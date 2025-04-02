@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
 import Dashboard from "./pages/Dashboard";
+import Subjects from "./pages/Subjects";
 import Profile from "./pages/Profile";
 import SubjectPage from "./components/SubjectPage";
 import NotFound from "./pages/NotFound";
@@ -35,6 +36,7 @@ const App = () => (
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/subjects" element={<Subjects />} />
               <Route path="/subject/:subjectId" element={<SubjectPage />} />
             </Route>
             
