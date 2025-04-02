@@ -50,12 +50,26 @@ export interface SubjectButtonProps
 
 const SubjectButton = React.forwardRef<HTMLButtonElement, SubjectButtonProps>(
   ({ className, variant = "outline", subjectColor, fontSize, isChapterStyle, isQuizStyle, size, ...props }, ref) => {
+    // If we're using isQuizStyle with a color, set the background color to match that subject
+    const backgroundColorClass = isQuizStyle && subjectColor && variant === "default" 
+      ? `bg-ap-${subjectColor} text-white hover:bg-ap-${subjectColor}/90` 
+      : "";
+    
     return (
       <Button
         ref={ref}
         variant={variant}
         size={size}
-        className={cn(subjectButtonVariants({ subjectColor, fontSize, isChapterStyle, isQuizStyle, className }))}
+        className={cn(
+          subjectButtonVariants({ 
+            subjectColor, 
+            fontSize, 
+            isChapterStyle, 
+            isQuizStyle, 
+            className 
+          }),
+          backgroundColorClass
+        )}
         {...props}
       />
     );
