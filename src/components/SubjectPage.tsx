@@ -9,6 +9,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import { Switch } from "@/components/ui/switch";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 
 type QuizQuestion = {
   id: string;
@@ -43,6 +46,7 @@ const SubjectPage = () => {
   const [quizSubmitted, setQuizSubmitted] = useState<boolean>(false);
   const [quizScore, setQuizScore] = useState<number>(0);
   const [currentChapter, setCurrentChapter] = useState<string>("");
+  const [language, setLanguage] = useState<"english" | "telugu">("english");
   
   useEffect(() => {
     // This would normally be a fetch from an API
@@ -504,21 +508,21 @@ const SubjectPage = () => {
         ) : (
           <>
             {/* Subject Header */}
-            <div className={`bg-ap-${subject.color}/10 rounded-xl p-6 mb-8`}>
+            <div className={`bg-ap-${subject?.color}/10 rounded-xl p-6 mb-8`}>
               <div className="flex flex-col md:flex-row justify-between">
                 <div className="flex items-start space-x-4">
-                  <div className={`p-3 bg-ap-${subject.color}/20 rounded-lg text-ap-${subject.color}`}>
-                    {subject.icon}
+                  <div className={`p-3 bg-ap-${subject?.color}/20 rounded-lg text-ap-${subject?.color}`}>
+                    {subject?.icon}
                   </div>
                   <div>
-                    <h1 className="text-2xl font-bold text-gray-900">{subject.name}</h1>
-                    <p className="text-gray-600 mt-1 max-w-2xl">{subject.description}</p>
+                    <h1 className="text-2xl font-bold text-gray-900">{subject?.name}</h1>
+                    <p className="text-gray-600 mt-1 max-w-2xl">{subject?.description}</p>
                   </div>
                 </div>
                 <div className="mt-6 md:mt-0 flex flex-col items-end justify-center">
                   <div className="text-sm text-gray-500 mb-2">Your Progress</div>
                   <div className="w-full md:w-48">
-                    <ProgressBar progress={subject.progress} color={subject.color} />
+                    <ProgressBar progress={subject?.progress || 0} color={subject?.color || "blue"} />
                   </div>
                 </div>
               </div>
@@ -544,13 +548,43 @@ const SubjectPage = () => {
               <TabsContent value="chapters">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                   <div className="lg:col-span-2">
-                    <h2 className="text-xl font-semibold mb-4">Chapters</h2>
+                    {/* Language Switch */}
+                    <div className="flex items-center justify-end mb-4 space-x-6">
+                      <div className="flex items-center space-x-2">
+                        <RadioGroup
+                          value={language}
+                          onValueChange={(value) => setLanguage(value as "english" | "telugu")}
+                          className="flex space-x-4"
+                        >
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="english" id="english" />
+                            <Label htmlFor="english">English</Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="telugu" id="telugu" />
+                            <Label htmlFor="telugu">తెలుగు</Label>
+                          </div>
+                        </RadioGroup>
+                      </div>
+                    </div>
+
+                    <h2 className="text-xl font-semibold mb-4">
+                      {language === "english" ? "Chapters" : "అధ్యాయాలు"}
+                    </h2>
                     <div className="space-y-4">
-                      {subject.chapters.map((chapter, index) => (
+                      {subject?.chapters.map((chapter, index) => (
                         <div key={index}>
                           <ChapterCard
-                            title={chapter.title}
-                            description={chapter.description}
+                            title={
+                              language === "english" 
+                                ? chapter.title 
+                                : `${chapter.title} (తెలుగులో)`
+                            }
+                            description={
+                              language === "english"
+                                ? chapter.description
+                                : `${chapter.description} తెలుగులో`
+                            }
                             status={chapter.status}
                             duration={chapter.duration}
                             subjectColor={subject.color}
@@ -563,7 +597,7 @@ const SubjectPage = () => {
                                 className={`border-ap-${subject.color} text-ap-${subject.color}`}
                                 onClick={() => handleStartQuiz(chapter.title)}
                               >
-                                Take Chapter Quiz
+                                {language === "english" ? "Take Chapter Quiz" : "క్విజ్ తీసుకోండి"}
                               </Button>
                             </div>
                           )}
@@ -573,53 +607,67 @@ const SubjectPage = () => {
                   </div>
                   
                   <div>
-                    <h2 className="text-xl font-semibold mb-4">Learning Resources</h2>
+                    <h2 className="text-xl font-semibold mb-4">
+                      {language === "english" ? "Learning Resources" : "అభ్యాస వనరులు"}
+                    </h2>
                     <div className="space-y-4">
-                      <div className={`bg-gradient-to-br from-ap-${subject.color}/10 to-white rounded-xl p-5 border border-ap-${subject.color}/20`}>
+                      <div className={`bg-gradient-to-br from-ap-${subject?.color}/10 to-white rounded-xl p-5 border border-ap-${subject?.color}/20`}>
                         <div className="flex justify-between">
-                          <div className={`p-2 bg-white/80 rounded-lg text-ap-${subject.color}`}>
+                          <div className={`p-2 bg-white/80 rounded-lg text-ap-${subject?.color}`}>
                             <FileText className="h-5 w-5" />
                           </div>
                           <span className="text-xs text-gray-500">PDF</span>
                         </div>
-                        <h3 className="mt-3 font-medium">Study Materials</h3>
+                        <h3 className="mt-3 font-medium">
+                          {language === "english" ? "Study Materials" : "అధ్యయన సామగ్రి"}
+                        </h3>
                         <p className="text-sm text-gray-600 mt-2">
-                          Comprehensive notes and examples for all chapters.
+                          {language === "english" 
+                            ? "Comprehensive notes and examples for all chapters."
+                            : "అన్ని అధ్యాయాలకు సమగ్ర నోట్స్ మరియు ఉదాహరణలు."}
                         </p>
-                        <Button variant="outline" size="sm" className={`mt-4 w-full border-ap-${subject.color} text-ap-${subject.color}`}>
-                          Download
+                        <Button variant="outline" size="sm" className={`mt-4 w-full border-ap-${subject?.color} text-ap-${subject?.color}`}>
+                          {language === "english" ? "Download" : "డౌన్‌లోడ్"}
                         </Button>
                       </div>
                       
-                      <div className={`bg-gradient-to-br from-ap-${subject.color}/10 to-white rounded-xl p-5 border border-ap-${subject.color}/20`}>
+                      <div className={`bg-gradient-to-br from-ap-${subject?.color}/10 to-white rounded-xl p-5 border border-ap-${subject?.color}/20`}>
                         <div className="flex justify-between">
-                          <div className={`p-2 bg-white/80 rounded-lg text-ap-${subject.color}`}>
+                          <div className={`p-2 bg-white/80 rounded-lg text-ap-${subject?.color}`}>
                             <PlayCircle className="h-5 w-5" />
                           </div>
                           <span className="text-xs text-gray-500">VIDEO</span>
                         </div>
-                        <h3 className="mt-3 font-medium">Video Lessons</h3>
+                        <h3 className="mt-3 font-medium">
+                          {language === "english" ? "Video Lessons" : "వీడియో పాఠాలు"}
+                        </h3>
                         <p className="text-sm text-gray-600 mt-2">
-                          Watch expert teachers explain key concepts.
+                          {language === "english"
+                            ? "Watch expert teachers explain key concepts."
+                            : "నిపుణ ఉపాధ్యాయులు కీలక భావనలను వివరించడం చూడండి."}
                         </p>
-                        <Button variant="outline" size="sm" className={`mt-4 w-full border-ap-${subject.color} text-ap-${subject.color}`}>
-                          Watch Videos
+                        <Button variant="outline" size="sm" className={`mt-4 w-full border-ap-${subject?.color} text-ap-${subject?.color}`}>
+                          {language === "english" ? "Watch Videos" : "వీడియోలు చూడండి"}
                         </Button>
                       </div>
                       
-                      <div className={`bg-gradient-to-br from-ap-${subject.color}/10 to-white rounded-xl p-5 border border-ap-${subject.color}/20`}>
+                      <div className={`bg-gradient-to-br from-ap-${subject?.color}/10 to-white rounded-xl p-5 border border-ap-${subject?.color}/20`}>
                         <div className="flex justify-between">
-                          <div className={`p-2 bg-white/80 rounded-lg text-ap-${subject.color}`}>
+                          <div className={`p-2 bg-white/80 rounded-lg text-ap-${subject?.color}`}>
                             <Users className="h-5 w-5" />
                           </div>
                           <span className="text-xs text-gray-500">FORUM</span>
                         </div>
-                        <h3 className="mt-3 font-medium">Ask Doubts</h3>
+                        <h3 className="mt-3 font-medium">
+                          {language === "english" ? "Ask Doubts" : "సందేహాలు అడగండి"}
+                        </h3>
                         <p className="text-sm text-gray-600 mt-2">
-                          Connect with teachers and peers to clear your doubts.
+                          {language === "english"
+                            ? "Connect with teachers and peers to clear your doubts."
+                            : "మీ సందేహాలను తీర్చడానికి ఉపాధ్యాయులు మరియు సహచరులతో కలవండి."}
                         </p>
-                        <Button variant="outline" size="sm" className={`mt-4 w-full border-ap-${subject.color} text-ap-${subject.color}`}>
-                          Join Discussion
+                        <Button variant="outline" size="sm" className={`mt-4 w-full border-ap-${subject?.color} text-ap-${subject?.color}`}>
+                          {language === "english" ? "Join Discussion" : "చర్చలో చేరండి"}
                         </Button>
                       </div>
                     </div>
@@ -629,22 +677,46 @@ const SubjectPage = () => {
               
               <TabsContent value="resources">
                 <div className="text-center py-16">
-                  <h2 className="text-xl font-semibold text-gray-800">Additional Resources Coming Soon</h2>
-                  <p className="text-gray-600 mt-2">We're adding more study materials for this subject.</p>
+                  <h2 className="text-xl font-semibold text-gray-800">
+                    {language === "english" 
+                      ? "Additional Resources Coming Soon" 
+                      : "అదనపు వనరులు త్వరలో వస్తున్నాయి"}
+                  </h2>
+                  <p className="text-gray-600 mt-2">
+                    {language === "english"
+                      ? "We're adding more study materials for this subject."
+                      : "మేము ఈ విషయానికి మరిన్ని అధ్యయన సామగ్రిని జోడిస్తున్నాము."}
+                  </p>
                 </div>
               </TabsContent>
               
               <TabsContent value="tests">
                 <div className="text-center py-16">
-                  <h2 className="text-xl font-semibold text-gray-800">Tests & Quizzes Coming Soon</h2>
-                  <p className="text-gray-600 mt-2">Practice tests will be available once you progress through the chapters.</p>
+                  <h2 className="text-xl font-semibold text-gray-800">
+                    {language === "english" 
+                      ? "Tests & Quizzes Coming Soon" 
+                      : "పరీక్షలు & క్విజ్‌లు త్వరలో"}
+                  </h2>
+                  <p className="text-gray-600 mt-2">
+                    {language === "english"
+                      ? "Practice tests will be available once you progress through the chapters."
+                      : "మీరు అధ్యాయాల ద్వారా పురోగమించిన తర్వాత అభ్యాస పరీక్షలు లభిస్తాయి."}
+                  </p>
                 </div>
               </TabsContent>
               
               <TabsContent value="discussions">
                 <div className="text-center py-16">
-                  <h2 className="text-xl font-semibold text-gray-800">Discussion Forum Coming Soon</h2>
-                  <p className="text-gray-600 mt-2">Connect with teachers and peers to discuss topics and clear doubts.</p>
+                  <h2 className="text-xl font-semibold text-gray-800">
+                    {language === "english" 
+                      ? "Discussion Forum Coming Soon" 
+                      : "చర్చా వేదిక త్వరలో"}
+                  </h2>
+                  <p className="text-gray-600 mt-2">
+                    {language === "english"
+                      ? "Connect with teachers and peers to discuss topics and clear doubts."
+                      : "విషయాలను చర్చించడానికి మరియు సందేహాలను తీర్చడానికి ఉపాధ్యాయులు మరియు సహచరులతో కలవండి."}
+                  </p>
                 </div>
               </TabsContent>
             </Tabs>
