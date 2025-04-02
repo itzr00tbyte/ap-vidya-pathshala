@@ -6,6 +6,7 @@ import ChapterCard from "@/components/ChapterCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calculator, Beaker, Globe, BookOpen, Book, BookUser, FileText, Users, PlayCircle, CheckCircle, XCircle, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SubjectButton } from "@/components/ui/subject-button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
@@ -591,14 +592,14 @@ const SubjectPage = () => {
                           />
                           {chapter.quiz && chapter.status === "in-progress" && (
                             <div className="mt-2 ml-12">
-                              <Button
+                              <SubjectButton
                                 variant="outline"
                                 size="sm"
-                                className={`border-ap-${subject.color} text-ap-${subject.color}`}
+                                subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"}
                                 onClick={() => handleStartQuiz(chapter.title)}
                               >
                                 {language === "english" ? "Take Chapter Quiz" : "క్విజ్ తీసుకోండి"}
-                              </Button>
+                              </SubjectButton>
                             </div>
                           )}
                         </div>
@@ -626,9 +627,14 @@ const SubjectPage = () => {
                             ? "Comprehensive notes and examples for all chapters."
                             : "అన్ని అధ్యాయాలకు సమగ్ర నోట్స్ మరియు ఉదాహరణలు."}
                         </p>
-                        <Button variant="outline" size="sm" className={`mt-4 w-full border-ap-${subject?.color} text-ap-${subject?.color}`}>
+                        <SubjectButton 
+                          variant="outline" 
+                          size="sm" 
+                          subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"} 
+                          className="mt-4 w-full"
+                        >
                           {language === "english" ? "Download" : "డౌన్‌లోడ్"}
-                        </Button>
+                        </SubjectButton>
                       </div>
                       
                       <div className={`bg-gradient-to-br from-ap-${subject?.color}/10 to-white rounded-xl p-5 border border-ap-${subject?.color}/20`}>
@@ -646,9 +652,14 @@ const SubjectPage = () => {
                             ? "Watch expert teachers explain key concepts."
                             : "నిపుణ ఉపాధ్యాయులు కీలక భావనలను వివరించడం చూడండి."}
                         </p>
-                        <Button variant="outline" size="sm" className={`mt-4 w-full border-ap-${subject?.color} text-ap-${subject?.color}`}>
+                        <SubjectButton 
+                          variant="outline" 
+                          size="sm" 
+                          subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"} 
+                          className="mt-4 w-full"
+                        >
                           {language === "english" ? "Watch Videos" : "వీడియోలు చూడండి"}
-                        </Button>
+                        </SubjectButton>
                       </div>
                       
                       <div className={`bg-gradient-to-br from-ap-${subject?.color}/10 to-white rounded-xl p-5 border border-ap-${subject?.color}/20`}>
@@ -666,9 +677,14 @@ const SubjectPage = () => {
                             ? "Connect with teachers and peers to clear your doubts."
                             : "మీ సందేహాలను తీర్చడానికి ఉపాధ్యాయులు మరియు సహచరులతో కలవండి."}
                         </p>
-                        <Button variant="outline" size="sm" className={`mt-4 w-full border-ap-${subject?.color} text-ap-${subject?.color}`}>
+                        <SubjectButton 
+                          variant="outline" 
+                          size="sm" 
+                          subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"} 
+                          className="mt-4 w-full"
+                        >
                           {language === "english" ? "Join Discussion" : "చర్చలో చేరండి"}
-                        </Button>
+                        </SubjectButton>
                       </div>
                     </div>
                   </div>
