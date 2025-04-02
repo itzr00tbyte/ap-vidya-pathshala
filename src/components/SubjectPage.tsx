@@ -943,4 +943,4 @@ const SubjectPage = () => {
               <TabsContent value="tests">
                 <div className="text-center py-16">
                   <h2 className="text-xl font-semibold text-gray-800">Tests & Quizzes Coming Soon</h2>
-                  <p className="text-gray-600 mt-2">Practice tests will be available once you progress
+                  <p className="text-gray-600 mt-2">Practice tests will be available once you progress through the chapters
