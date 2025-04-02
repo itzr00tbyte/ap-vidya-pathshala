@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -6,7 +5,7 @@ import SubjectCard from "@/components/SubjectCard";
 import ProgressBar from "@/components/ProgressBar";
 import QuizNotification from "@/components/QuizNotification";
 import ChapterCard from "@/components/ChapterCard";
-import { BookOpen, Calculator, Globe, Flask, Book, FileText, PieChart, BookUser } from "lucide-react";
+import { BookOpen, Calculator, Globe, Beaker, Book, BookUser, FileText, PieChart, PlayCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Dashboard = () => {
@@ -33,7 +32,7 @@ const Dashboard = () => {
     { 
       id: "science", 
       name: "Science", 
-      icon: <Flask className="h-5 w-5" />, 
+      icon: <Beaker className="h-5 w-5" />, 
       progress: 45, 
       color: "green", 
       chaptersCount: 15 

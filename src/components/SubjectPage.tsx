@@ -1,11 +1,10 @@
-
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import ProgressBar from "@/components/ProgressBar";
 import ChapterCard from "@/components/ChapterCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calculator, Flask, Globe, BookOpen, Book, BookUser, FileText, Users, PlayCircle } from "lucide-react";
+import { Calculator, Beaker, Globe, BookOpen, Book, BookUser, FileText, Users, PlayCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 type SubjectData = {
@@ -81,7 +80,7 @@ const SubjectPage = () => {
         science: {
           id: "science",
           name: "Science",
-          icon: <Flask className="h-6 w-6" />,
+          icon: <Beaker className="h-6 w-6" />,
           color: "green",
           description: "Explore physical and biological phenomena through observation, experimentation, and analysis.",
           progress: 45,
