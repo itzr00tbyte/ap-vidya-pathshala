@@ -592,7 +592,7 @@ const SubjectPage = () => {
                           />
                           {chapter.quiz && chapter.status === "in-progress" && (
                             <div className="mt-2 ml-4">
-                              <div className={`rounded-lg border border-${subject.color === 'blue' ? 'ap-blue' : `ap-${subject.color}`}/20 bg-white p-4 transition-all hover:shadow-sm flex items-center justify-between`}>
+                              <div className={`rounded-lg border border-${subject.color === 'blue' ? 'ap-blue' : `ap-${subject.color}`}/20 bg-white p-4 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5 flex items-center justify-between`}>
                                 <div>
                                   <h4 className="font-medium">
                                     {language === "english" ? `${chapter.title} Quiz` : `${chapter.title} క్విజ్`}
