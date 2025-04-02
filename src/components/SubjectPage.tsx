@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -840,7 +839,7 @@ const SubjectPage = () => {
                 </div>
               </TabsContent>
               
-              {/* New Syllabus Tab Content */}
+              {/* Syllabus Tab Content */}
               <TabsContent value="syllabus">
                 <div className="bg-white rounded-lg shadow-sm p-6">
                   <h2 className="text-2xl font-bold mb-6">{subject.name} Syllabus</h2>
@@ -944,22 +943,4 @@ const SubjectPage = () => {
               <TabsContent value="tests">
                 <div className="text-center py-16">
                   <h2 className="text-xl font-semibold text-gray-800">Tests & Quizzes Coming Soon</h2>
-                  <p className="text-gray-600 mt-2">Practice tests will be available once you progress through the chapters.</p>
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="discussions">
-                <div className="text-center py-16">
-                  <h2 className="text-xl font-semibold text-gray-800">Discussion Forum Coming Soon</h2>
-                  <p className="text-gray-600 mt-2">Connect with teachers and peers to discuss concepts and clear your doubts.</p>
-                </div>
-              </TabsContent>
-            </Tabs>
-          </>
-        )}
-      </div>
-    </div>
-  );
-};
-
-export default SubjectPage;
+                  <p className="text-gray-600 mt-2">Practice tests will be available once you progress through
