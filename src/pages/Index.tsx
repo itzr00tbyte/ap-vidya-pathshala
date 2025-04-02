@@ -1,9 +1,13 @@
-
 import { GraduationCap, BookOpen, Users, BarChart } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import GradeCard from "@/components/GradeCard";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import HowItWorksSection from "@/components/HowItWorksSection";
+import NewsletterSection from "@/components/NewsletterSection";
+import FAQsSection from "@/components/FAQsSection";
+import BenefitsSection from "@/components/BenefitsSection";
 
 const gradeData = [
   {
@@ -114,6 +118,12 @@ const Index = () => {
         </div>
       </section>
       
+      {/* How It Works */}
+      <HowItWorksSection />
+      
+      {/* Benefits */}
+      <BenefitsSection />
+      
       {/* Features */}
       <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -135,6 +145,15 @@ const Index = () => {
           </div>
         </div>
       </section>
+      
+      {/* Testimonials */}
+      <TestimonialsSection />
+      
+      {/* FAQs */}
+      <FAQsSection />
+      
+      {/* Newsletter */}
+      <NewsletterSection />
       
       {/* Call to Action */}
       <section className="py-16 bg-ap-blue">
