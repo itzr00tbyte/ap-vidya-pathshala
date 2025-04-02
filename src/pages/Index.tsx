@@ -8,7 +8,6 @@ import HowItWorksSection from "@/components/HowItWorksSection";
 import NewsletterSection from "@/components/NewsletterSection";
 import FAQsSection from "@/components/FAQsSection";
 import BenefitsSection from "@/components/BenefitsSection";
-import YouTubeSection from "@/components/YouTubeSection";
 import GradeSelectorSection from "@/components/GradeSelectorSection";
 
 const features = [
@@ -64,13 +63,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-      
-      {/* YouTube Video Guide */}
-      <YouTubeSection 
-        videoId="dQw4w9WgXcQ" 
-        title="Learn About AP Vidya Pathshala"
-        description="Watch this video to understand how our platform can help you excel in your studies with AP State curriculum."
-      />
       
       {/* Grade Selection */}
       <GradeSelectorSection />
