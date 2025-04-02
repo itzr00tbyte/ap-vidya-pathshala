@@ -47,8 +47,8 @@ export default function BenefitsSection() {
               <div className="absolute w-full h-full bg-ap-green rounded-lg transform -rotate-3 opacity-10"></div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <img 
-                  src="/placeholder.svg" 
-                  alt="Student learning infographic" 
+                  src="/lovable-uploads/27b8df97-cd99-4a65-840e-1ec4acaedd91.png" 
+                  alt="Student learning with laptop" 
                   className="max-w-full max-h-full rounded-lg shadow-lg"
                   style={{ objectFit: 'contain' }}
                 />
