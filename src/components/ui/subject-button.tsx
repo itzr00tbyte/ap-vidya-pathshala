@@ -16,32 +16,34 @@ const subjectButtonVariants = cva(
         yellow: "border-ap-yellow text-ap-yellow hover:bg-ap-yellow/10",
         red: "border-ap-red text-ap-red hover:bg-ap-red/10",
       },
-      size: {
+      fontSize: {
         default: "text-base",
         sm: "text-sm",
       },
     },
     defaultVariants: {
       subjectColor: "blue",
-      size: "default",
+      fontSize: "default",
     },
   }
 );
 
 export interface SubjectButtonProps
   extends ButtonProps,
-    VariantProps<typeof subjectButtonVariants> {
+    Omit<VariantProps<typeof subjectButtonVariants>, "size"> {
   subjectColor?: "blue" | "green" | "orange" | "purple" | "yellow" | "red";
+  fontSize?: "default" | "sm";
   children: React.ReactNode;
 }
 
 const SubjectButton = React.forwardRef<HTMLButtonElement, SubjectButtonProps>(
-  ({ className, variant = "outline", subjectColor, size, ...props }, ref) => {
+  ({ className, variant = "outline", subjectColor, fontSize, size, ...props }, ref) => {
     return (
       <Button
         ref={ref}
         variant={variant}
-        className={cn(subjectButtonVariants({ subjectColor, size, className }))}
+        size={size}
+        className={cn(subjectButtonVariants({ subjectColor, fontSize, className }))}
         {...props}
       />
     );
