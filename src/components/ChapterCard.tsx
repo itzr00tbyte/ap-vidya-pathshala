@@ -2,6 +2,7 @@
 import { Book, CheckCircle, Lock, PlayCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { useNavigate, useParams } from "react-router-dom";
 
 type ChapterStatus = "completed" | "in-progress" | "locked";
 
@@ -20,6 +21,21 @@ const ChapterCard = ({
   duration,
   subjectColor = "blue"
 }: ChapterCardProps) => {
+  const navigate = useNavigate();
+  const { subjectId } = useParams<{ subjectId: string }>();
+
+  const handleButtonClick = () => {
+    if (status === "locked") return;
+    
+    if (status === "completed") {
+      // Navigate to slideshow for review
+      navigate(`/subject/${subjectId}/slideshow/${encodeURIComponent(title)}`);
+    } else {
+      // For "in-progress", continue with the original behavior
+      console.log("Continue chapter:", title);
+    }
+  };
+
   return (
     <div className={cn(
       "border rounded-lg p-5 bg-white transition-all hover:shadow-md",
@@ -77,6 +93,7 @@ const ChapterCard = ({
             status === "in-progress" && `bg-ap-${subjectColor}`,
             status === "locked" && "text-gray-400"
           )}
+          onClick={handleButtonClick}
         >
           <PlayCircle className="mr-1 h-4 w-4" />
           {status === "completed" ? "Review" : status === "in-progress" ? "Continue" : "Locked"}

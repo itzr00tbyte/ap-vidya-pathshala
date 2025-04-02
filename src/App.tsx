@@ -14,6 +14,7 @@ import Dashboard from "./pages/Dashboard";
 import Subjects from "./pages/Subjects";
 import Profile from "./pages/Profile";
 import SubjectPage from "./components/SubjectPage";
+import SlideshowCanvas from "./components/SlideshowCanvas";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -38,6 +39,7 @@ const App = () => (
               <Route path="/profile" element={<Profile />} />
               <Route path="/subjects" element={<Subjects />} />
               <Route path="/subject/:subjectId" element={<SubjectPage />} />
+              <Route path="/subject/:subjectId/slideshow/:chapterId" element={<SlideshowCanvas />} />
             </Route>
             
             {/* 404 route */}
