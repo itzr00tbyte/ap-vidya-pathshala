@@ -13,6 +13,7 @@ import { toast } from "sonner";
 import { Switch } from "@/components/ui/switch";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 type QuizQuestion = {
   id: string;
@@ -549,29 +550,28 @@ const SubjectPage = () => {
               <TabsContent value="chapters">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                   <div className="lg:col-span-2">
-                    {/* Language Switch */}
-                    <div className="flex items-center justify-end mb-4 space-x-6">
-                      <div className="flex items-center space-x-2">
-                        <RadioGroup
-                          value={language}
-                          onValueChange={(value) => setLanguage(value as "english" | "telugu")}
-                          className="flex space-x-4"
-                        >
-                          <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="english" id="english" />
-                            <Label htmlFor="english">English</Label>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="telugu" id="telugu" />
-                            <Label htmlFor="telugu">తెలుగు</Label>
-                          </div>
-                        </RadioGroup>
-                      </div>
+                    {/* Language Toggle - Moved here next to Chapters heading */}
+                    <div className="flex items-center justify-between mb-4">
+                      <h2 className="text-xl font-semibold">
+                        {language === "english" ? "Chapters" : "అధ్యాయాలు"}
+                      </h2>
+                      <ToggleGroup 
+                        type="single" 
+                        value={language} 
+                        onValueChange={(value) => {
+                          if (value) setLanguage(value as "english" | "telugu");
+                        }}
+                        className="border rounded-md"
+                      >
+                        <ToggleGroupItem value="english" aria-label="Toggle english">
+                          English
+                        </ToggleGroupItem>
+                        <ToggleGroupItem value="telugu" aria-label="Toggle telugu">
+                          తెలుగు
+                        </ToggleGroupItem>
+                      </ToggleGroup>
                     </div>
 
-                    <h2 className="text-xl font-semibold mb-4">
-                      {language === "english" ? "Chapters" : "అధ్యాయాలు"}
-                    </h2>
                     <div className="space-y-4">
                       {subject?.chapters.map((chapter, index) => (
                         <div key={index}>
