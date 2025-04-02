@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { GraduationCap, User, Bell, Menu, LogOut } from "lucide-react";
+import { GraduationCap, User, Bell, Menu, LogOut, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
@@ -12,10 +12,23 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [selectedGrade, setSelectedGrade] = useState("6");
+
+  const handleGradeChange = (value: string) => {
+    setSelectedGrade(value);
+    // Additional logic for grade change can be added here
+  };
 
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
@@ -42,6 +55,25 @@ const Navbar = () => {
                   <Link to="/subjects" className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-ap-blue">
                     Subjects
                   </Link>
+                  
+                  {/* Grade selector dropdown */}
+                  <div className="relative">
+                    <Select value={selectedGrade} onValueChange={handleGradeChange}>
+                      <SelectTrigger className="w-[130px] h-9 bg-ap-light-blue/10 border-0 text-ap-blue">
+                        <span className="flex items-center">
+                          Grade <SelectValue placeholder="6" />
+                        </span>
+                      </SelectTrigger>
+                      <SelectContent>
+                        {[6, 7, 8, 9, 10].map((grade) => (
+                          <SelectItem key={grade} value={grade.toString()}>
+                            Grade {grade}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
                   <Button size="sm" variant="outline" className="relative">
                     <Bell className="h-5 w-5" />
                     <span className="absolute -top-1 -right-1 bg-ap-red text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
@@ -130,6 +162,27 @@ const Navbar = () => {
                 >
                   Subjects
                 </Link>
+                
+                {/* Mobile grade selector */}
+                <div className="px-3 py-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Select Grade
+                  </label>
+                  <Select value={selectedGrade} onValueChange={handleGradeChange}>
+                    <SelectTrigger className="w-full bg-ap-light-blue/10 border-0">
+                      <span className="flex items-center">
+                        Grade <SelectValue placeholder="6" />
+                      </span>
+                    </SelectTrigger>
+                    <SelectContent>
+                      {[6, 7, 8, 9, 10].map((grade) => (
+                        <SelectItem key={grade} value={grade.toString()}>
+                          Grade {grade}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
               </>
             )}
             
