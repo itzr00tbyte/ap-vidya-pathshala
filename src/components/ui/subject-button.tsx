@@ -20,10 +20,15 @@ const subjectButtonVariants = cva(
         default: "text-base",
         sm: "text-sm",
       },
+      isChapterStyle: {
+        true: "w-full flex items-center justify-center gap-2 shadow-sm hover:shadow-md hover:-translate-y-0.5",
+        false: "",
+      }
     },
     defaultVariants: {
       subjectColor: "blue",
       fontSize: "default",
+      isChapterStyle: false,
     },
   }
 );
@@ -33,17 +38,18 @@ export interface SubjectButtonProps
     Omit<VariantProps<typeof subjectButtonVariants>, "size"> {
   subjectColor?: "blue" | "green" | "orange" | "purple" | "yellow" | "red";
   fontSize?: "default" | "sm";
+  isChapterStyle?: boolean;
   children: React.ReactNode;
 }
 
 const SubjectButton = React.forwardRef<HTMLButtonElement, SubjectButtonProps>(
-  ({ className, variant = "outline", subjectColor, fontSize, size, ...props }, ref) => {
+  ({ className, variant = "outline", subjectColor, fontSize, isChapterStyle, size, ...props }, ref) => {
     return (
       <Button
         ref={ref}
         variant={variant}
         size={size}
-        className={cn(subjectButtonVariants({ subjectColor, fontSize, className }))}
+        className={cn(subjectButtonVariants({ subjectColor, fontSize, isChapterStyle, className }))}
         {...props}
       />
     );
