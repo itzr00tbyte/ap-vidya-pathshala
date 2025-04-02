@@ -1,42 +1,20 @@
-
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import ProgressBar from "@/components/ProgressBar";
 import ChapterCard from "@/components/ChapterCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { 
-  Calculator, 
-  Beaker, 
-  Globe, 
-  BookOpen, 
-  BookText, 
-  FileText, 
-  Users, 
-  PlayCircle, 
-  CheckCircle, 
-  XCircle, 
-  HelpCircle,
-  Clock 
-} from "lucide-react";
+import { Calculator, Beaker, Globe, BookOpen, Book, BookUser, FileText, Users, PlayCircle, CheckCircle, XCircle, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 type QuizQuestion = {
   id: string;
   question: string;
   options: string[];
   correctAnswer: string;
-};
-
-type SyllabusUnit = {
-  title: string;
-  topics: string[];
-  learningOutcomes: string[];
 };
 
 type SubjectData = {
@@ -46,7 +24,6 @@ type SubjectData = {
   color: string;
   description: string;
   progress: number;
-  syllabus?: SyllabusUnit[];
   chapters: {
     title: string;
     description: string;
@@ -79,53 +56,6 @@ const SubjectPage = () => {
           color: "blue",
           description: "Develop problem-solving skills and logical reasoning through numbers, patterns, and equations.",
           progress: 65,
-          syllabus: [
-            {
-              title: "Algebra Fundamentals",
-              topics: [
-                "Variables and Constants",
-                "Algebraic Expressions",
-                "Simplifying Expressions",
-                "Linear Equations"
-              ],
-              learningOutcomes: [
-                "Identify and use variables in mathematical contexts",
-                "Translate word problems into algebraic expressions",
-                "Solve linear equations with one variable",
-                "Apply algebraic principles to real-world problems"
-              ]
-            },
-            {
-              title: "Geometry and Measurements",
-              topics: [
-                "Basic Geometric Shapes",
-                "Area and Perimeter",
-                "Angles and Lines",
-                "Coordinate Geometry"
-              ],
-              learningOutcomes: [
-                "Calculate the area and perimeter of basic shapes",
-                "Analyze properties of angles and lines",
-                "Plot points and graphs on the coordinate plane",
-                "Apply geometric principles to solve problems"
-              ]
-            },
-            {
-              title: "Number Systems",
-              topics: [
-                "Integers and Operations",
-                "Fractions and Decimals",
-                "Rational Numbers",
-                "Properties of Numbers"
-              ],
-              learningOutcomes: [
-                "Perform operations with integers",
-                "Convert between fractions, decimals, and percentages",
-                "Apply properties of rational numbers",
-                "Solve problems involving number systems"
-              ]
-            }
-          ],
           chapters: [
             {
               title: "Introduction to Algebra",
@@ -209,38 +139,6 @@ const SubjectPage = () => {
           color: "green",
           description: "Explore physical and biological phenomena through observation, experimentation, and analysis.",
           progress: 45,
-          syllabus: [
-            {
-              title: "Physical Sciences",
-              topics: [
-                "Matter and Its Properties",
-                "Force and Motion",
-                "Energy and Work",
-                "Electricity and Magnetism"
-              ],
-              learningOutcomes: [
-                "Classify materials based on physical and chemical properties",
-                "Explain Newton's laws of motion and apply them to everyday scenarios",
-                "Understand different forms of energy and their conversions",
-                "Describe the relationship between electricity and magnetism"
-              ]
-            },
-            {
-              title: "Life Sciences",
-              topics: [
-                "Cell Structure and Function",
-                "Plant and Animal Life",
-                "Human Body Systems",
-                "Ecosystems and Environment"
-              ],
-              learningOutcomes: [
-                "Identify cell structures and explain their functions",
-                "Compare and contrast plant and animal life cycles",
-                "Describe the major human body systems and their interactions",
-                "Analyze ecosystem dynamics and environmental impacts"
-              ]
-            }
-          ],
           chapters: [
             {
               title: "Matter and Its Properties",
@@ -281,53 +179,6 @@ const SubjectPage = () => {
           color: "orange",
           description: "Understand human society, history, geography, and civic responsibilities.",
           progress: 30,
-          syllabus: [
-            {
-              title: "History",
-              topics: [
-                "Ancient Indian History",
-                "Medieval Indian History",
-                "Modern Indian History",
-                "World History Highlights"
-              ],
-              learningOutcomes: [
-                "Trace the evolution of ancient Indian civilizations",
-                "Analyze key events and developments in medieval India",
-                "Evaluate the freedom struggle and its impact on modern India",
-                "Connect Indian history with global historical trends"
-              ]
-            },
-            {
-              title: "Geography",
-              topics: [
-                "Physical Geography of India",
-                "Human Geography",
-                "Resource Distribution",
-                "Environmental Concerns"
-              ],
-              learningOutcomes: [
-                "Identify major geographical features of India",
-                "Analyze population distribution and migration patterns",
-                "Assess the distribution and utilization of natural resources",
-                "Evaluate environmental challenges and conservation efforts"
-              ]
-            },
-            {
-              title: "Civics",
-              topics: [
-                "Indian Constitution",
-                "Government Structure",
-                "Rights and Duties",
-                "Democratic Processes"
-              ],
-              learningOutcomes: [
-                "Understand the key features of the Indian Constitution",
-                "Describe the structure and functions of government",
-                "Recognize fundamental rights and duties of citizens",
-                "Explain democratic processes and civic participation"
-              ]
-            }
-          ],
           chapters: [
             {
               title: "Ancient Indian History",
@@ -362,53 +213,6 @@ const SubjectPage = () => {
           color: "purple",
           description: "Develop reading, writing, speaking, and listening skills in English language.",
           progress: 75,
-          syllabus: [
-            {
-              title: "Reading and Comprehension",
-              topics: [
-                "Fiction and Non-fiction Texts",
-                "Poetry Analysis",
-                "Critical Reading",
-                "Context Clues and Vocabulary"
-              ],
-              learningOutcomes: [
-                "Analyze different types of texts for meaning and structure",
-                "Interpret poetic devices and their effects",
-                "Evaluate arguments and evidence in texts",
-                "Use context clues to determine word meanings"
-              ]
-            },
-            {
-              title: "Writing Skills",
-              topics: [
-                "Essay Writing",
-                "Creative Writing",
-                "Grammar and Syntax",
-                "Research and Citation"
-              ],
-              learningOutcomes: [
-                "Compose well-structured essays with clear arguments",
-                "Create original fiction and poetry using literary techniques",
-                "Apply grammar rules consistently in writing",
-                "Conduct research and cite sources properly"
-              ]
-            },
-            {
-              title: "Communication",
-              topics: [
-                "Public Speaking",
-                "Debate and Discussion",
-                "Listening Skills",
-                "Digital Communication"
-              ],
-              learningOutcomes: [
-                "Deliver effective oral presentations",
-                "Participate constructively in debates and discussions",
-                "Demonstrate active listening techniques",
-                "Communicate appropriately across digital platforms"
-              ]
-            }
-          ],
           chapters: [
             {
               title: "Reading Comprehension",
@@ -436,84 +240,71 @@ const SubjectPage = () => {
             },
           ],
         },
-        history: {
-          id: "history",
-          name: "History",
-          icon: <Clock className="h-6 w-6" />,
-          color: "red",
-          description: "Discover world civilizations and important events through time.",
-          progress: 30,
-          syllabus: [
-            {
-              title: "Ancient Civilizations",
-              topics: [
-                "Mesopotamia and Egypt",
-                "Ancient Greece",
-                "Roman Empire",
-                "Indus Valley Civilization"
-              ],
-              learningOutcomes: [
-                "Compare the development of early human civilizations",
-                "Analyze the contributions of ancient Greece to modern society",
-                "Evaluate the rise and fall of the Roman Empire",
-                "Describe the urban planning and culture of Indus Valley"
-              ]
-            },
-            {
-              title: "Medieval Period",
-              topics: [
-                "Feudal Systems",
-                "Islamic Golden Age",
-                "Byzantine Empire",
-                "Medieval India"
-              ],
-              learningOutcomes: [
-                "Explain the structure and impact of feudalism",
-                "Recognize scientific and cultural advances of the Islamic Golden Age",
-                "Analyze the Byzantine Empire's influence on Eastern Europe",
-                "Trace the development of medieval Indian kingdoms"
-              ]
-            },
-            {
-              title: "Modern History",
-              topics: [
-                "Industrial Revolution",
-                "World Wars",
-                "Decolonization",
-                "Contemporary Global Issues"
-              ],
-              learningOutcomes: [
-                "Assess the social and economic impacts of industrialization",
-                "Analyze causes and consequences of the World Wars",
-                "Evaluate the process of decolonization in various regions",
-                "Connect historical patterns to current global challenges"
-              ]
-            }
-          ],
+        telugu: {
+          id: "telugu",
+          name: "Telugu",
+          icon: <Book className="h-6 w-6" />,
+          color: "yellow",
+          description: "Master Telugu language through literature, grammar, and communication practice.",
+          progress: 50,
           chapters: [
             {
-              title: "Ancient Indian History",
-              description: "Explore the rich history of ancient Indian civilizations",
+              title: "Telugu Padyalu (Poetry)",
+              description: "Learn classical Telugu poetry and their meanings",
               status: "completed",
+              duration: "50 mins",
+            },
+            {
+              title: "Telugu Vyakaranam (Grammar)",
+              description: "Understand the grammatical rules of Telugu language",
+              status: "in-progress",
               duration: "55 mins",
             },
             {
-              title: "World War II",
-              description: "Study the causes, events, and aftermath of WWII",
-              status: "in-progress",
-              duration: "65 mins",
-            },
-            {
-              title: "Cold War Era",
-              description: "Understand the geopolitical tensions of the Cold War period",
+              title: "Telugu Sahityam (Literature)",
+              description: "Explore various forms of Telugu literature",
               status: "locked",
               duration: "60 mins",
             },
             {
-              title: "Indian Independence Movement",
-              description: "Learn about India's struggle for independence",
+              title: "Rachana (Creative Writing)",
+              description: "Develop writing skills in Telugu",
               status: "locked",
+              duration: "45 mins",
+            },
+          ],
+        },
+        hindi: {
+          id: "hindi",
+          name: "Hindi",
+          icon: <BookUser className="h-6 w-6" />,
+          color: "red",
+          description: "Learn Hindi language through vocabulary building, grammar, and literary appreciation.",
+          progress: 25,
+          chapters: [
+            {
+              title: "Hindi Varnamala",
+              description: "Master Hindi alphabets and their pronunciations",
+              status: "completed",
+              duration: "40 mins",
+            },
+            {
+              title: "Hindi Vyakaran (Grammar)",
+              description: "Learn basic Hindi grammar rules",
+              status: "in-progress",
               duration: "50 mins",
+            },
+            {
+              title: "Hindi Kahaniyan (Stories)",
+              description: "Read and understand Hindi short stories",
+              status: "locked",
+              duration: "45 mins",
+            },
+            {
+              title: "Hindi Nibandh (Essays)",
+              description: "Learn to write essays in Hindi",
+              status: "locked",
+              duration: "55 mins",
             },
           ],
         },
@@ -739,9 +530,6 @@ const SubjectPage = () => {
                 <TabsTrigger value="chapters" className="text-sm">
                   Chapters
                 </TabsTrigger>
-                <TabsTrigger value="syllabus" className="text-sm">
-                  Syllabus
-                </TabsTrigger>
                 <TabsTrigger value="resources" className="text-sm">
                   Resources
                 </TabsTrigger>
@@ -839,100 +627,6 @@ const SubjectPage = () => {
                 </div>
               </TabsContent>
               
-              {/* Syllabus Tab Content */}
-              <TabsContent value="syllabus">
-                <div className="bg-white rounded-lg shadow-sm p-6">
-                  <h2 className="text-2xl font-bold mb-6">{subject.name} Syllabus</h2>
-                  
-                  {subject.syllabus ? (
-                    <div className="space-y-6">
-                      {subject.syllabus.map((unit, index) => (
-                        <Collapsible key={index} className="border border-gray-200 rounded-lg overflow-hidden">
-                          <CollapsibleTrigger className="flex justify-between items-center w-full p-4 text-left font-medium bg-gray-50 hover:bg-gray-100 transition-colors">
-                            <span>{unit.title}</span>
-                            <span className="text-gray-500">+</span>
-                          </CollapsibleTrigger>
-                          <CollapsibleContent>
-                            <div className="p-4 border-t border-gray-200">
-                              <div className="mb-4">
-                                <h4 className="font-medium text-gray-700 mb-2">Topics Covered</h4>
-                                <ul className="list-disc pl-5 space-y-1">
-                                  {unit.topics.map((topic, idx) => (
-                                    <li key={idx} className="text-gray-600">{topic}</li>
-                                  ))}
-                                </ul>
-                              </div>
-                              
-                              <div>
-                                <h4 className="font-medium text-gray-700 mb-2">Learning Outcomes</h4>
-                                <ul className="list-disc pl-5 space-y-1">
-                                  {unit.learningOutcomes.map((outcome, idx) => (
-                                    <li key={idx} className="text-gray-600">{outcome}</li>
-                                  ))}
-                                </ul>
-                              </div>
-                            </div>
-                          </CollapsibleContent>
-                        </Collapsible>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="text-center py-8 text-gray-500">
-                      Syllabus information will be available soon.
-                    </div>
-                  )}
-                  
-                  <div className="mt-8">
-                    <h3 className="text-lg font-semibold mb-4">Evaluation Structure</h3>
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead>Component</TableHead>
-                          <TableHead>Weightage</TableHead>
-                          <TableHead>Description</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        <TableRow>
-                          <TableCell className="font-medium">Class Participation</TableCell>
-                          <TableCell>10%</TableCell>
-                          <TableCell>Active engagement in discussions and activities</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell className="font-medium">Assignments</TableCell>
-                          <TableCell>20%</TableCell>
-                          <TableCell>Regular homework and practice exercises</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell className="font-medium">Unit Tests</TableCell>
-                          <TableCell>30%</TableCell>
-                          <TableCell>Chapter-wise assessments throughout the term</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell className="font-medium">Final Examination</TableCell>
-                          <TableCell>40%</TableCell>
-                          <TableCell>Comprehensive test covering all units</TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
-                  </div>
-                  
-                  <div className="mt-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                    <h3 className="text-lg font-semibold mb-2">Recommended Textbooks</h3>
-                    <ul className="space-y-2">
-                      <li className="flex items-start">
-                        <BookOpen className="h-5 w-5 text-gray-600 mr-2 mt-0.5" />
-                        <span className="text-gray-700">Core Textbook: "Essential {subject.name} for Grade 6-8"</span>
-                      </li>
-                      <li className="flex items-start">
-                        <BookOpen className="h-5 w-5 text-gray-600 mr-2 mt-0.5" />
-                        <span className="text-gray-700">Supplementary Material: "Practice Workbook for {subject.name}"</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </TabsContent>
-              
               <TabsContent value="resources">
                 <div className="text-center py-16">
                   <h2 className="text-xl font-semibold text-gray-800">Additional Resources Coming Soon</h2>
@@ -950,7 +644,7 @@ const SubjectPage = () => {
               <TabsContent value="discussions">
                 <div className="text-center py-16">
                   <h2 className="text-xl font-semibold text-gray-800">Discussion Forum Coming Soon</h2>
-                  <p className="text-gray-600 mt-2">Connect with teachers and peers to discuss concepts and clear doubts.</p>
+                  <p className="text-gray-600 mt-2">Connect with teachers and peers to discuss topics and clear doubts.</p>
                 </div>
               </TabsContent>
             </Tabs>
