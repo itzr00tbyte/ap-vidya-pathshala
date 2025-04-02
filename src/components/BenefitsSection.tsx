@@ -1,3 +1,4 @@
+
 import { CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 const benefits = ["Comprehensive coverage of AP State Board curriculum", "Interactive lessons with animated explanations", "Self-paced learning with personalized feedback", "Regular practice tests and mock exams", "Detailed performance analytics and progress tracking", "Easy access on all devices, anywhere, anytime", "Expert teachers with years of experience", "Engaging content that makes learning enjoyable"];
@@ -35,9 +36,13 @@ export default function BenefitsSection() {
               <div className="absolute w-full h-full bg-ap-blue rounded-lg transform rotate-3 opacity-10"></div>
               <div className="absolute w-full h-full bg-ap-green rounded-lg transform -rotate-3 opacity-10"></div>
               <div className="absolute inset-0 flex items-center justify-center">
-                <img src="/lovable-uploads/27b8df97-cd99-4a65-840e-1ec4acaedd91.png" alt="Student learning with laptop" style={{
-                objectFit: 'contain'
-              }} className="max-w-full max-h-full rounded-lg shadow-lg object-fill" />
+                <div className="w-full h-full max-w-md flex items-center justify-center">
+                  <img 
+                    src="/lovable-uploads/27b8df97-cd99-4a65-840e-1ec4acaedd91.png" 
+                    alt="Student learning with laptop" 
+                    className="max-w-full max-h-full rounded-lg shadow-lg object-contain" 
+                  />
+                </div>
               </div>
             </div>
           </div>
