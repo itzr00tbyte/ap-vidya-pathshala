@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import SubjectCard from "@/components/SubjectCard";
 import { 
   BookOpen, 
-  Flask, 
+  Beaker,  // Replace Flask with Beaker
   BookText, 
   Clock, 
   Globe, 
@@ -33,7 +33,7 @@ const mockSubjects = [
     progress: 42,
     chapters: 15,
     color: "green",
-    icon: <Flask />
+    icon: <Beaker />  // Changed Flask to Beaker
   },
   {
     id: "3",
@@ -100,16 +100,16 @@ const Subjects = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {mockSubjects.map((subject) => (
-            <SubjectCard 
-              key={subject.id}
-              id={subject.id}
-              name={subject.name}
-              icon={subject.icon}
-              progress={subject.progress}
-              color={subject.color}
-              chaptersCount={subject.chapters}
-              onClick={() => handleSubjectClick(subject.id)}
-            />
+            <div key={subject.id} onClick={() => handleSubjectClick(subject.id)}>
+              <SubjectCard 
+                id={subject.id}
+                name={subject.name}
+                icon={subject.icon}
+                progress={subject.progress}
+                color={subject.color}
+                chaptersCount={subject.chapters}
+              />
+            </div>
           ))}
         </div>
       </main>
