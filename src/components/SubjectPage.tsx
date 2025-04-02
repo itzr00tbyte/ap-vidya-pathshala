@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -943,3 +944,21 @@ const SubjectPage = () => {
                 <div className="text-center py-16">
                   <h2 className="text-xl font-semibold text-gray-800">Tests & Quizzes Coming Soon</h2>
                   <p className="text-gray-600 mt-2">Practice tests will be available once you progress through the chapters.</p>
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="discussions">
+                <div className="text-center py-16">
+                  <h2 className="text-xl font-semibold text-gray-800">Discussion Forum Coming Soon</h2>
+                  <p className="text-gray-600 mt-2">Connect with teachers and peers to discuss concepts and clear doubts.</p>
+                </div>
+              </TabsContent>
+            </Tabs>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default SubjectPage;
