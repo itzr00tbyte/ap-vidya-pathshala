@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import ProgressBar from "@/components/ProgressBar";
 import ChapterCard from "@/components/ChapterCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calculator, Beaker, Globe, BookOpen, Book, BookUser, FileText, Users, PlayCircle, CheckCircle, XCircle, HelpCircle } from "lucide-react";
+import { Calculator, Beaker, Globe, BookOpen, Book, BookUser, FileText, Users, PlayCircle, CheckCircle, XCircle, HelpCircle, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SubjectButton } from "@/components/ui/subject-button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -591,15 +591,31 @@ const SubjectPage = () => {
                             subjectColor={subject.color}
                           />
                           {chapter.quiz && chapter.status === "in-progress" && (
-                            <div className="mt-2 ml-12">
-                              <SubjectButton
-                                variant="outline"
-                                size="sm"
-                                subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"}
-                                onClick={() => handleStartQuiz(chapter.title)}
-                              >
-                                {language === "english" ? "Take Chapter Quiz" : "క్విజ్ తీసుకోండి"}
-                              </SubjectButton>
+                            <div className="mt-2 ml-4">
+                              <div className={`rounded-lg border border-${subject.color === 'blue' ? 'ap-blue' : `ap-${subject.color}`}/20 bg-white p-4 transition-all hover:shadow-sm flex items-center justify-between`}>
+                                <div>
+                                  <h4 className="font-medium">
+                                    {language === "english" ? `${chapter.title} Quiz` : `${chapter.title} క్విజ్`}
+                                  </h4>
+                                  <p className="text-sm text-gray-500 mt-1">
+                                    {language === "english" 
+                                      ? "Test your understanding" 
+                                      : "మీ అవగాహనను పరీక్షించండి"}
+                                    <span className="text-xs ml-2">{chapter.duration}</span>
+                                  </p>
+                                </div>
+                                <SubjectButton
+                                  variant="default" 
+                                  size="sm"
+                                  isQuizStyle={true}
+                                  subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"}
+                                  className={`bg-ap-${subject.color}`}
+                                  onClick={() => handleStartQuiz(chapter.title)}
+                                >
+                                  <PlayCircle className="h-4 w-4" />
+                                  {language === "english" ? "Start Quiz" : "క్విజ్ ప్రారంభించండి"}
+                                </SubjectButton>
+                              </div>
                             </div>
                           )}
                         </div>
