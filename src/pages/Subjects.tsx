@@ -3,8 +3,15 @@ import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import SubjectCard from "@/components/SubjectCard";
+import { 
+  BookOpen, 
+  Flask, 
+  BookText, 
+  Clock, 
+  Globe, 
+  Laptop 
+} from "lucide-react";
 
 // Mock subject data
 const mockSubjects = [
@@ -16,6 +23,7 @@ const mockSubjects = [
     progress: 65,
     chapters: 12,
     color: "blue",
+    icon: <BookOpen />
   },
   {
     id: "2",
@@ -25,6 +33,7 @@ const mockSubjects = [
     progress: 42,
     chapters: 15,
     color: "green",
+    icon: <Flask />
   },
   {
     id: "3",
@@ -34,6 +43,7 @@ const mockSubjects = [
     progress: 78,
     chapters: 10,
     color: "yellow",
+    icon: <BookText />
   },
   {
     id: "4",
@@ -43,6 +53,7 @@ const mockSubjects = [
     progress: 30,
     chapters: 14,
     color: "red",
+    icon: <Clock />
   },
   {
     id: "5",
@@ -52,6 +63,7 @@ const mockSubjects = [
     progress: 55,
     chapters: 8,
     color: "purple",
+    icon: <Globe />
   },
   {
     id: "6",
@@ -61,6 +73,7 @@ const mockSubjects = [
     progress: 20,
     chapters: 16,
     color: "teal",
+    icon: <Laptop />
   }
 ];
 
@@ -69,7 +82,6 @@ const Subjects = () => {
   const navigate = useNavigate();
   const [selectedGrade] = useState<number>(user?.grade || 6);
 
-  // Filter subjects based on selected grade (this would be more sophisticated in a real app)
   const handleSubjectClick = (subjectId: string) => {
     navigate(`/subject/${subjectId}`);
   };
@@ -90,7 +102,12 @@ const Subjects = () => {
           {mockSubjects.map((subject) => (
             <SubjectCard 
               key={subject.id}
-              subject={subject}
+              id={subject.id}
+              name={subject.name}
+              icon={subject.icon}
+              progress={subject.progress}
+              color={subject.color}
+              chaptersCount={subject.chapters}
               onClick={() => handleSubjectClick(subject.id)}
             />
           ))}
