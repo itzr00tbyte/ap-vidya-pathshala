@@ -16,6 +16,13 @@ const YouTubeSection = ({
     <section className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
+          <div className="flex justify-center mb-4">
+            <img 
+              src="/lovable-uploads/9e1819ee-f35b-4fa8-8e73-1b018502b94f.png" 
+              alt="Directorate of Government Examinations" 
+              className="h-16 md:h-20"
+            />
+          </div>
           <h2 className="text-3xl font-bold text-gray-900">{title}</h2>
           <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
             {description}

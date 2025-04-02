@@ -77,6 +77,13 @@ const GradeSelectorSection = () => {
     <section className="py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6">
+          <div className="flex justify-center mb-4">
+            <img 
+              src="/lovable-uploads/9e1819ee-f35b-4fa8-8e73-1b018502b94f.png" 
+              alt="Directorate of Government Examinations" 
+              className="h-24 md:h-32"
+            />
+          </div>
           <h2 className="text-3xl font-bold text-gray-900">Choose Your Grade</h2>
           <p className="mt-4 text-gray-600">Select your grade to access curriculum-aligned learning materials</p>
         </div>
