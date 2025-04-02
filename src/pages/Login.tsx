@@ -18,6 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useAuth } from "@/context/AuthContext";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
@@ -31,6 +32,7 @@ export default function Login() {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const { login } = useAuth();
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -41,27 +43,25 @@ export default function Login() {
     },
   });
 
-  function onSubmit(data: LoginFormValues) {
+  async function onSubmit(data: LoginFormValues) {
     setIsLoading(true);
     
-    // Simulate login - in a real app this would connect to your backend
-    setTimeout(() => {
-      // Mock successful login
-      localStorage.setItem("isAuthenticated", "true");
-      localStorage.setItem("user", JSON.stringify({
-        name: "Student User",
-        email: data.email,
-        grade: 8,
-        avatar: null,
-      }));
-      
-      setIsLoading(false);
+    try {
+      await login(data.email, data.password);
       toast({
         title: "Login successful",
         description: "Welcome back to AP Vidya Pathshala!",
       });
       navigate("/dashboard");
-    }, 1500);
+    } catch (error) {
+      toast({
+        title: "Login failed",
+        description: "Invalid email or password. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -80,6 +80,11 @@ export default function Login() {
             <CardDescription className="text-center">
               Enter your email and password to access your account
             </CardDescription>
+            <div className="bg-amber-50 p-2 rounded-md border border-amber-200 text-amber-800 text-sm">
+              <p className="font-medium">Demo Accounts:</p>
+              <p>Email: student@example.com | Password: password123</p>
+              <p>Email: teacher@example.com | Password: teacher123</p>
+            </div>
           </CardHeader>
           <CardContent>
             <Form {...form}>

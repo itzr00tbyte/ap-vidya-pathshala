@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 type User = {
@@ -20,6 +19,24 @@ type AuthContextType = {
   updateUser: (user: Partial<User>) => void;
 };
 
+// Static credentials for demo purposes
+const STATIC_CREDENTIALS = [
+  { 
+    email: "student@example.com", 
+    password: "password123", 
+    name: "Student User",
+    grade: 8,
+    avatar: null
+  },
+  { 
+    email: "teacher@example.com", 
+    password: "teacher123", 
+    name: "Teacher User",
+    grade: 10,
+    avatar: null
+  }
+];
+
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -38,23 +55,25 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const login = async (email: string, password: string): Promise<void> => {
-    // This is a mock login - in a real app, this would call your API
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        // For demo purposes, accept any email/password
-        const mockUser = {
-          name: "Student User",
-          email: email,
-          grade: 8,
-          avatar: null,
-        };
+        // Check against static credentials
+        const foundUser = STATIC_CREDENTIALS.find(
+          (cred) => cred.email === email && cred.password === password
+        );
         
-        localStorage.setItem("isAuthenticated", "true");
-        localStorage.setItem("user", JSON.stringify(mockUser));
-        
-        setUser(mockUser);
-        setIsAuthenticated(true);
-        resolve();
+        if (foundUser) {
+          const { password, ...userWithoutPassword } = foundUser;
+          
+          localStorage.setItem("isAuthenticated", "true");
+          localStorage.setItem("user", JSON.stringify(userWithoutPassword));
+          
+          setUser(userWithoutPassword);
+          setIsAuthenticated(true);
+          resolve();
+        } else {
+          reject(new Error("Invalid email or password"));
+        }
       }, 1000);
     });
   };
