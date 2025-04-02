@@ -591,7 +591,7 @@ const SubjectPage = () => {
                             subjectColor={subject.color}
                           />
                           {chapter.quiz && chapter.status === "in-progress" && (
-                            <div className="mt-2 ml-4">
+                            <div className="mt-3 ml-0">
                               <div className={`rounded-lg border border-${subject.color === 'blue' ? 'ap-blue' : `ap-${subject.color}`}/20 bg-white p-4 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5 flex items-center justify-between`}>
                                 <div>
                                   <h4 className="font-medium">
@@ -601,7 +601,6 @@ const SubjectPage = () => {
                                     {language === "english" 
                                       ? "Test your understanding" 
                                       : "మీ అవగాహనను పరీక్షించండి"}
-                                    <span className="text-xs ml-2">{chapter.duration}</span>
                                   </p>
                                 </div>
                                 <SubjectButton
@@ -612,7 +611,7 @@ const SubjectPage = () => {
                                   className={`bg-ap-${subject.color}`}
                                   onClick={() => handleStartQuiz(chapter.title)}
                                 >
-                                  <PlayCircle className="h-4 w-4" />
+                                  <PlayCircle className="h-4 w-4 mr-1" />
                                   {language === "english" ? "Start Quiz" : "క్విజ్ ప్రారంభించండి"}
                                 </SubjectButton>
                               </div>
