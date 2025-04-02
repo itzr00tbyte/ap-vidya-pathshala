@@ -1,5 +1,6 @@
 import { GraduationCap, BookOpen, Users, BarChart } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import GradeCard from "@/components/GradeCard";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import TestimonialsSection from "@/components/TestimonialsSection";
@@ -8,7 +9,39 @@ import NewsletterSection from "@/components/NewsletterSection";
 import FAQsSection from "@/components/FAQsSection";
 import BenefitsSection from "@/components/BenefitsSection";
 import YouTubeSection from "@/components/YouTubeSection";
-import GradeSelectorSection from "@/components/GradeSelectorSection";
+
+const gradeData = [
+  {
+    grade: 6,
+    title: "6th Standard",
+    description: "Begin your middle school journey with essential foundations.",
+    color: "blue",
+  },
+  {
+    grade: 7,
+    title: "7th Standard",
+    description: "Build on your knowledge with more advanced concepts.",
+    color: "green",
+  },
+  {
+    grade: 8,
+    title: "8th Standard",
+    description: "Deepen your understanding with complex topics.",
+    color: "yellow",
+  },
+  {
+    grade: 9,
+    title: "9th Standard",
+    description: "Prepare for high school with critical thinking skills.",
+    color: "orange",
+  },
+  {
+    grade: 10,
+    title: "10th Standard",
+    description: "Get ready for board exams with comprehensive study materials.",
+    color: "red",
+  },
+];
 
 const features = [
   {
@@ -72,7 +105,26 @@ const Index = () => {
       />
       
       {/* Grade Selection */}
-      <GradeSelectorSection />
+      <section className="py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-gray-900">Choose Your Grade</h2>
+            <p className="mt-4 text-gray-600">Select your grade to access curriculum-aligned learning materials</p>
+          </div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {gradeData.map((grade) => (
+              <GradeCard
+                key={grade.grade}
+                grade={grade.grade}
+                title={grade.title}
+                description={grade.description}
+                color={grade.color}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
       
       {/* How It Works */}
       <HowItWorksSection />
