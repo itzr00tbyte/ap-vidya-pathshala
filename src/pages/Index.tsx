@@ -1,3 +1,4 @@
+
 import { GraduationCap, BookOpen, Users, BarChart } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
@@ -38,8 +39,8 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
       
-      {/* Hero Section */}
-      <section className="bg-gradient-to-b from-white to-ap-light-blue/10 py-16">
+      {/* Hero Section - increased padding from py-16 to py-28 */}
+      <section className="bg-gradient-to-b from-white to-ap-light-blue/10 py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
