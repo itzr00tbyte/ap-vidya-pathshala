@@ -79,11 +79,11 @@ export default function Login() {
             <CardDescription className="text-center">
               Enter your email and password to access your account
             </CardDescription>
-            <div className="bg-amber-50 p-2 rounded-md border border-amber-200 text-amber-800 text-sm">
+            {/* <div className="bg-amber-50 p-2 rounded-md border border-amber-200 text-amber-800 text-sm">
               <p className="font-medium">Demo Accounts:</p>
               <p>Email: student@example.com | Password: password123</p>
               <p>Email: teacher@example.com | Password: teacher123</p>
-            </div>
+            </div> */}
           </CardHeader>
           <CardContent>
             <Form {...form}>
