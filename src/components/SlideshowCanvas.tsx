@@ -244,63 +244,73 @@ const SlideshowCanvas = ({ subjectId, chapterId }: SlideshowCanvasProps) => {
     navigate(`/subject/${actualSubjectId}`);
   };
 
+  useEffect(() => {
+    // Add a class to the body to help with full height styling
+    document.body.classList.add('slideshow-mode');
+    return () => {
+      document.body.classList.remove('slideshow-mode');
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex justify-between items-center mb-6">
+      <div className="flex-grow flex flex-col">
+        <div className="px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold">Chapter Review: {decodeURIComponent(actualChapterId || '')}</h1>
           <Button variant="outline" size="icon" onClick={handleClose}>
             <X className="h-4 w-4" />
           </Button>
         </div>
         
-        <div className="bg-white rounded-xl shadow-md overflow-hidden">
-          <div className="relative h-96">
-            {slides[currentSlide].imageUrl && (
-              <div className="absolute inset-0">
-                <img 
-                  src={slides[currentSlide].imageUrl} 
-                  alt={slides[currentSlide].title} 
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-              </div>
-            )}
-            
-            <div className="absolute inset-0 flex flex-col justify-end p-8">
-              <h2 className="text-3xl font-bold text-white mb-2">
-                {slides[currentSlide].title}
-              </h2>
-              <p className="text-xl text-white/90">
-                {slides[currentSlide].content}
-              </p>
-            </div>
-          </div>
-          
-          <div className="p-4 flex items-center justify-between border-t border-gray-100">
-            <div className="text-sm text-gray-500">
-              Slide {currentSlide + 1} of {slides.length}
-            </div>
-            
-            <div className="flex gap-2">
-              <Button 
-                variant="outline" 
-                size="sm"
-                onClick={handlePrevious}
-                disabled={currentSlide === 0}
-              >
-                <ArrowLeft className="mr-1 h-4 w-4" /> Previous
-              </Button>
+        <div className="flex-grow flex flex-col mx-4 sm:mx-6 lg:mx-8 mb-4">
+          <div className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col flex-grow">
+            <div className="relative flex-grow">
+              {slides[currentSlide].imageUrl && (
+                <div className="absolute inset-0">
+                  <img 
+                    src={slides[currentSlide].imageUrl} 
+                    alt={slides[currentSlide].title} 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+                </div>
+              )}
               
-              <Button 
-                size="sm"
-                onClick={handleNext}
-                disabled={currentSlide === slides.length - 1}
-              >
-                Next <ArrowRight className="ml-1 h-4 w-4" />
-              </Button>
+              <div className="absolute inset-0 flex flex-col justify-end p-8">
+                <h2 className="text-3xl font-bold text-white mb-2">
+                  {slides[currentSlide].title}
+                </h2>
+                <p className="text-xl text-white/90">
+                  {slides[currentSlide].content}
+                </p>
+              </div>
+            </div>
+            
+            <div className="p-4 flex items-center justify-between border-t border-gray-100">
+              <div className="text-sm text-gray-500">
+                Slide {currentSlide + 1} of {slides.length}
+              </div>
+              
+              <div className="flex gap-2">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={handlePrevious}
+                  disabled={currentSlide === 0}
+                >
+                  <ArrowLeft className="mr-1 h-4 w-4" /> Previous
+                </Button>
+                
+                <Button 
+                  size="sm"
+                  onClick={handleNext}
+                  disabled={currentSlide === slides.length - 1}
+                >
+                  Next <ArrowRight className="ml-1 h-4 w-4" />
+                </Button>
+              </div>
             </div>
           </div>
         </div>

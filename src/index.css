@@ -44,6 +44,17 @@
 
   body {
     @apply bg-background text-foreground font-sans;
+    min-height: 100vh;
+  }
+  
+  /* Make slideshow take full height */
+  .slideshow-mode {
+    @apply overflow-hidden;
+    height: 100vh;
+  }
+  
+  .slideshow-mode #root {
+    height: 100vh;
   }
   
   .card-hover {
