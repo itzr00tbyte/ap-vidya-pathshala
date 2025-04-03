@@ -1,292 +1,222 @@
 
-import React, { useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { useState, useEffect } from "react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { toast } from "@/hooks/use-toast";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MOCK_SCHOOLS } from "@/data/mockSchools";
 
-const userFormSchema = z.object({
-  name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-  role: z.enum(["student", "teacher", "headmaster", "admin"]),
-  schoolId: z.string().optional(),
-  grade: z.string().optional(),
-  status: z.enum(["active", "inactive", "pending"]).default("active"),
-});
-
-type UserFormValues = z.infer<typeof userFormSchema>;
-
-export interface UserData {
-  id?: string;
+// Define UserData type explicitly to ensure required properties are set
+export type UserData = {
+  id: string;
   name: string;
   email: string;
   role: "student" | "teacher" | "headmaster" | "admin";
-  schoolId?: string;
-  grade?: string;
   status: "active" | "inactive" | "pending";
-}
+  schoolId: string;
+  grade?: string;
+};
 
 interface UserFormDialogProps {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
-  user?: UserData | null;
-  onSave: (data: UserData) => void;
-  title?: string;
+  user: UserData | null;
+  onSave: (userData: UserData) => void;
+  title: string;
 }
 
-const UserFormDialog = ({
-  isOpen,
-  setIsOpen,
-  user,
-  onSave,
-  title = "Add New User",
-}: UserFormDialogProps) => {
-  const isEditMode = !!user;
-  
-  const defaultValues: Partial<UserFormValues> = {
-    name: user?.name || "",
-    email: user?.email || "",
-    role: user?.role || "student",
-    schoolId: user?.schoolId || "",
-    grade: user?.grade || "",
-    status: user?.status || "active",
-  };
-
-  const form = useForm<UserFormValues>({
-    resolver: zodResolver(userFormSchema),
-    defaultValues,
+export default function UserFormDialog({ 
+  isOpen, 
+  setIsOpen, 
+  user, 
+  onSave, 
+  title 
+}: UserFormDialogProps) {
+  // Initialize all form fields with default values
+  const [formData, setFormData] = useState<UserData>({
+    id: "",
+    name: "",
+    email: "",
+    role: "student",
+    status: "active",
+    schoolId: MOCK_SCHOOLS[0]?.id || "",
+    grade: "1"
   });
-
-  function onSubmit(data: UserFormValues) {
-    try {
-      // Ensure we're passing all required properties
-      const userData: UserData = {
-        id: user?.id,
-        name: data.name,
-        email: data.email,
-        role: data.role,
-        schoolId: data.schoolId,
-        grade: data.grade,
-        status: data.status
-      };
-      
-      onSave(userData);
-      setIsOpen(false);
-      toast({
-        title: `User ${isEditMode ? "updated" : "added"} successfully`,
-        description: `${data.name} has been ${isEditMode ? "updated" : "added"} in the system.`,
+  
+  // Update form when editing existing user
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        id: user.id,
+        name: user.name || "",
+        email: user.email || "",
+        role: user.role || "student",
+        status: user.status || "active",
+        schoolId: user.schoolId || MOCK_SCHOOLS[0]?.id || "",
+        grade: user.grade || "1"
       });
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: `Failed to ${isEditMode ? "update" : "add"} user. Please try again.`,
-        variant: "destructive",
+    } else {
+      // Reset form for new user
+      setFormData({
+        id: `u${Date.now()}`, // Generate a temporary ID
+        name: "",
+        email: "",
+        role: "student",
+        status: "active",
+        schoolId: MOCK_SCHOOLS[0]?.id || "",
+        grade: "1"
       });
     }
-  }
-
-  const selectedRole = form.watch("role");
-
+  }, [user]);
+  
+  const handleChange = (
+    field: keyof UserData, 
+    value: string
+  ) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+  
+  const handleSubmit = () => {
+    // Ensure all required fields are filled
+    if (!formData.name || !formData.email || !formData.role || !formData.status || !formData.schoolId) {
+      alert("Please fill all required fields");
+      return;
+    }
+    
+    // Submit the form data
+    onSave(formData);
+    setIsOpen(false);
+  };
+  
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>
-            {isEditMode ? "Update user details" : "Fill in the details to add a new user."}
-          </DialogDescription>
         </DialogHeader>
-
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Full Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="John Doe" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+        
+        <div className="grid gap-4 py-4">
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="name" className="text-right">
+              Name
+            </Label>
+            <Input
+              id="name"
+              value={formData.name}
+              onChange={(e) => handleChange("name", e.target.value)}
+              className="col-span-3"
+              required
             />
-
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder="john.doe@example.com" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+          </div>
+          
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="email" className="text-right">
+              Email
+            </Label>
+            <Input
+              id="email"
+              type="email"
+              value={formData.email}
+              onChange={(e) => handleChange("email", e.target.value)}
+              className="col-span-3"
+              required
             />
-
-            <FormField
-              control={form.control}
-              name="role"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Role</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a role" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="student">Student</SelectItem>
-                      <SelectItem value="teacher">Teacher</SelectItem>
-                      <SelectItem value="headmaster">Headmaster</SelectItem>
-                      <SelectItem value="admin">Admin</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {(selectedRole === "student" || selectedRole === "teacher") && (
-              <FormField
-                control={form.control}
-                name="schoolId"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>School</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a school" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {MOCK_SCHOOLS.map(school => (
-                          <SelectItem key={school.id} value={school.id}>
-                            {school.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            )}
-
-            {selectedRole === "student" && (
-              <FormField
-                control={form.control}
-                name="grade"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Grade</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a grade" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(grade => (
-                          <SelectItem key={grade} value={grade.toString()}>
-                            Grade {grade}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            )}
-
-            <FormField
-              control={form.control}
-              name="status"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Status</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select status" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="active">Active</SelectItem>
-                      <SelectItem value="inactive">Inactive</SelectItem>
-                      <SelectItem value="pending">Pending</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <DialogFooter className="mt-6">
-              <Button 
-                type="button" 
-                variant="outline" 
-                onClick={() => setIsOpen(false)}
+          </div>
+          
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="role" className="text-right">
+              Role
+            </Label>
+            <Select
+              value={formData.role}
+              onValueChange={(value) => handleChange("role", value as any)}
+            >
+              <SelectTrigger className="col-span-3">
+                <SelectValue placeholder="Select role" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="student">Student</SelectItem>
+                <SelectItem value="teacher">Teacher</SelectItem>
+                <SelectItem value="headmaster">Head Master</SelectItem>
+                <SelectItem value="admin">Admin</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="status" className="text-right">
+              Status
+            </Label>
+            <Select
+              value={formData.status}
+              onValueChange={(value) => handleChange("status", value as any)}
+            >
+              <SelectTrigger className="col-span-3">
+                <SelectValue placeholder="Select status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="active">Active</SelectItem>
+                <SelectItem value="pending">Pending</SelectItem>
+                <SelectItem value="inactive">Inactive</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="school" className="text-right">
+              School
+            </Label>
+            <Select
+              value={formData.schoolId}
+              onValueChange={(value) => handleChange("schoolId", value)}
+            >
+              <SelectTrigger className="col-span-3">
+                <SelectValue placeholder="Select school" />
+              </SelectTrigger>
+              <SelectContent>
+                {MOCK_SCHOOLS.map((school) => (
+                  <SelectItem key={school.id} value={school.id}>
+                    {school.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          
+          {formData.role === "student" && (
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="grade" className="text-right">
+                Grade
+              </Label>
+              <Select
+                value={formData.grade || "1"}
+                onValueChange={(value) => handleChange("grade", value)}
               >
-                Cancel
-              </Button>
-              <Button type="submit">
-                {isEditMode ? "Update" : "Add"} User
-              </Button>
-            </DialogFooter>
-          </form>
-        </Form>
+                <SelectTrigger className="col-span-3">
+                  <SelectValue placeholder="Select grade" />
+                </SelectTrigger>
+                <SelectContent>
+                  {Array.from({ length: 12 }, (_, i) => (
+                    <SelectItem key={i + 1} value={(i + 1).toString()}>
+                      Grade {i + 1}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
+        </div>
+        
+        <DialogFooter>
+          <Button type="button" variant="outline" onClick={() => setIsOpen(false)}>
+            Cancel
+          </Button>
+          <Button type="button" onClick={handleSubmit}>
+            Save
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
-};
-
-export default UserFormDialog;
+}
