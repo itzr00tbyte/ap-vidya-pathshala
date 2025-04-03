@@ -81,8 +81,8 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				// Custom theme colors
-				"ap-blue": "#1E88E5",
-				"ap-light-blue": "#90CAF9",
+				"ap-blue": "#6A5ACD", // Changed from blue to purple-blue
+				"ap-light-blue": "#B39DDB", // Changed to light purple
 				"ap-green": "#43A047",
 				"ap-light-green": "#66BB6A",
 				"ap-yellow": "#FDD835",
