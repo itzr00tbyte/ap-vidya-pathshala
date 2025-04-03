@@ -5,22 +5,41 @@ import {
   Users, GraduationCap, BookOpen, School,
   BarChart, Calendar, BookMarked, Award
 } from "lucide-react";
+import { MOCK_STUDENTS } from "@/data/mockStudents";
+import { MOCK_TEACHERS } from "@/data/mockTeachers";
+import { MOCK_SCHOOLS } from "@/data/mockSchools";
 
 export default function AdminDashboard() {
   const { user } = useAuth();
 
-  // Data for statistics cards (mock data)
+  // Calculate statistics from mock data
+  const totalStudents = MOCK_STUDENTS.length;
+  const totalTeachers = MOCK_TEACHERS.length;
+  const totalSchools = MOCK_SCHOOLS.length;
+  
+  // Calculate average completion from student learning stats
+  const avgCompletion = Math.round(
+    MOCK_STUDENTS.reduce((sum, student) => 
+      sum + (student.learningStats.avgQuizScore || 0), 0) / totalStudents
+  );
+
+  // Calculate honor roll students (students with performance = "Excellent")
+  const honorRollCount = MOCK_STUDENTS.filter(student => 
+    student.performance === "Excellent"
+  ).length;
+
+  // Data for statistics cards
   const stats = [
     {
       title: "Total Students",
-      value: "2,345",
+      value: totalStudents.toString(),
       icon: Users,
       color: "bg-blue-100 text-blue-600",
       roles: ["admin", "headmaster", "teacher"]
     },
     {
       title: "Total Teachers",
-      value: "64",
+      value: totalTeachers.toString(),
       icon: GraduationCap,
       color: "bg-green-100 text-green-600",
       roles: ["admin", "headmaster"]
@@ -34,7 +53,7 @@ export default function AdminDashboard() {
     },
     {
       title: "Total Schools",
-      value: "12",
+      value: totalSchools.toString(),
       icon: School,
       color: "bg-purple-100 text-purple-600",
       roles: ["admin"]
@@ -48,7 +67,7 @@ export default function AdminDashboard() {
     },
     {
       title: "Avg. Completion",
-      value: "76%",
+      value: `${avgCompletion}%`,
       icon: BarChart,
       color: "bg-indigo-100 text-indigo-600",
       roles: ["admin", "headmaster", "teacher"]
@@ -62,7 +81,7 @@ export default function AdminDashboard() {
     },
     {
       title: "Honor Roll",
-      value: "328",
+      value: honorRollCount.toString(),
       icon: Award,
       color: "bg-teal-100 text-teal-600",
       roles: ["admin", "headmaster", "teacher"]
