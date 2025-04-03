@@ -1,3 +1,4 @@
+
 import { Target, BookMarked, Sparkles, Medal } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -110,7 +111,7 @@ const renderShape = (shape: string) => {
 
 export default function HowItWorksSection() {
   return (
-    <section className="py-16 bg-white overflow-hidden relative">
+    <section className="py-16 section-bg-light wave-bottom math-symbols-overlay relative overflow-hidden">
       {/* Educational pattern background */}
       <div className="absolute inset-0 w-full h-full pattern-grid opacity-10"></div>
       
@@ -121,7 +122,7 @@ export default function HowItWorksSection() {
           className={`absolute ${elem.position} ${elem.size} ${elem.opacity} flex items-center justify-center z-0`}
           initial={{ opacity: 0, scale: 0 }}
           animate={{ 
-            opacity: 0.1, 
+            opacity: 0.15, 
             scale: 1,
             rotate: [0, 10, 0, -10, 0],
           }}
@@ -148,12 +149,12 @@ export default function HowItWorksSection() {
       </motion.div>
       
       {/* Wave pattern */}
-      <svg className="absolute bottom-0 left-0 w-full opacity-10" 
+      <svg className="absolute bottom-0 left-0 w-full opacity-20" 
         viewBox="0 0 1440 320" 
         preserveAspectRatio="none">
         <motion.path 
           initial={{ opacity: 0, pathLength: 0 }}
-          animate={{ opacity: 0.2, pathLength: 1 }}
+          animate={{ opacity: 0.3, pathLength: 1 }}
           transition={{ duration: 2, ease: "easeInOut" }}
           d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,208C1248,171,1344,117,1392,90.7L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
           fill="#FFD700"
@@ -224,10 +225,10 @@ export default function HowItWorksSection() {
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
                   <motion.div 
-                    className={`mx-auto md:mx-0 ${index % 2 === 0 ? 'md:ml-auto md:mr-10' : 'md:mr-auto md:ml-10'} max-w-md p-6 bg-white rounded-xl shadow-sm border border-gray-100`}
+                    className={`mx-auto md:mx-0 ${index % 2 === 0 ? 'md:ml-auto md:mr-10' : 'md:mr-auto md:ml-10'} max-w-md p-6 educational-card`}
                     whileHover={{ 
                       boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
-                      background: "linear-gradient(to right, rgba(255,255,255,1), rgba(255,250,240,0.8))"
+                      background: "linear-gradient(to right, rgba(255,255,255,0.95), rgba(255,250,240,0.9))"
                     }}
                   >
                     <h3 className="font-semibold text-lg mb-2">{step.title}</h3>
@@ -257,7 +258,7 @@ export default function HowItWorksSection() {
         {/* Floating educational elements */}
         <div className="relative h-20 mt-8">
           <motion.div 
-            className="absolute left-[10%] top-0 w-12 h-12 text-ap-yellow/20 text-3xl font-bold"
+            className="absolute left-[10%] top-0 w-12 h-12 text-ap-yellow/30 text-3xl font-bold"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.5 }}
@@ -268,7 +269,7 @@ export default function HowItWorksSection() {
           </motion.div>
           
           <motion.div 
-            className="absolute left-[25%] bottom-0 w-8 h-8 rounded-md border-2 border-ap-red/20 rotate-12"
+            className="absolute left-[25%] bottom-0 w-8 h-8 rounded-md border-2 border-ap-red/30 rotate-12"
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1.2, duration: 0.5 }}
@@ -277,7 +278,7 @@ export default function HowItWorksSection() {
           />
           
           <motion.div 
-            className="absolute right-[30%] top-1/2 w-12 h-12 text-ap-green/20 text-3xl font-bold"
+            className="absolute right-[30%] top-1/2 w-12 h-12 text-ap-green/30 text-3xl font-bold"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.4, duration: 0.5 }}
@@ -288,7 +289,7 @@ export default function HowItWorksSection() {
           </motion.div>
           
           <motion.div 
-            className="absolute right-[15%] top-0 w-10 h-10 rounded-full border-2 border-ap-yellow/20"
+            className="absolute right-[15%] top-0 w-10 h-10 rounded-full border-2 border-ap-yellow/30"
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1.6, duration: 0.5 }}
