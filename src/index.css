@@ -16,17 +16,17 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 45 93% 55%;
-    --primary-foreground: 0 0% 20%;
+    --primary: 0 84.2% 60.2%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 143 50% 45%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 45 93% 55%;
+    --secondary-foreground: 0 0% 20%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 45 93% 55%;
-    --accent-foreground: 0 0% 20%;
+    --accent: 0 84.2% 60.2%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -62,6 +62,6 @@
   }
   
   .gradient-text {
-    @apply bg-gradient-to-r from-ap-yellow to-ap-green bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-ap-yellow to-ap-red bg-clip-text text-transparent;
   }
 }

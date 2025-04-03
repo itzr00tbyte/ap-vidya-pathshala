@@ -85,9 +85,9 @@ export default {
 				"ap-light-blue": "#B39DDB", // Keep light purple for contrast
 				"ap-green": "#43A047",
 				"ap-light-green": "#66BB6A",
-				"ap-yellow": "#FFD700", // Brighter yellow
+				"ap-yellow": "#FFD700", // Bright yellow
 				"ap-orange": "#FB8C00",
-				"ap-red": "#E53935",
+				"ap-red": "#E53935", // Vibrant red
 				"ap-purple": "#8E24AA",
 			},
 			borderRadius: {
@@ -132,4 +132,3 @@ export default {
 	},
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
-
