@@ -24,6 +24,7 @@ import UserManagement from "./pages/admin/UserManagement";
 import CourseManagement from "./pages/admin/CourseManagement";
 import TeacherManagement from "./pages/admin/TeacherManagement";
 import SchoolManagement from "./pages/admin/SchoolManagement";
+import ClassProgression from "./pages/admin/ClassProgression";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +53,7 @@ const App = () => (
                 <Route path="courses" element={<CourseManagement />} />
                 <Route path="teachers" element={<TeacherManagement />} />
                 <Route path="schools" element={<SchoolManagement />} />
+                <Route path="classes" element={<ClassProgression />} />
               </Route>
             </Route>
             
