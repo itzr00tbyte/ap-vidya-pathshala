@@ -1,8 +1,20 @@
+
 #root {
-  max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+}
+
+@media (max-width: 768px) {
+  #root {
+    padding: 0.5rem;
+  }
+}
+
+@media (min-width: 769px) {
+  #root {
+    padding: 1rem;
+  }
 }
 
 .logo {
@@ -39,4 +51,11 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* Add utility class for extra small screens */
+@media (min-width: 475px) {
+  .xs\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }

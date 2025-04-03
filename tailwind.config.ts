@@ -19,6 +19,9 @@ export default {
 			}
 		},
 		extend: {
+			screens: {
+				'xs': '475px',
+			},
 			fontFamily: {
 				sans: ['Poppins', 'sans-serif'],
 			},
@@ -118,3 +121,4 @@ export default {
 	},
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+

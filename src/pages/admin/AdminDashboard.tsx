@@ -94,25 +94,25 @@ export default function AdminDashboard() {
   );
 
   return (
-    <div>
+    <div className="w-full px-2 sm:px-4">
       <div className="mb-6">
-        <h2 className="text-3xl font-bold text-gray-800">Dashboard</h2>
-        <p className="text-gray-600 mt-1">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Dashboard</h2>
+        <p className="text-sm sm:text-base text-gray-600 mt-1">
           Welcome back, {user?.name}. Here's what's happening with your educational platform.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6 mb-8">
         {filteredStats.map((stat, index) => (
-          <Card key={index}>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-500">{stat.title}</CardTitle>
-              <div className={`p-2 rounded-md ${stat.color}`}>
-                <stat.icon className="h-5 w-5" />
+          <Card key={index} className="overflow-hidden">
+            <CardHeader className="flex flex-row items-center justify-between pb-1 sm:pb-2">
+              <CardTitle className="text-xs sm:text-sm font-medium text-gray-500">{stat.title}</CardTitle>
+              <div className={`p-1 sm:p-2 rounded-md ${stat.color}`}>
+                <stat.icon className="h-4 w-4 sm:h-5 sm:w-5" />
               </div>
             </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{stat.value}</div>
+            <CardContent className="pt-0 sm:pt-2">
+              <div className="text-xl sm:text-2xl font-bold">{stat.value}</div>
             </CardContent>
           </Card>
         ))}
@@ -120,10 +120,10 @@ export default function AdminDashboard() {
 
       {/* Role-specific content */}
       {user?.role === "admin" && (
-        <div className="mt-8">
-          <h3 className="text-xl font-semibold mb-4">Super Admin Controls</h3>
-          <div className="bg-amber-50 p-4 rounded-md border border-amber-200">
-            <p className="text-amber-800">
+        <div className="mt-6 sm:mt-8">
+          <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Super Admin Controls</h3>
+          <div className="bg-amber-50 p-3 sm:p-4 rounded-md border border-amber-200">
+            <p className="text-sm sm:text-base text-amber-800">
               You have full access to all system functionalities. Use the navigation menu to manage users, courses, teachers, schools, and monitor class progression.
             </p>
           </div>
@@ -131,10 +131,10 @@ export default function AdminDashboard() {
       )}
       
       {user?.role === "headmaster" && (
-        <div className="mt-8">
-          <h3 className="text-xl font-semibold mb-4">Head Master View</h3>
-          <div className="bg-blue-50 p-4 rounded-md border border-blue-200">
-            <p className="text-blue-800">
+        <div className="mt-6 sm:mt-8">
+          <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Head Master View</h3>
+          <div className="bg-blue-50 p-3 sm:p-4 rounded-md border border-blue-200">
+            <p className="text-sm sm:text-base text-blue-800">
               You can view and manage all students and teachers assigned to your schools. Monitor student learning progress by class, semester, and subject.
             </p>
           </div>
@@ -142,10 +142,10 @@ export default function AdminDashboard() {
       )}
       
       {user?.role === "teacher" && (
-        <div className="mt-8">
-          <h3 className="text-xl font-semibold mb-4">Teacher Dashboard</h3>
-          <div className="bg-green-50 p-4 rounded-md border border-green-200">
-            <p className="text-green-800">
+        <div className="mt-6 sm:mt-8">
+          <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Teacher Dashboard</h3>
+          <div className="bg-green-50 p-3 sm:p-4 rounded-md border border-green-200">
+            <p className="text-sm sm:text-base text-green-800">
               You can view your assigned students and track their course progress, completion rates, and performance.
             </p>
           </div>
