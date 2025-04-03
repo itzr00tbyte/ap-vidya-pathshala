@@ -1,9 +1,8 @@
-
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Plus, Download, Filter, Mail, Phone, Search, BookOpen, Calendar, School } from "lucide-react";
+import { Plus, Download, Filter, Mail, Phone, Search, BookOpen, Calendar, School, User } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
@@ -318,7 +317,7 @@ export default function TeacherManagement() {
                 <div className="mt-2 grid grid-cols-2 gap-4">
                   <div className="bg-blue-50 p-3 rounded-md flex items-center">
                     <div className="rounded-full bg-blue-100 p-2">
-                      <Users className="h-4 w-4 text-blue-900" />
+                      <User className="h-4 w-4 text-blue-900" />
                     </div>
                     <div className="ml-3">
                       <div className="text-sm text-gray-500">Students</div>
