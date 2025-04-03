@@ -25,59 +25,63 @@ import CourseManagement from "./pages/admin/CourseManagement";
 import TeacherManagement from "./pages/admin/TeacherManagement";
 import SchoolManagement from "./pages/admin/SchoolManagement";
 import ClassProgression from "./pages/admin/ClassProgression";
+import { useState } from "react";
 
-const queryClient = new QueryClient();
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            {/* Public routes */}
-            <Route path="/" element={<Index />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            
-            {/* Admin Portal Routes */}
-            <Route path="/admin-portal/login" element={<AdminLogin />} />
-            
-            {/* Admin Protected Routes */}
-            <Route element={<PrivateRoute roles={["admin", "headmaster", "teacher"]} redirectTo="/admin-portal/login" />}>
-              <Route path="/admin-portal" element={<AdminLayout />}>
-                <Route index element={<AdminDashboard />} />
-                <Route path="users" element={<UserManagement />} />
-                <Route path="courses" element={<CourseManagement />} />
-                <Route path="teachers" element={<TeacherManagement />} />
-                <Route path="schools" element={<SchoolManagement />} />
-                <Route path="classes" element={<ClassProgression />} />
+const App = () => {
+  // Create QueryClient inside the component
+  const [queryClient] = useState(() => new QueryClient());
+  
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              {/* Public routes */}
+              <Route path="/" element={<Index />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              
+              {/* Admin Portal Routes */}
+              <Route path="/admin-portal/login" element={<AdminLogin />} />
+              
+              {/* Admin Protected Routes */}
+              <Route element={<PrivateRoute roles={["admin", "headmaster", "teacher"]} redirectTo="/admin-portal/login" />}>
+                <Route path="/admin-portal" element={<AdminLayout />}>
+                  <Route index element={<AdminDashboard />} />
+                  <Route path="users" element={<UserManagement />} />
+                  <Route path="courses" element={<CourseManagement />} />
+                  <Route path="teachers" element={<TeacherManagement />} />
+                  <Route path="schools" element={<SchoolManagement />} />
+                  <Route path="classes" element={<ClassProgression />} />
+                </Route>
               </Route>
-            </Route>
-            
-            {/* Protected routes */}
-            <Route element={<PrivateRoute />}>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/subjects" element={<Subjects />} />
-              <Route path="/subject/:subjectId" element={<SubjectPage />} />
-              <Route path="/subject/:subjectId/slideshow/:chapterId" element={<SlideshowCanvas />} />
-            </Route>
-            
-            {/* Routes for teachers and headmasters */}
-            <Route element={<PrivateRoute roles={["teacher", "headmaster"]} />}>
-              <Route path="/students" element={<StudentManagement />} />
-            </Route>
-            
-            {/* 404 route */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </AuthProvider>
-  </QueryClientProvider>
-);
+              
+              {/* Protected routes */}
+              <Route element={<PrivateRoute />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/subjects" element={<Subjects />} />
+                <Route path="/subject/:subjectId" element={<SubjectPage />} />
+                <Route path="/subject/:subjectId/slideshow/:chapterId" element={<SlideshowCanvas />} />
+              </Route>
+              
+              {/* Routes for teachers and headmasters */}
+              <Route element={<PrivateRoute roles={["teacher", "headmaster"]} />}>
+                <Route path="/students" element={<StudentManagement />} />
+              </Route>
+              
+              {/* 404 route */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </AuthProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
