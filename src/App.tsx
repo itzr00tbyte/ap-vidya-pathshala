@@ -41,6 +41,10 @@ const App = () => (
               <Route path="/subjects" element={<Subjects />} />
               <Route path="/subject/:subjectId" element={<SubjectPage />} />
               <Route path="/subject/:subjectId/slideshow/:chapterId" element={<SlideshowCanvas />} />
+            </Route>
+            
+            {/* Routes for teachers and headmasters */}
+            <Route element={<PrivateRoute roles={["teacher", "headmaster"]} />}>
               <Route path="/students" element={<StudentManagement />} />
             </Route>
             

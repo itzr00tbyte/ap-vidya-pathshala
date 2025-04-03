@@ -28,10 +28,14 @@ import {
   UserPlus, 
   Filter, 
   Download, 
-  BarChart3 
+  BarChart3,
+  User,
+  Book,
+  BookOpen,
+  ChartBar
 } from "lucide-react";
 
-// Mock student data
+// Extended mock student data with learning stats
 const MOCK_STUDENTS = [
   {
     id: "1",
@@ -41,7 +45,15 @@ const MOCK_STUDENTS = [
     section: "A",
     attendance: 92,
     performance: "Excellent",
-    lastActive: "2023-04-01"
+    lastActive: "2023-04-01",
+    teacher: "Teacher User",
+    learningStats: {
+      completedLessons: 24,
+      avgQuizScore: 85,
+      timeSpent: "14h 30m",
+      strongSubjects: ["Mathematics", "Science"],
+      weakSubjects: ["History"]
+    }
   },
   {
     id: "2",
@@ -51,7 +63,15 @@ const MOCK_STUDENTS = [
     section: "B",
     attendance: 88,
     performance: "Good",
-    lastActive: "2023-04-02"
+    lastActive: "2023-04-02",
+    teacher: "Another Teacher",
+    learningStats: {
+      completedLessons: 20,
+      avgQuizScore: 78,
+      timeSpent: "12h 15m",
+      strongSubjects: ["Languages", "Art"],
+      weakSubjects: ["Science", "Mathematics"]
+    }
   },
   {
     id: "3",
@@ -61,7 +81,15 @@ const MOCK_STUDENTS = [
     section: "A",
     attendance: 95,
     performance: "Excellent",
-    lastActive: "2023-04-01"
+    lastActive: "2023-04-01",
+    teacher: "Teacher User",
+    learningStats: {
+      completedLessons: 28,
+      avgQuizScore: 92,
+      timeSpent: "16h 45m",
+      strongSubjects: ["Mathematics", "Science", "Computer Science"],
+      weakSubjects: []
+    }
   },
   {
     id: "4",
@@ -71,7 +99,15 @@ const MOCK_STUDENTS = [
     section: "C",
     attendance: 78,
     performance: "Average",
-    lastActive: "2023-03-28"
+    lastActive: "2023-03-28",
+    teacher: "Another Teacher",
+    learningStats: {
+      completedLessons: 18,
+      avgQuizScore: 68,
+      timeSpent: "10h 20m",
+      strongSubjects: ["Art", "Physical Education"],
+      weakSubjects: ["Mathematics", "Science"]
+    }
   },
   {
     id: "5",
@@ -81,7 +117,15 @@ const MOCK_STUDENTS = [
     section: "A",
     attendance: 91,
     performance: "Good",
-    lastActive: "2023-04-02"
+    lastActive: "2023-04-02",
+    teacher: "Teacher User",
+    learningStats: {
+      completedLessons: 26,
+      avgQuizScore: 82,
+      timeSpent: "15h 10m",
+      strongSubjects: ["History", "Geography"],
+      weakSubjects: ["Mathematics"]
+    }
   },
 ];
 
@@ -93,6 +137,8 @@ export default function StudentManagement() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredStudents, setFilteredStudents] = useState(MOCK_STUDENTS);
   const [activeTab, setActiveTab] = useState("all");
+  const [selectedStudent, setSelectedStudent] = useState<typeof MOCK_STUDENTS[0] | null>(null);
+  const [showStatsCard, setShowStatsCard] = useState(false);
 
   useEffect(() => {
     // Check if user has the required role
@@ -107,8 +153,12 @@ export default function StudentManagement() {
   }, [user, navigate, toast]);
 
   useEffect(() => {
-    // Filter students based on search and active tab
+    // For teachers, filter students to only show their students
     let filtered = students;
+    
+    if (user?.role === "teacher") {
+      filtered = filtered.filter(student => student.teacher === user.name);
+    }
 
     // Apply search filter
     if (searchQuery) {
@@ -125,7 +175,7 @@ export default function StudentManagement() {
     }
 
     setFilteredStudents(filtered);
-  }, [searchQuery, activeTab, students]);
+  }, [searchQuery, activeTab, students, user]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -135,7 +185,18 @@ export default function StudentManagement() {
     setActiveTab(value);
   };
 
+  const viewStudentStats = (student: typeof MOCK_STUDENTS[0]) => {
+    setSelectedStudent(student);
+    setShowStatsCard(true);
+  };
+
+  const closeStatsCard = () => {
+    setShowStatsCard(false);
+    setSelectedStudent(null);
+  };
+
   const canEditStudents = user?.role === "headmaster";
+  const pageTitle = user?.role === "headmaster" ? "Student Management" : "My Class Students";
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -144,7 +205,7 @@ export default function StudentManagement() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Student Management</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{pageTitle}</h1>
             <p className="text-gray-500 mt-1">
               {user?.role === "headmaster" 
                 ? "View and manage all student details" 
@@ -159,6 +220,84 @@ export default function StudentManagement() {
                 Add New Student
               </Button>
             </div>
+          )}
+        </div>
+        
+        <div className="grid gap-6 mb-6">
+          {showStatsCard && selectedStudent && (
+            <Card className="col-span-1 bg-white shadow-md overflow-hidden">
+              <CardHeader className="bg-blue-50">
+                <div className="flex justify-between items-center">
+                  <CardTitle className="text-lg font-medium text-blue-800">
+                    Learning Statistics for {selectedStudent.name}
+                  </CardTitle>
+                  <Button variant="ghost" onClick={closeStatsCard}>
+                    Close
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                  <div className="bg-blue-50 rounded-lg p-4 flex flex-col items-center justify-center">
+                    <BookOpen className="h-8 w-8 text-blue-600 mb-2" />
+                    <p className="text-sm text-gray-500">Completed Lessons</p>
+                    <p className="text-2xl font-bold text-blue-700">{selectedStudent.learningStats.completedLessons}</p>
+                  </div>
+                  
+                  <div className="bg-green-50 rounded-lg p-4 flex flex-col items-center justify-center">
+                    <ChartBar className="h-8 w-8 text-green-600 mb-2" />
+                    <p className="text-sm text-gray-500">Avg. Quiz Score</p>
+                    <p className="text-2xl font-bold text-green-700">{selectedStudent.learningStats.avgQuizScore}%</p>
+                  </div>
+                  
+                  <div className="bg-purple-50 rounded-lg p-4 flex flex-col items-center justify-center">
+                    <Book className="h-8 w-8 text-purple-600 mb-2" />
+                    <p className="text-sm text-gray-500">Time Spent Learning</p>
+                    <p className="text-2xl font-bold text-purple-700">{selectedStudent.learningStats.timeSpent}</p>
+                  </div>
+                  
+                  <div className="bg-orange-50 rounded-lg p-4 flex flex-col items-center justify-center">
+                    <User className="h-8 w-8 text-orange-600 mb-2" />
+                    <p className="text-sm text-gray-500">Attendance</p>
+                    <p className="text-2xl font-bold text-orange-700">{selectedStudent.attendance}%</p>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                  <div>
+                    <h3 className="text-md font-medium text-gray-700 mb-2">Strong Subjects</h3>
+                    <div className="space-y-2">
+                      {selectedStudent.learningStats.strongSubjects.length > 0 ? (
+                        selectedStudent.learningStats.strongSubjects.map((subject, index) => (
+                          <div key={index} className="flex items-center bg-green-50 p-2 rounded-md">
+                            <div className="h-3 w-3 rounded-full bg-green-500 mr-2"></div>
+                            <span>{subject}</span>
+                          </div>
+                        ))
+                      ) : (
+                        <p className="text-gray-500 italic">No strong subjects yet</p>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-md font-medium text-gray-700 mb-2">Areas for Improvement</h3>
+                    <div className="space-y-2">
+                      {selectedStudent.learningStats.weakSubjects.length > 0 ? (
+                        selectedStudent.learningStats.weakSubjects.map((subject, index) => (
+                          <div key={index} className="flex items-center bg-orange-50 p-2 rounded-md">
+                            <div className="h-3 w-3 rounded-full bg-orange-500 mr-2"></div>
+                            <span>{subject}</span>
+                          </div>
+                        ))
+                      ) : (
+                        <p className="text-gray-500 italic">No weak subjects</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           )}
         </div>
         
@@ -249,6 +388,9 @@ export default function StudentManagement() {
                                 </Button>
                               </DropdownMenuTrigger>
                               <DropdownMenuContent align="end">
+                                <DropdownMenuItem onClick={() => viewStudentStats(student)}>
+                                  View Learning Stats
+                                </DropdownMenuItem>
                                 <DropdownMenuItem>View details</DropdownMenuItem>
                                 <DropdownMenuItem>View performance</DropdownMenuItem>
                                 {canEditStudents && (
