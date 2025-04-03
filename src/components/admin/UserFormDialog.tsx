@@ -46,7 +46,7 @@ const userFormSchema = z.object({
 
 type UserFormValues = z.infer<typeof userFormSchema>;
 
-interface UserData {
+export interface UserData {
   id?: string;
   name: string;
   email: string;
@@ -89,10 +89,18 @@ const UserFormDialog = ({
 
   function onSubmit(data: UserFormValues) {
     try {
-      onSave({
+      // Ensure we're passing all required properties
+      const userData: UserData = {
         id: user?.id,
-        ...data,
-      });
+        name: data.name,
+        email: data.email,
+        role: data.role,
+        schoolId: data.schoolId,
+        grade: data.grade,
+        status: data.status
+      };
+      
+      onSave(userData);
       setIsOpen(false);
       toast({
         title: `User ${isEditMode ? "updated" : "added"} successfully`,

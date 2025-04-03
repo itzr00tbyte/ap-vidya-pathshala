@@ -1,4 +1,3 @@
-
 // Define Student type that's compatible with what StudentTable expects
 export type Student = {
   id: string;
@@ -16,6 +15,7 @@ export type Student = {
   performance: string;
   lastActive: string;
   teacher: string;
+  status: "active" | "inactive" | "pending";
   learningStats: {
     completedLessons: number;
     avgQuizScore: number;
@@ -46,6 +46,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Excellent",
     lastActive: "2023-04-02",
     teacher: "Mrs. Ananya Sharma",
+    status: "active", // Added status
     learningStats: {
       completedLessons: 145,
       avgQuizScore: 87,
@@ -70,6 +71,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Excellent",
     lastActive: "2023-04-02",
     teacher: "Mr. Vikram Singh",
+    status: "active", // Added status
     learningStats: {
       completedLessons: 168,
       avgQuizScore: 92,
@@ -78,6 +80,8 @@ export const MOCK_STUDENTS: Student[] = [
       weakSubjects: []
     }
   },
+  // For the remaining students, let's assign status based on their attendance
+  // Attendance > 90: active, between 80-90: pending, below 80: inactive
   {
     id: "s3",
     name: "Vihaan Kumar",
@@ -94,6 +98,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Good",
     lastActive: "2023-04-01",
     teacher: "Mrs. Ananya Sharma",
+    status: "pending", // Added status
     learningStats: {
       completedLessons: 120,
       avgQuizScore: 78,
@@ -118,6 +123,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Good",
     lastActive: "2023-04-02",
     teacher: "Mr. Vikram Singh",
+    status: "active",
     learningStats: {
       completedLessons: 182,
       avgQuizScore: 85,
@@ -142,6 +148,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Excellent",
     lastActive: "2023-04-01",
     teacher: "Mrs. Priya Reddy",
+    status: "active",
     learningStats: {
       completedLessons: 152,
       avgQuizScore: 89,
@@ -166,6 +173,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Good",
     lastActive: "2023-04-01",
     teacher: "Mrs. Priya Reddy",
+    status: "active",
     learningStats: {
       completedLessons: 160,
       avgQuizScore: 86,
@@ -190,6 +198,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Good",
     lastActive: "2023-03-31",
     teacher: "Mrs. Ananya Sharma",
+    status: "pending",
     learningStats: {
       completedLessons: 118,
       avgQuizScore: 81,
@@ -214,6 +223,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Good",
     lastActive: "2023-04-02",
     teacher: "Mr. Vikram Singh",
+    status: "active",
     learningStats: {
       completedLessons: 180,
       avgQuizScore: 88,
@@ -238,6 +248,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Excellent",
     lastActive: "2023-04-01",
     teacher: "Mrs. Ananya Sharma",
+    status: "active",
     learningStats: {
       completedLessons: 155,
       avgQuizScore: 90,
@@ -262,6 +273,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Good",
     lastActive: "2023-03-31",
     teacher: "Mrs. Priya Reddy",
+    status: "active",
     learningStats: {
       completedLessons: 162,
       avgQuizScore: 84,
@@ -288,6 +300,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Good",
     lastActive: "2023-04-02",
     teacher: "Mr. Arjun Patel",
+    status: "active",
     learningStats: {
       completedLessons: 148,
       avgQuizScore: 86,
@@ -312,6 +325,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Excellent",
     lastActive: "2023-04-02",
     teacher: "Ms. Meera Iyer",
+    status: "active",
     learningStats: {
       completedLessons: 165,
       avgQuizScore: 91,
@@ -336,6 +350,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Satisfactory",
     lastActive: "2023-03-31",
     teacher: "Mr. Arjun Patel",
+    status: "pending",
     learningStats: {
       completedLessons: 115,
       avgQuizScore: 79,
@@ -360,6 +375,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Good",
     lastActive: "2023-04-01",
     teacher: "Ms. Meera Iyer",
+    status: "active",
     learningStats: {
       completedLessons: 185,
       avgQuizScore: 87,
@@ -384,6 +400,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Good",
     lastActive: "2023-04-01",
     teacher: "Mr. Arjun Patel",
+    status: "active",
     learningStats: {
       completedLessons: 150,
       avgQuizScore: 88,
@@ -408,6 +425,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Good",
     lastActive: "2023-03-31",
     teacher: "Ms. Meera Iyer",
+    status: "active",
     learningStats: {
       completedLessons: 158,
       avgQuizScore: 85,
@@ -432,6 +450,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Good",
     lastActive: "2023-04-02",
     teacher: "Mr. Karthik Nair",
+    status: "pending",
     learningStats: {
       completedLessons: 120,
       avgQuizScore: 82,
@@ -456,6 +475,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Good",
     lastActive: "2023-04-01",
     teacher: "Ms. Meera Iyer",
+    status: "active",
     learningStats: {
       completedLessons: 178,
       avgQuizScore: 89,
@@ -480,6 +500,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Excellent",
     lastActive: "2023-04-02",
     teacher: "Mr. Arjun Patel",
+    status: "active",
     learningStats: {
       completedLessons: 154,
       avgQuizScore: 93,
@@ -504,6 +525,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Satisfactory",
     lastActive: "2023-03-31",
     teacher: "Mr. Karthik Nair",
+    status: "pending",
     learningStats: {
       completedLessons: 160,
       avgQuizScore: 82,
@@ -530,6 +552,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Good",
     lastActive: "2023-04-02",
     teacher: "Dr. Ravi Verma",
+    status: "active",
     learningStats: {
       completedLessons: 146,
       avgQuizScore: 88,
@@ -554,6 +577,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Excellent",
     lastActive: "2023-04-01",
     teacher: "Mrs. Sunita Gupta",
+    status: "active",
     learningStats: {
       completedLessons: 170,
       avgQuizScore: 90,
@@ -578,6 +602,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Good",
     lastActive: "2023-03-31",
     teacher: "Mrs. Sunita Gupta",
+    status: "pending",
     learningStats: {
       completedLessons: 118,
       avgQuizScore: 80,
@@ -602,6 +627,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Good",
     lastActive: "2023-04-01",
     teacher: "Dr. Ravi Verma",
+    status: "active",
     learningStats: {
       completedLessons: 182,
       avgQuizScore: 86,
@@ -626,6 +652,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Good",
     lastActive: "2023-04-02",
     teacher: "Mrs. Sunita Gupta",
+    status: "active",
     learningStats: {
       completedLessons: 149,
       avgQuizScore: 87,
@@ -650,6 +677,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Good",
     lastActive: "2023-03-31",
     teacher: "Dr. Ravi Verma",
+    status: "active",
     learningStats: {
       completedLessons: 162,
       avgQuizScore: 85,
@@ -674,6 +702,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Good",
     lastActive: "2023-04-01",
     teacher: "Mrs. Sunita Gupta",
+    status: "active",
     learningStats: {
       completedLessons: 125,
       avgQuizScore: 84,
@@ -698,6 +727,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Good",
     lastActive: "2023-03-31",
     teacher: "Mr. Deepak Mishra",
+    status: "pending",
     learningStats: {
       completedLessons: 175,
       avgQuizScore: 88,
@@ -722,6 +752,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Excellent",
     lastActive: "2023-04-02",
     teacher: "Mrs. Sunita Gupta",
+    status: "active",
     learningStats: {
       completedLessons: 155,
       avgQuizScore: 92,
@@ -746,6 +777,7 @@ export const MOCK_STUDENTS: Student[] = [
     performance: "Good",
     lastActive: "2023-03-31",
     teacher: "Mr. Deepak Mishra",
+    status: "active",
     learningStats: {
       completedLessons: 165,
       avgQuizScore: 86,
@@ -755,3 +787,12 @@ export const MOCK_STUDENTS: Student[] = [
     }
   }
 ];
+
+// Update the implementation to add status to all mock students
+for (let i = 4; i < MOCK_STUDENTS.length; i++) {
+  if (!MOCK_STUDENTS[i].status) {
+    // If attendance > 90: active, between 80-90: pending, below 80: inactive
+    if (MOCK_STUDENTS[i].attendance > 90) {
+      MOCK_STUDENTS[i].status = "active";
+    } else if (MOCK_STUDENTS[i].attendance >= 80) {
+      MOCK_STUDENTS[i].status
