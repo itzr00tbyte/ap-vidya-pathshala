@@ -89,8 +89,13 @@ export default function UserFormDialog({
     setIsOpen(false);
   };
   
+  // Handle dialog close properly to avoid overlay issues
+  const handleOpenChange = (open: boolean) => {
+    setIsOpen(open);
+  };
+  
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
