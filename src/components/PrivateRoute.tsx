@@ -1,6 +1,7 @@
 
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
+import { useEffect, useState } from "react";
 
 interface PrivateRouteProps {
   redirectTo?: string;
@@ -12,13 +13,27 @@ export default function PrivateRoute({
   roles
 }: PrivateRouteProps) {
   const location = useLocation();
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
+  const [isChecking, setIsChecking] = useState(true);
+  
+  useEffect(() => {
+    // Give auth context a moment to initialize
+    const checkAuth = setTimeout(() => {
+      setIsChecking(false);
+    }, 500);
+    
+    return () => clearTimeout(checkAuth);
+  }, []);
+  
+  // Show nothing while checking authentication
+  if (isChecking) {
+    return null;
+  }
   
   // First check if user is authenticated
-  const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
-  
   if (!isAuthenticated) {
-    return <Navigate to={redirectTo} replace />;
+    // Redirect to login with return path
+    return <Navigate to={redirectTo} state={{ from: location }} replace />;
   }
   
   // Then check if specific roles are required and if the user has the necessary role
