@@ -1,3 +1,4 @@
+
 // Define Student type that's compatible with what StudentTable expects
 export type Student = {
   id: string;
@@ -795,4 +796,9 @@ for (let i = 4; i < MOCK_STUDENTS.length; i++) {
     if (MOCK_STUDENTS[i].attendance > 90) {
       MOCK_STUDENTS[i].status = "active";
     } else if (MOCK_STUDENTS[i].attendance >= 80) {
-      MOCK_STUDENTS[i].status
+      MOCK_STUDENTS[i].status = "pending";
+    } else {
+      MOCK_STUDENTS[i].status = "inactive";
+    }
+  }
+}
