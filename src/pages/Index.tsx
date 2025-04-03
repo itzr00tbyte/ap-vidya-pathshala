@@ -75,8 +75,53 @@ const Index = () => {
         <div className="absolute top-1/2 right-1/4 text-5xl text-ap-yellow/20 font-bold">−</div>
       </div>
       
-      {/* Hero Section - with animations */}
-      <section className="bg-gradient-to-b from-white to-ap-red/5 relative py-28 overflow-hidden">
+      {/* Hero Section - with enhanced animations and patterns */}
+      <section className="bg-gradient-to-br from-ap-blue/5 via-white to-ap-red/10 relative py-28 overflow-hidden">
+        {/* Educational Pattern Overlay */}
+        <div className="absolute inset-0 opacity-5 pattern-grid z-0"></div>
+        
+        {/* Animated Educational Elements */}
+        <div className="absolute inset-0 overflow-hidden z-0">
+          {/* Animated Formulas */}
+          <motion.div 
+            className="absolute top-10 left-[10%] text-4xl font-mono opacity-10 text-ap-blue"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 0.1, y: 0 }}
+            transition={{ duration: 1.5, delay: 0.2 }}
+          >
+            E=mc²
+          </motion.div>
+          
+          <motion.div 
+            className="absolute bottom-20 right-[15%] text-3xl font-mono opacity-10 text-ap-red"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 0.1, y: 0 }}
+            transition={{ duration: 1.5, delay: 0.5 }}
+          >
+            a²+b²=c²
+          </motion.div>
+          
+          {/* Animated Geometric Shapes */}
+          <motion.div 
+            className="absolute top-1/4 right-[20%] w-32 h-32 border-2 border-ap-yellow/20 rounded-lg"
+            initial={{ rotate: 0, opacity: 0 }}
+            animate={{ rotate: 45, opacity: 0.2 }}
+            transition={{ duration: 2, delay: 0.3 }}
+          ></motion.div>
+          
+          <motion.div 
+            className="absolute bottom-1/3 left-[25%] w-24 h-24 border-2 border-ap-green/20"
+            initial={{ rotate: 0, opacity: 0 }}
+            animate={{ rotate: 15, opacity: 0.2 }}
+            transition={{ duration: 2, delay: 0.5 }}
+          ></motion.div>
+          
+          {/* Scientific Icons */}
+          <div className="absolute top-1/2 left-[10%] opacity-10 text-4xl">🧪</div>
+          <div className="absolute top-1/3 right-[10%] opacity-10 text-4xl">📊</div>
+          <div className="absolute bottom-1/4 left-[40%] opacity-10 text-4xl">🔍</div>
+        </div>
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div 
             className="text-center"
@@ -115,37 +160,39 @@ const Index = () => {
           </motion.div>
         </div>
         
-        {/* Animated educational wave pattern */}
+        {/* Enhanced Animated Wave Patterns */}
+        {/* First wave - bottom layer */}
         <motion.div 
-          className="absolute bottom-0 left-0 w-full h-32 bg-contain"
+          className="absolute bottom-0 left-0 w-full h-40"
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 0.2, y: 0 }}
-          transition={{ duration: 1.2 }}
+          animate={{ opacity: 0.3, y: 0 }}
+          transition={{ duration: 1.5 }}
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z' fill='%23E53935' opacity='0.15'%3E%3C/path%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z' fill='%239b87f5' opacity='0.25'%3E%3C/path%3E%3C/svg%3E")`,
             backgroundSize: '100% 100%'
           }}
         />
         
-        {/* Additional decorative waves with different colors and speeds */}
+        {/* Second wave - middle layer */}
+        <motion.div 
+          className="absolute bottom-0 left-0 w-full h-32"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 0.3, x: 0 }}
+          transition={{ duration: 1.8, delay: 0.3 }}
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%23F97316' opacity='0.20'%3E%3C/path%3E%3C/svg%3E")`,
+            backgroundSize: '100% 100%'
+          }}
+        />
+        
+        {/* Third wave - top layer */}
         <motion.div 
           className="absolute bottom-0 left-0 w-full h-24"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 0.15, x: 0 }}
-          transition={{ duration: 1.5, delay: 0.2 }}
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' fill='%236A5ACD' opacity='0.2'%3E%3C/path%3E%3C/svg%3E")`,
-            backgroundSize: '100% 100%'
-          }}
-        />
-        
-        <motion.div 
-          className="absolute bottom-0 left-0 w-full h-20"
           initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 0.15, x: 0 }}
-          transition={{ duration: 1.8, delay: 0.4 }}
+          animate={{ opacity: 0.3, x: 0 }}
+          transition={{ duration: 2.2, delay: 0.6 }}
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%23FFD700' opacity='0.2'%3E%3C/path%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' fill='%230EA5E9' opacity='0.15'%3E%3C/path%3E%3C/svg%3E")`,
             backgroundSize: '100% 100%'
           }}
         />
