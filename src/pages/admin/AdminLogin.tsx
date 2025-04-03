@@ -18,6 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useAuth } from "@/context/AuthContext";
+import { useEffect } from "react";
 
 const adminLoginSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
@@ -32,10 +33,12 @@ export default function AdminLogin() {
   const [isLoading, setIsLoading] = useState(false);
   const { login, user } = useAuth();
 
-  // Redirect if already logged in as admin
-  if (user && (user.role === "admin" || user.role === "headmaster" || user.role === "teacher")) {
-    navigate("/admin-portal");
-  }
+  // Use useEffect for navigation instead of direct rendering logic
+  useEffect(() => {
+    if (user && (user.role === "admin" || user.role === "headmaster" || user.role === "teacher")) {
+      navigate("/admin-portal");
+    }
+  }, [user, navigate]);
 
   const form = useForm<AdminLoginFormValues>({
     resolver: zodResolver(adminLoginSchema),
