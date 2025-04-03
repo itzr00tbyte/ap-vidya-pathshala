@@ -30,17 +30,17 @@ const StudentTable = ({ students, onViewStats, canEditStudents }: StudentTablePr
   // Mobile card view for students
   if (isMobile) {
     return (
-      <div className="space-y-4">
+      <div className="space-y-3">
         {students.length > 0 ? (
           students.map((student) => (
             <div 
               key={student.id} 
-              className="bg-white p-4 rounded-lg border shadow-sm"
+              className="bg-white p-3 rounded-lg border shadow-sm"
             >
               <div className="flex justify-between items-start mb-2">
                 <div>
-                  <h3 className="font-medium">{student.name}</h3>
-                  <p className="text-sm text-gray-500">{student.email}</p>
+                  <h3 className="font-medium text-sm sm:text-base">{student.name}</h3>
+                  <p className="text-xs sm:text-sm text-gray-500">{student.email}</p>
                 </div>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -65,7 +65,7 @@ const StudentTable = ({ students, onViewStats, canEditStudents }: StudentTablePr
                 </DropdownMenu>
               </div>
               
-              <div className="grid grid-cols-2 gap-y-2 text-sm">
+              <div className="grid grid-cols-2 gap-x-2 gap-y-2 text-xs sm:text-sm">
                 <div>
                   <span className="text-gray-500">Grade:</span> {student.grade}
                 </div>
@@ -77,7 +77,7 @@ const StudentTable = ({ students, onViewStats, canEditStudents }: StudentTablePr
                 </div>
                 <div>
                   <span className="text-gray-500">Performance:</span>
-                  <span className={`ml-1 px-2 py-0.5 rounded-full text-xs ${
+                  <span className={`ml-1 px-1.5 py-0.5 rounded-full text-xs ${
                     student.performance === 'Excellent' ? 'bg-green-100 text-green-800' :
                     student.performance === 'Good' ? 'bg-blue-100 text-blue-800' :
                     'bg-yellow-100 text-yellow-800'
@@ -98,7 +98,7 @@ const StudentTable = ({ students, onViewStats, canEditStudents }: StudentTablePr
     );
   }
 
-  // Desktop table view
+  // Desktop table view with horizontal scrolling for smaller screens
   return (
     <div className="overflow-x-auto">
       <Table>
@@ -111,7 +111,7 @@ const StudentTable = ({ students, onViewStats, canEditStudents }: StudentTablePr
             <TableHead>Section</TableHead>
             <TableHead>Attendance</TableHead>
             <TableHead>Performance</TableHead>
-            <TableHead>Last Active</TableHead>
+            <TableHead className="hidden md:table-cell">Last Active</TableHead>
             <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -134,7 +134,7 @@ const StudentTable = ({ students, onViewStats, canEditStudents }: StudentTablePr
                     {student.performance}
                   </span>
                 </TableCell>
-                <TableCell>{student.lastActive}</TableCell>
+                <TableCell className="hidden md:table-cell">{student.lastActive}</TableCell>
                 <TableCell className="text-right">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>

@@ -5,7 +5,13 @@
   text-align: center;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 380px) {
+  #root {
+    padding: 0.25rem;
+  }
+}
+
+@media (min-width: 381px) and (max-width: 768px) {
   #root {
     padding: 0.5rem;
   }
@@ -53,9 +59,56 @@
   color: #888;
 }
 
-/* Add utility class for extra small screens */
+/* Add utility classes for extra small screens */
 @media (min-width: 475px) {
   .xs\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Responsive padding utilities */
+.responsive-padding {
+  padding: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .responsive-padding {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-padding {
+    padding: 1.5rem;
+  }
+}
+
+/* Responsive container */
+.responsive-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .responsive-container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .responsive-container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .responsive-container {
+    max-width: 1280px;
   }
 }
