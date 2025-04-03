@@ -29,7 +29,7 @@ const STATIC_CREDENTIALS = [
     name: "Student User",
     grade: 8,
     avatar: null,
-    role: "student" 
+    role: "student" as const
   },
   { 
     email: "teacher@example.com", 
@@ -37,7 +37,7 @@ const STATIC_CREDENTIALS = [
     name: "Teacher User",
     grade: 10,
     avatar: null,
-    role: "teacher" 
+    role: "teacher" as const
   },
   {
     email: "headmaster@example.com",
@@ -45,7 +45,7 @@ const STATIC_CREDENTIALS = [
     name: "Headmaster User",
     grade: 12,
     avatar: null,
-    role: "headmaster"
+    role: "headmaster" as const
   }
 ];
 
@@ -80,7 +80,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           localStorage.setItem("isAuthenticated", "true");
           localStorage.setItem("user", JSON.stringify(userWithoutPassword));
           
-          setUser(userWithoutPassword);
+          setUser(userWithoutPassword as User);
           setIsAuthenticated(true);
           resolve();
         } else {
@@ -98,8 +98,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const newUser = {
           ...userWithoutPassword,
           avatar: null,
-          // Default role for new signups is student
-          role: userWithoutPassword.role || "student" as const
+          // Ensure role is properly typed as one of the allowed values
+          role: (userWithoutPassword.role || "student") as "student" | "teacher" | "headmaster"
         };
         
         localStorage.setItem("isAuthenticated", "true");
