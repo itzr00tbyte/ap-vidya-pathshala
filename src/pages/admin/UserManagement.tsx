@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { Card } from "@/components/ui/card";
@@ -7,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Plus, Download, Filter, Search } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
-import { MOCK_STUDENTS } from "@/data/mockStudents";
+import { MOCK_STUDENTS, Student } from "@/data/mockStudents";
 import { MOCK_TEACHERS } from "@/data/mockTeachers";
 import { MOCK_HEADMASTERS } from "@/data/mockHeadmasters";
 import { MOCK_SCHOOLS } from "@/data/mockSchools";
@@ -25,7 +24,7 @@ export default function UserManagement() {
   const { user } = useAuth();
   const isAdmin = user?.role === "admin";
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedStudent, setSelectedStudent] = useState<any>(null);
+  const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [showStatsDialog, setShowStatsDialog] = useState(false);
   const [teacherSearchQuery, setTeacherSearchQuery] = useState("");
   const [headmasterSearchQuery, setHeadmasterSearchQuery] = useState("");
@@ -49,7 +48,7 @@ export default function UserManagement() {
     headmaster.email.toLowerCase().includes(headmasterSearchQuery.toLowerCase())
   );
 
-  const handleViewStats = (student: any) => {
+  const handleViewStats = (student: Student) => {
     setSelectedStudent(student);
     setShowStatsDialog(true);
   };

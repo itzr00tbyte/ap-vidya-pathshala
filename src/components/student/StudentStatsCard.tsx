@@ -2,22 +2,10 @@
 import { BookOpen, ChartBar, Book, User } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-
-type StudentLearningStats = {
-  completedLessons: number;
-  avgQuizScore: number;
-  timeSpent: string;
-  strongSubjects: string[];
-  weakSubjects: string[];
-};
+import { Student } from "@/data/mockStudents";
 
 interface StudentStatsCardProps {
-  student: {
-    id: string;
-    name: string;
-    attendance: number;
-    learningStats: StudentLearningStats;
-  };
+  student: Student;
   onClose: () => void;
 }
 

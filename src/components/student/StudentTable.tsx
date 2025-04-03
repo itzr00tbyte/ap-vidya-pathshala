@@ -15,25 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
-
-export type Student = {
-  id: string;
-  name: string;
-  email: string;
-  grade: number;
-  section: string;
-  attendance: number;
-  performance: string;
-  lastActive: string;
-  teacher: string;
-  learningStats: {
-    completedLessons: number;
-    avgQuizScore: number;
-    timeSpent: string;
-    strongSubjects: string[];
-    weakSubjects: string[];
-  }
-};
+import { Student } from "@/data/mockStudents";
 
 interface StudentTableProps {
   students: Student[];

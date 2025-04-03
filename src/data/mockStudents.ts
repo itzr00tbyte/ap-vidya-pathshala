@@ -1,8 +1,34 @@
 
+// Define Student type that's compatible with what StudentTable expects
+export type Student = {
+  id: string;
+  name: string;
+  email: string;
+  grade: number;
+  section: string;
+  schoolId: string;
+  guardianName: string;
+  guardianContact: string;
+  dateOfBirth: string;
+  address: string;
+  enrollmentDate: string;
+  attendance: number;
+  performance: string;
+  lastActive: string;
+  teacher: string;
+  learningStats: {
+    completedLessons: number;
+    avgQuizScore: number;
+    timeSpent: string;
+    strongSubjects: string[];
+    weakSubjects: string[];
+  }
+};
+
 // This file contains mock student data for 30 students (10 per school)
 // Each student has a realistic profile with educational details
 
-export const MOCK_STUDENTS = [
+export const MOCK_STUDENTS: Student[] = [
   // School 1 Students (10 students)
   {
     id: "s1",
@@ -17,6 +43,9 @@ export const MOCK_STUDENTS = [
     address: "12-3-456, Begumpet, Hyderabad",
     enrollmentDate: "2019-06-10",
     attendance: 92,
+    performance: "Excellent",
+    lastActive: "2023-04-02",
+    teacher: "Mrs. Ananya Sharma",
     learningStats: {
       completedLessons: 145,
       avgQuizScore: 87,
@@ -38,6 +67,9 @@ export const MOCK_STUDENTS = [
     address: "8-2-293, Banjara Hills, Hyderabad",
     enrollmentDate: "2018-06-12",
     attendance: 95,
+    performance: "Excellent",
+    lastActive: "2023-04-02",
+    teacher: "Mr. Vikram Singh",
     learningStats: {
       completedLessons: 168,
       avgQuizScore: 92,
@@ -59,6 +91,9 @@ export const MOCK_STUDENTS = [
     address: "3-6-245, Himayatnagar, Hyderabad",
     enrollmentDate: "2020-06-15",
     attendance: 88,
+    performance: "Good",
+    lastActive: "2023-04-01",
+    teacher: "Mrs. Ananya Sharma",
     learningStats: {
       completedLessons: 120,
       avgQuizScore: 78,
@@ -80,6 +115,9 @@ export const MOCK_STUDENTS = [
     address: "5-9-22, Basheer Bagh, Hyderabad",
     enrollmentDate: "2017-06-08",
     attendance: 90,
+    performance: "Good",
+    lastActive: "2023-04-02",
+    teacher: "Mr. Vikram Singh",
     learningStats: {
       completedLessons: 182,
       avgQuizScore: 85,
@@ -101,6 +139,9 @@ export const MOCK_STUDENTS = [
     address: "10-3-156, Masab Tank, Hyderabad",
     enrollmentDate: "2019-06-10",
     attendance: 94,
+    performance: "Excellent",
+    lastActive: "2023-04-01",
+    teacher: "Mrs. Priya Reddy",
     learningStats: {
       completedLessons: 152,
       avgQuizScore: 89,
@@ -122,6 +163,9 @@ export const MOCK_STUDENTS = [
     address: "7-1-397, Ameerpet, Hyderabad",
     enrollmentDate: "2018-06-11",
     attendance: 91,
+    performance: "Good",
+    lastActive: "2023-04-01",
+    teacher: "Mrs. Priya Reddy",
     learningStats: {
       completedLessons: 160,
       avgQuizScore: 86,
@@ -143,6 +187,9 @@ export const MOCK_STUDENTS = [
     address: "12-7-20, Kukatpally, Hyderabad",
     enrollmentDate: "2020-06-15",
     attendance: 89,
+    performance: "Good",
+    lastActive: "2023-03-31",
+    teacher: "Mrs. Ananya Sharma",
     learningStats: {
       completedLessons: 118,
       avgQuizScore: 81,
@@ -164,6 +211,9 @@ export const MOCK_STUDENTS = [
     address: "8-3-168, Jubilee Hills, Hyderabad",
     enrollmentDate: "2017-06-08",
     attendance: 92,
+    performance: "Good",
+    lastActive: "2023-04-02",
+    teacher: "Mr. Vikram Singh",
     learningStats: {
       completedLessons: 180,
       avgQuizScore: 88,
@@ -185,6 +235,9 @@ export const MOCK_STUDENTS = [
     address: "3-5-890, Narayanguda, Hyderabad",
     enrollmentDate: "2019-06-10",
     attendance: 96,
+    performance: "Excellent",
+    lastActive: "2023-04-01",
+    teacher: "Mrs. Ananya Sharma",
     learningStats: {
       completedLessons: 155,
       avgQuizScore: 90,
@@ -206,6 +259,9 @@ export const MOCK_STUDENTS = [
     address: "5-8-123, Nampally, Hyderabad",
     enrollmentDate: "2018-06-11",
     attendance: 90,
+    performance: "Good",
+    lastActive: "2023-03-31",
+    teacher: "Mrs. Priya Reddy",
     learningStats: {
       completedLessons: 162,
       avgQuizScore: 84,
@@ -229,6 +285,9 @@ export const MOCK_STUDENTS = [
     address: "24, Gandhi Street, T Nagar, Chennai",
     enrollmentDate: "2019-05-20",
     attendance: 91,
+    performance: "Good",
+    lastActive: "2023-04-02",
+    teacher: "Mr. Arjun Patel",
     learningStats: {
       completedLessons: 148,
       avgQuizScore: 86,
@@ -250,6 +309,9 @@ export const MOCK_STUDENTS = [
     address: "12, Poes Garden, Chennai",
     enrollmentDate: "2018-05-22",
     attendance: 94,
+    performance: "Excellent",
+    lastActive: "2023-04-02",
+    teacher: "Ms. Meera Iyer",
     learningStats: {
       completedLessons: 165,
       avgQuizScore: 91,
@@ -271,6 +333,9 @@ export const MOCK_STUDENTS = [
     address: "7, Lake View Road, Nungambakkam, Chennai",
     enrollmentDate: "2020-05-18",
     attendance: 87,
+    performance: "Satisfactory",
+    lastActive: "2023-03-31",
+    teacher: "Mr. Arjun Patel",
     learningStats: {
       completedLessons: 115,
       avgQuizScore: 79,
@@ -292,6 +357,9 @@ export const MOCK_STUDENTS = [
     address: "45, Sterling Road, Nungambakkam, Chennai",
     enrollmentDate: "2017-05-15",
     attendance: 93,
+    performance: "Good",
+    lastActive: "2023-04-01",
+    teacher: "Ms. Meera Iyer",
     learningStats: {
       completedLessons: 185,
       avgQuizScore: 87,
@@ -313,6 +381,9 @@ export const MOCK_STUDENTS = [
     address: "22, Chamiers Road, RA Puram, Chennai",
     enrollmentDate: "2019-05-20",
     attendance: 95,
+    performance: "Good",
+    lastActive: "2023-04-01",
+    teacher: "Mr. Arjun Patel",
     learningStats: {
       completedLessons: 150,
       avgQuizScore: 88,
@@ -334,6 +405,9 @@ export const MOCK_STUDENTS = [
     address: "8, Cathedral Road, Chennai",
     enrollmentDate: "2018-05-22",
     attendance: 90,
+    performance: "Good",
+    lastActive: "2023-03-31",
+    teacher: "Ms. Meera Iyer",
     learningStats: {
       completedLessons: 158,
       avgQuizScore: 85,
@@ -355,6 +429,9 @@ export const MOCK_STUDENTS = [
     address: "33, Peters Road, Royapettah, Chennai",
     enrollmentDate: "2020-05-18",
     attendance: 89,
+    performance: "Good",
+    lastActive: "2023-04-02",
+    teacher: "Mr. Karthik Nair",
     learningStats: {
       completedLessons: 120,
       avgQuizScore: 82,
@@ -376,6 +453,9 @@ export const MOCK_STUDENTS = [
     address: "17, Dr. Radhakrishnan Salai, Mylapore, Chennai",
     enrollmentDate: "2017-05-15",
     attendance: 92,
+    performance: "Good",
+    lastActive: "2023-04-01",
+    teacher: "Ms. Meera Iyer",
     learningStats: {
       completedLessons: 178,
       avgQuizScore: 89,
@@ -397,6 +477,9 @@ export const MOCK_STUDENTS = [
     address: "5, Santhome High Road, Chennai",
     enrollmentDate: "2019-05-20",
     attendance: 96,
+    performance: "Excellent",
+    lastActive: "2023-04-02",
+    teacher: "Mr. Arjun Patel",
     learningStats: {
       completedLessons: 154,
       avgQuizScore: 93,
@@ -418,6 +501,9 @@ export const MOCK_STUDENTS = [
     address: "28, TTK Road, Alwarpet, Chennai",
     enrollmentDate: "2018-05-22",
     attendance: 88,
+    performance: "Satisfactory",
+    lastActive: "2023-03-31",
+    teacher: "Mr. Karthik Nair",
     learningStats: {
       completedLessons: 160,
       avgQuizScore: 82,
@@ -441,6 +527,9 @@ export const MOCK_STUDENTS = [
     address: "A-14, Vasant Vihar, New Delhi",
     enrollmentDate: "2019-04-10",
     attendance: 92,
+    performance: "Good",
+    lastActive: "2023-04-02",
+    teacher: "Dr. Ravi Verma",
     learningStats: {
       completedLessons: 146,
       avgQuizScore: 88,
@@ -462,6 +551,9 @@ export const MOCK_STUDENTS = [
     address: "C-8, Greater Kailash, New Delhi",
     enrollmentDate: "2018-04-12",
     attendance: 95,
+    performance: "Excellent",
+    lastActive: "2023-04-01",
+    teacher: "Mrs. Sunita Gupta",
     learningStats: {
       completedLessons: 170,
       avgQuizScore: 90,
@@ -483,6 +575,9 @@ export const MOCK_STUDENTS = [
     address: "D-5, Punjabi Bagh, New Delhi",
     enrollmentDate: "2020-04-15",
     attendance: 88,
+    performance: "Good",
+    lastActive: "2023-03-31",
+    teacher: "Mrs. Sunita Gupta",
     learningStats: {
       completedLessons: 118,
       avgQuizScore: 80,
@@ -504,6 +599,9 @@ export const MOCK_STUDENTS = [
     address: "E-12, Defence Colony, New Delhi",
     enrollmentDate: "2017-04-10",
     attendance: 91,
+    performance: "Good",
+    lastActive: "2023-04-01",
+    teacher: "Dr. Ravi Verma",
     learningStats: {
       completedLessons: 182,
       avgQuizScore: 86,
@@ -525,6 +623,9 @@ export const MOCK_STUDENTS = [
     address: "F-7, Rajouri Garden, New Delhi",
     enrollmentDate: "2019-04-10",
     attendance: 94,
+    performance: "Good",
+    lastActive: "2023-04-02",
+    teacher: "Mrs. Sunita Gupta",
     learningStats: {
       completedLessons: 149,
       avgQuizScore: 87,
@@ -546,6 +647,9 @@ export const MOCK_STUDENTS = [
     address: "G-22, Lajpat Nagar, New Delhi",
     enrollmentDate: "2018-04-12",
     attendance: 90,
+    performance: "Good",
+    lastActive: "2023-03-31",
+    teacher: "Dr. Ravi Verma",
     learningStats: {
       completedLessons: 162,
       avgQuizScore: 85,
@@ -567,6 +671,9 @@ export const MOCK_STUDENTS = [
     address: "H-45, Malviya Nagar, New Delhi",
     enrollmentDate: "2020-04-15",
     attendance: 93,
+    performance: "Good",
+    lastActive: "2023-04-01",
+    teacher: "Mrs. Sunita Gupta",
     learningStats: {
       completedLessons: 125,
       avgQuizScore: 84,
@@ -588,6 +695,9 @@ export const MOCK_STUDENTS = [
     address: "J-10, Saket, New Delhi",
     enrollmentDate: "2017-04-10",
     attendance: 89,
+    performance: "Good",
+    lastActive: "2023-03-31",
+    teacher: "Mr. Deepak Mishra",
     learningStats: {
       completedLessons: 175,
       avgQuizScore: 88,
@@ -609,6 +719,9 @@ export const MOCK_STUDENTS = [
     address: "K-8, Hauz Khas, New Delhi",
     enrollmentDate: "2019-04-10",
     attendance: 96,
+    performance: "Excellent",
+    lastActive: "2023-04-02",
+    teacher: "Mrs. Sunita Gupta",
     learningStats: {
       completedLessons: 155,
       avgQuizScore: 92,
@@ -630,6 +743,9 @@ export const MOCK_STUDENTS = [
     address: "L-15, Chanakyapuri, New Delhi",
     enrollmentDate: "2018-04-12",
     attendance: 91,
+    performance: "Good",
+    lastActive: "2023-03-31",
+    teacher: "Mr. Deepak Mishra",
     learningStats: {
       completedLessons: 165,
       avgQuizScore: 86,

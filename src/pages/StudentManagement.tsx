@@ -42,7 +42,7 @@ export default function StudentManagement() {
     // For teachers, filter students to only show their students
     let filtered = students;
     
-    if (user?.role === "teacher") {
+    if (user?.role === "teacher" && user?.name) {
       filtered = filtered.filter(student => student.teacher === user.name);
     }
 
