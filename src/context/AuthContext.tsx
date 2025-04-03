@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 type User = {
@@ -8,6 +9,7 @@ type User = {
   bio?: string;
   phone?: string;
   address?: string;
+  role: "student" | "teacher" | "headmaster";  // Added role field
 };
 
 type AuthContextType = {
@@ -19,21 +21,31 @@ type AuthContextType = {
   updateUser: (user: Partial<User>) => void;
 };
 
-// Static credentials for demo purposes
+// Static credentials for demo purposes - now includes role information
 const STATIC_CREDENTIALS = [
   { 
     email: "student@example.com", 
     password: "password123", 
     name: "Student User",
     grade: 8,
-    avatar: null
+    avatar: null,
+    role: "student" 
   },
   { 
     email: "teacher@example.com", 
     password: "teacher123", 
     name: "Teacher User",
     grade: 10,
-    avatar: null
+    avatar: null,
+    role: "teacher" 
+  },
+  {
+    email: "headmaster@example.com",
+    password: "headmaster123",
+    name: "Headmaster User",
+    grade: 12,
+    avatar: null,
+    role: "headmaster"
   }
 ];
 
@@ -86,6 +98,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const newUser = {
           ...userWithoutPassword,
           avatar: null,
+          // Default role for new signups is student
+          role: userWithoutPassword.role || "student" as const
         };
         
         localStorage.setItem("isAuthenticated", "true");

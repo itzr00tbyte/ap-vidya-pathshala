@@ -1,9 +1,10 @@
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { GraduationCap, LogIn, User } from "lucide-react";
+import { GraduationCap, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -79,11 +80,12 @@ export default function Login() {
             <CardDescription className="text-center">
               Enter your email and password to access your account
             </CardDescription>
-            {/* <div className="bg-amber-50 p-2 rounded-md border border-amber-200 text-amber-800 text-sm">
+            <div className="bg-amber-50 p-2 rounded-md border border-amber-200 text-amber-800 text-sm">
               <p className="font-medium">Demo Accounts:</p>
-              <p>Email: student@example.com | Password: password123</p>
-              <p>Email: teacher@example.com | Password: teacher123</p>
-            </div> */}
+              <p>Student: student@example.com | password123</p>
+              <p>Teacher: teacher@example.com | teacher123</p>
+              <p>Headmaster: headmaster@example.com | headmaster123</p>
+            </div>
           </CardHeader>
           <CardContent>
             <Form {...form}>
@@ -96,7 +98,7 @@ export default function Login() {
                       <FormLabel>Email</FormLabel>
                       <FormControl>
                         <Input 
-                          placeholder="student@example.com" 
+                          placeholder="email@example.com" 
                           type="email" 
                           {...field}
                           disabled={isLoading}
