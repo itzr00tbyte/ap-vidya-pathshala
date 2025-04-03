@@ -9,7 +9,7 @@ type User = {
   bio?: string;
   phone?: string;
   address?: string;
-  role: "student" | "teacher" | "headmaster";  // Added role field
+  role: "student" | "teacher" | "headmaster" | "admin";  // Added admin role
 };
 
 type AuthContextType = {
@@ -21,7 +21,7 @@ type AuthContextType = {
   updateUser: (user: Partial<User>) => void;
 };
 
-// Static credentials for demo purposes - now includes role information
+// Static credentials for demo purposes - now includes admin role
 const STATIC_CREDENTIALS = [
   { 
     email: "student@example.com", 
@@ -46,6 +46,14 @@ const STATIC_CREDENTIALS = [
     grade: 12,
     avatar: null,
     role: "headmaster" as const
+  },
+  {
+    email: "admin@example.com",
+    password: "admin123",
+    name: "Admin User",
+    grade: 12,
+    avatar: null,
+    role: "admin" as const
   }
 ];
 
@@ -99,7 +107,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           ...userWithoutPassword,
           avatar: null,
           // Ensure role is properly typed as one of the allowed values
-          role: (userWithoutPassword.role || "student") as "student" | "teacher" | "headmaster"
+          role: (userWithoutPassword.role || "student") as "student" | "teacher" | "headmaster" | "admin"
         };
         
         localStorage.setItem("isAuthenticated", "true");

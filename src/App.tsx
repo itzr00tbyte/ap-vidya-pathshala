@@ -17,6 +17,13 @@ import SubjectPage from "./components/SubjectPage";
 import SlideshowCanvas from "./components/SlideshowCanvas";
 import StudentManagement from "./pages/StudentManagement";
 import NotFound from "./pages/NotFound";
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminLayout from "./pages/admin/AdminLayout";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import UserManagement from "./pages/admin/UserManagement";
+import CourseManagement from "./pages/admin/CourseManagement";
+import TeacherManagement from "./pages/admin/TeacherManagement";
+import SchoolManagement from "./pages/admin/SchoolManagement";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +40,20 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
+            
+            {/* Admin Portal Routes */}
+            <Route path="/admin-portal/login" element={<AdminLogin />} />
+            
+            {/* Admin Protected Routes */}
+            <Route element={<PrivateRoute roles={["admin", "headmaster", "teacher"]} redirectTo="/admin-portal/login" />}>
+              <Route path="/admin-portal" element={<AdminLayout />}>
+                <Route index element={<AdminDashboard />} />
+                <Route path="users" element={<UserManagement />} />
+                <Route path="courses" element={<CourseManagement />} />
+                <Route path="teachers" element={<TeacherManagement />} />
+                <Route path="schools" element={<SchoolManagement />} />
+              </Route>
+            </Route>
             
             {/* Protected routes */}
             <Route element={<PrivateRoute />}>

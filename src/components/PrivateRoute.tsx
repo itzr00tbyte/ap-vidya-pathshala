@@ -4,7 +4,7 @@ import { useAuth } from "@/context/AuthContext";
 
 interface PrivateRouteProps {
   redirectTo?: string;
-  roles?: Array<"student" | "teacher" | "headmaster">;
+  roles?: Array<"student" | "teacher" | "headmaster" | "admin">;
 }
 
 export default function PrivateRoute({ 
@@ -23,7 +23,9 @@ export default function PrivateRoute({
   
   // Then check if specific roles are required and if the user has the necessary role
   if (roles && user && !roles.includes(user.role)) {
-    return <Navigate to="/dashboard" replace state={{ from: location }} />;
+    // Redirect teachers and headmasters to dashboard, admins to admin portal
+    const fallbackPath = user.role === "admin" ? "/admin-portal" : "/dashboard";
+    return <Navigate to={fallbackPath} replace state={{ from: location }} />;
   }
 
   return <Outlet />;
