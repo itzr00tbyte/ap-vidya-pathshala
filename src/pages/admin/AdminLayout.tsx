@@ -1,6 +1,6 @@
 
 import { useEffect } from "react";
-import { Outlet, useNavigate, Link } from "react-router-dom";
+import { Outlet, useNavigate, Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { 
   Users, School, BookOpen, GraduationCap, 
@@ -14,6 +14,7 @@ export default function AdminLayout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const location = useLocation();
   
   // Ensure only admin, headmaster, or teacher can access
   useEffect(() => {
@@ -103,22 +104,25 @@ export default function AdminLayout() {
         
         <nav className="mt-4">
           <ul className="space-y-1">
-            {filteredNavigation.map((item) => (
-              <li key={item.name}>
-                <Link
-                  to={item.path}
-                  className={({ isActive }) => cn(
-                    "flex items-center px-4 py-3 text-sm font-medium",
-                    isActive
-                      ? "text-ap-blue bg-blue-50 border-l-4 border-ap-blue"
-                      : "text-gray-600 hover:bg-gray-50"
-                  )}
-                >
-                  <item.icon className="h-5 w-5 mr-3" />
-                  {item.name}
-                </Link>
-              </li>
-            ))}
+            {filteredNavigation.map((item) => {
+              const isActive = location.pathname === item.path;
+              return (
+                <li key={item.name}>
+                  <Link
+                    to={item.path}
+                    className={cn(
+                      "flex items-center px-4 py-3 text-sm font-medium",
+                      isActive
+                        ? "text-ap-blue bg-blue-50 border-l-4 border-ap-blue"
+                        : "text-gray-600 hover:bg-gray-50"
+                    )}
+                  >
+                    <item.icon className="h-5 w-5 mr-3" />
+                    {item.name}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
         
@@ -148,3 +152,4 @@ export default function AdminLayout() {
     </div>
   );
 }
+
