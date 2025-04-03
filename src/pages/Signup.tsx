@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { GraduationCap, UserPlus } from "lucide-react";
+import { GraduationCap, UserPlus, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -77,19 +77,39 @@ export default function Signup() {
     }, 1500);
   }
 
+  const handleBackToHome = () => {
+    navigate('/');
+  };
+  
+  const handleLoginClick = () => {
+    navigate('/login');
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       <div className="w-full max-w-md">
         <div className="flex justify-center mb-8">
-          <Link to="/" className="flex items-center space-x-2">
+          <Button variant="link" className="flex items-center space-x-2 p-0" onClick={handleBackToHome}>
             <GraduationCap className="h-12 w-12 text-ap-blue" />
             <span className="text-2xl font-bold text-ap-blue">AP Vidya Pathshala</span>
-          </Link>
+          </Button>
         </div>
 
         <Card>
           <CardHeader className="space-y-1">
-            <CardTitle className="text-2xl font-bold text-center">Create an account</CardTitle>
+            <div className="flex items-center justify-between mb-2">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="flex items-center text-ap-blue" 
+                onClick={handleLoginClick}
+              >
+                <ArrowLeft className="mr-1 h-4 w-4" />
+                Back to login
+              </Button>
+              <CardTitle className="text-2xl font-bold text-center">Create an account</CardTitle>
+              <div className="w-[88px]"></div> {/* Empty div for alignment */}
+            </div>
             <CardDescription className="text-center">
               Enter your details to create your account
             </CardDescription>
@@ -219,9 +239,13 @@ export default function Signup() {
           <CardFooter className="flex flex-col">
             <div className="mt-2 text-center text-sm">
               Already have an account?{" "}
-              <Link to="/login" className="font-medium text-ap-blue hover:underline">
+              <Button 
+                variant="link" 
+                className="font-medium text-ap-blue hover:underline p-0"
+                onClick={handleLoginClick}
+              >
                 Sign in
-              </Link>
+              </Button>
             </div>
           </CardFooter>
         </Card>

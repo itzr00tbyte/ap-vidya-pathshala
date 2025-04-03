@@ -64,14 +64,26 @@ export default function Login() {
     }
   }
 
+  const handleForgotPassword = () => {
+    navigate('/forgot-password');
+  };
+
+  const handleSignUp = () => {
+    navigate('/signup');
+  };
+
+  const handleBackToHome = () => {
+    navigate('/');
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       <div className="w-full max-w-md">
         <div className="flex justify-center mb-8">
-          <Link to="/" className="flex items-center space-x-2">
+          <Button variant="link" className="flex items-center space-x-2 p-0" onClick={handleBackToHome}>
             <GraduationCap className="h-12 w-12 text-ap-blue" />
             <span className="text-2xl font-bold text-ap-blue">AP Vidya Pathshala</span>
-          </Link>
+          </Button>
         </div>
 
         <Card>
@@ -148,9 +160,14 @@ export default function Login() {
                     )}
                   />
                   
-                  <Link to="/forgot-password" className="text-sm font-medium text-ap-blue hover:underline">
+                  <Button 
+                    type="button" 
+                    variant="link" 
+                    className="text-sm font-medium text-ap-blue hover:underline p-0" 
+                    onClick={handleForgotPassword}
+                  >
                     Forgot password?
-                  </Link>
+                  </Button>
                 </div>
                 
                 <Button type="submit" className="w-full" disabled={isLoading}>
@@ -175,9 +192,13 @@ export default function Login() {
           <CardFooter className="flex flex-col">
             <div className="mt-2 text-center text-sm">
               Don't have an account?{" "}
-              <Link to="/signup" className="font-medium text-ap-blue hover:underline">
+              <Button 
+                variant="link" 
+                className="font-medium text-ap-blue hover:underline p-0"
+                onClick={handleSignUp}
+              >
                 Sign up
-              </Link>
+              </Button>
             </div>
           </CardFooter>
         </Card>

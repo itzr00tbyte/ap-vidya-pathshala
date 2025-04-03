@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -26,6 +26,7 @@ type ForgotPasswordFormValues = z.infer<typeof forgotPasswordSchema>;
 
 export default function ForgotPassword() {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -49,6 +50,10 @@ export default function ForgotPassword() {
       });
     }, 1500);
   }
+
+  const handleBackToLogin = () => {
+    navigate('/login');
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
@@ -78,10 +83,8 @@ export default function ForgotPassword() {
                 <p className="text-center text-sm text-gray-500">
                   We've sent a password reset link to your email. Please check your inbox and follow the instructions to reset your password.
                 </p>
-                <Button variant="outline" className="w-full" asChild>
-                  <Link to="/login">
-                    Return to sign in
-                  </Link>
+                <Button variant="outline" className="w-full" onClick={handleBackToLogin}>
+                  Return to sign in
                 </Button>
               </div>
             ) : (
@@ -125,10 +128,14 @@ export default function ForgotPassword() {
           </CardContent>
           <CardFooter className="flex flex-col">
             <div className="mt-2 text-center text-sm">
-              <Link to="/login" className="inline-flex items-center font-medium text-ap-blue hover:underline">
+              <Button 
+                variant="link" 
+                onClick={handleBackToLogin}
+                className="inline-flex items-center font-medium text-ap-blue hover:underline p-0"
+              >
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to sign in
-              </Link>
+              </Button>
             </div>
           </CardFooter>
         </Card>
