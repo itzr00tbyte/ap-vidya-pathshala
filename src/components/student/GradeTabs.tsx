@@ -13,6 +13,7 @@ const GradeTabs = ({ activeTab, onTabChange, children }: GradeTabsProps) => {
       <div className="px-4 sm:px-6 border-b border-gray-200">
         <TabsList className="flex overflow-x-auto py-2">
           <TabsTrigger value="all">All Grades</TabsTrigger>
+          <TabsTrigger value="6">Grade 6</TabsTrigger>
           <TabsTrigger value="7">Grade 7</TabsTrigger>
           <TabsTrigger value="8">Grade 8</TabsTrigger>
           <TabsTrigger value="9">Grade 9</TabsTrigger>

@@ -41,7 +41,7 @@ export default function UserFormDialog({
     role: "student",
     status: "active",
     schoolId: MOCK_SCHOOLS[0]?.id || "",
-    grade: "1"
+    grade: "6"  // Changed default to grade 6
   });
   
   // Update form when editing existing user
@@ -54,7 +54,7 @@ export default function UserFormDialog({
         role: user.role || "student",
         status: user.status || "active",
         schoolId: user.schoolId || MOCK_SCHOOLS[0]?.id || "",
-        grade: user.grade || "1"
+        grade: user.grade || "6"  // Changed default to grade 6
       });
     } else {
       // Reset form for new user
@@ -65,7 +65,7 @@ export default function UserFormDialog({
         role: "student",
         status: "active",
         schoolId: MOCK_SCHOOLS[0]?.id || "",
-        grade: "1"
+        grade: "6"  // Changed default to grade 6
       });
     }
   }, [user]);
@@ -190,16 +190,17 @@ export default function UserFormDialog({
                 Grade
               </Label>
               <Select
-                value={formData.grade || "1"}
+                value={formData.grade || "6"}
                 onValueChange={(value) => handleChange("grade", value)}
               >
                 <SelectTrigger className="col-span-3">
                   <SelectValue placeholder="Select grade" />
                 </SelectTrigger>
                 <SelectContent>
-                  {Array.from({ length: 12 }, (_, i) => (
-                    <SelectItem key={i + 1} value={(i + 1).toString()}>
-                      Grade {i + 1}
+                  {/* Changed to only include grades 6 through 10 */}
+                  {Array.from({ length: 5 }, (_, i) => i + 6).map((grade) => (
+                    <SelectItem key={grade} value={grade.toString()}>
+                      Grade {grade}
                     </SelectItem>
                   ))}
                 </SelectContent>
