@@ -8,6 +8,9 @@ import { Plus, Download, Filter, Search } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { MOCK_STUDENTS } from "@/data/mockStudents";
+import { MOCK_TEACHERS } from "@/data/mockTeachers";
+import { MOCK_HEADMASTERS } from "@/data/mockHeadmasters";
+import { MOCK_SCHOOLS } from "@/data/mockSchools";
 import StudentTable from "@/components/student/StudentTable";
 import StudentToolbar from "@/components/student/StudentToolbar";
 import {
@@ -18,77 +21,32 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-// Mock data for teachers and headmasters
-const MOCK_TEACHERS = [
-  {
-    id: "t1",
-    name: "Dr. Rajesh Kumar",
-    email: "rajesh.kumar@example.com",
-    subject: "Mathematics",
-    grade: 8,
-    section: "A",
-    school: "AP Vidya Pathshala Central",
-    phone: "+91-9876543210",
-    joinDate: "2022-06-15",
-  },
-  {
-    id: "t2",
-    name: "Mrs. Ananya Sharma",
-    email: "ananya.sharma@example.com",
-    subject: "Science",
-    grade: 7,
-    section: "B",
-    school: "AP Vidya Pathshala South",
-    phone: "+91-8765432109",
-    joinDate: "2021-07-10",
-  },
-  {
-    id: "t3",
-    name: "Mr. Vikram Singh",
-    email: "vikram.singh@example.com",
-    subject: "Hindi",
-    grade: 9,
-    section: "A",
-    school: "AP Vidya Pathshala North",
-    phone: "+91-7654321098",
-    joinDate: "2020-08-05",
-  },
-];
-
-const MOCK_HEADMASTERS = [
-  {
-    id: "h1",
-    name: "Dr. Srinivas Rao",
-    email: "srinivas.rao@example.com",
-    school: "AP Vidya Pathshala Central",
-    phone: "+91-6543210987",
-    joinDate: "2018-04-01",
-    teachersCount: 48,
-    studentsCount: 1245,
-  },
-  {
-    id: "h2",
-    name: "Mrs. Lakshmi Devi",
-    email: "lakshmi.devi@example.com",
-    school: "AP Vidya Pathshala South",
-    phone: "+91-5432109876",
-    joinDate: "2019-06-15",
-    teachersCount: 35,
-    studentsCount: 980,
-  },
-];
-
 export default function UserManagement() {
   const { user } = useAuth();
   const isAdmin = user?.role === "admin";
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedStudent, setSelectedStudent] = useState<any>(null);
   const [showStatsDialog, setShowStatsDialog] = useState(false);
+  const [teacherSearchQuery, setTeacherSearchQuery] = useState("");
+  const [headmasterSearchQuery, setHeadmasterSearchQuery] = useState("");
 
   // Filter students based on search query
   const filteredStudents = MOCK_STUDENTS.filter(student => 
     student.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     student.email.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // Filter teachers based on search query
+  const filteredTeachers = MOCK_TEACHERS.filter(teacher => 
+    teacher.name.toLowerCase().includes(teacherSearchQuery.toLowerCase()) ||
+    teacher.email.toLowerCase().includes(teacherSearchQuery.toLowerCase()) ||
+    teacher.subjects.some(subj => subj.toLowerCase().includes(teacherSearchQuery.toLowerCase()))
+  );
+
+  // Filter headmasters based on search query
+  const filteredHeadmasters = MOCK_HEADMASTERS.filter(headmaster => 
+    headmaster.name.toLowerCase().includes(headmasterSearchQuery.toLowerCase()) ||
+    headmaster.email.toLowerCase().includes(headmasterSearchQuery.toLowerCase())
   );
 
   const handleViewStats = (student: any) => {
@@ -152,6 +110,8 @@ export default function UserManagement() {
                 type="text"
                 placeholder="Search teachers..."
                 className="pl-10"
+                value={teacherSearchQuery}
+                onChange={(e) => setTeacherSearchQuery(e.target.value)}
               />
             </div>
             
@@ -168,18 +128,28 @@ export default function UserManagement() {
                   </tr>
                 </thead>
                 <tbody>
-                  {MOCK_TEACHERS.map((teacher) => (
-                    <tr key={teacher.id} className="border-b hover:bg-gray-50">
-                      <td className="py-3 px-4">{teacher.name}</td>
-                      <td className="py-3 px-4">{teacher.email}</td>
-                      <td className="py-3 px-4">{teacher.subject}</td>
-                      <td className="py-3 px-4">Grade {teacher.grade}-{teacher.section}</td>
-                      <td className="py-3 px-4">{teacher.school}</td>
-                      <td className="py-3 px-4">
-                        <Button variant="outline" size="sm">View Profile</Button>
+                  {filteredTeachers.map((teacher) => {
+                    const school = MOCK_SCHOOLS.find(s => s.id === teacher.schoolId);
+                    return (
+                      <tr key={teacher.id} className="border-b hover:bg-gray-50">
+                        <td className="py-3 px-4">{teacher.name}</td>
+                        <td className="py-3 px-4">{teacher.email}</td>
+                        <td className="py-3 px-4">{teacher.subjects.join(", ")}</td>
+                        <td className="py-3 px-4">Grade {teacher.grades.join(", ")}</td>
+                        <td className="py-3 px-4">{school?.name}</td>
+                        <td className="py-3 px-4">
+                          <Button variant="outline" size="sm">View Profile</Button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                  {filteredTeachers.length === 0 && (
+                    <tr>
+                      <td colSpan={6} className="text-center py-6 text-gray-500">
+                        No teachers found matching your search
                       </td>
                     </tr>
-                  ))}
+                  )}
                 </tbody>
               </table>
             </div>
@@ -195,6 +165,8 @@ export default function UserManagement() {
                   type="text"
                   placeholder="Search headmasters..."
                   className="pl-10"
+                  value={headmasterSearchQuery}
+                  onChange={(e) => setHeadmasterSearchQuery(e.target.value)}
                 />
               </div>
               
@@ -211,18 +183,28 @@ export default function UserManagement() {
                     </tr>
                   </thead>
                   <tbody>
-                    {MOCK_HEADMASTERS.map((headmaster) => (
-                      <tr key={headmaster.id} className="border-b hover:bg-gray-50">
-                        <td className="py-3 px-4">{headmaster.name}</td>
-                        <td className="py-3 px-4">{headmaster.email}</td>
-                        <td className="py-3 px-4">{headmaster.school}</td>
-                        <td className="py-3 px-4">{headmaster.teachersCount}</td>
-                        <td className="py-3 px-4">{headmaster.studentsCount}</td>
-                        <td className="py-3 px-4">
-                          <Button variant="outline" size="sm">View Profile</Button>
+                    {filteredHeadmasters.map((headmaster) => {
+                      const school = MOCK_SCHOOLS.find(s => s.id === headmaster.schoolId);
+                      return (
+                        <tr key={headmaster.id} className="border-b hover:bg-gray-50">
+                          <td className="py-3 px-4">{headmaster.name}</td>
+                          <td className="py-3 px-4">{headmaster.email}</td>
+                          <td className="py-3 px-4">{school?.name}</td>
+                          <td className="py-3 px-4">{school?.teachers}</td>
+                          <td className="py-3 px-4">{school?.students}</td>
+                          <td className="py-3 px-4">
+                            <Button variant="outline" size="sm">View Profile</Button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                    {filteredHeadmasters.length === 0 && (
+                      <tr>
+                        <td colSpan={6} className="text-center py-6 text-gray-500">
+                          No headmasters found matching your search
                         </td>
                       </tr>
-                    ))}
+                    )}
                   </tbody>
                 </table>
               </div>

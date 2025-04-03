@@ -4,55 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Plus, Download, Filter, MapPin, Users, GraduationCap } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-
-// Mock data for schools
-const MOCK_SCHOOLS = [
-  {
-    id: 1,
-    name: "AP Vidya Pathshala Central",
-    location: "Hyderabad, Telangana",
-    students: 1245,
-    teachers: 48,
-    headmaster: "Dr. Srinivas Rao",
-    status: "active"
-  },
-  {
-    id: 2,
-    name: "AP Vidya Pathshala South",
-    location: "Chennai, Tamil Nadu",
-    students: 980,
-    teachers: 35,
-    headmaster: "Mrs. Lakshmi Devi",
-    status: "active"
-  },
-  {
-    id: 3,
-    name: "AP Vidya Pathshala North",
-    location: "Delhi, NCR",
-    students: 1120,
-    teachers: 42,
-    headmaster: "Mr. Arun Verma",
-    status: "active"
-  },
-  {
-    id: 4,
-    name: "AP Vidya Pathshala East",
-    location: "Kolkata, West Bengal",
-    students: 875,
-    teachers: 32,
-    headmaster: "Dr. Amrita Sen",
-    status: "maintenance"
-  },
-  {
-    id: 5,
-    name: "AP Vidya Pathshala West",
-    location: "Mumbai, Maharashtra",
-    students: 1350,
-    teachers: 52,
-    headmaster: "Mr. Deepak Patil",
-    status: "active"
-  },
-];
+import { MOCK_SCHOOLS } from "@/data/mockSchools";
+import { MOCK_HEADMASTERS } from "@/data/mockHeadmasters";
 
 export default function SchoolManagement() {
   return (
@@ -100,40 +53,45 @@ export default function SchoolManagement() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {MOCK_SCHOOLS.map((school) => (
-                <TableRow key={school.id}>
-                  <TableCell className="font-medium">{school.name}</TableCell>
-                  <TableCell>
-                    <div className="flex items-center">
-                      <MapPin className="h-3 w-3 mr-2" />
-                      <span>{school.location}</span>
-                    </div>
-                  </TableCell>
-                  <TableCell>{school.headmaster}</TableCell>
-                  <TableCell>
-                    <div className="flex items-center">
-                      <Users className="h-3 w-3 mr-2" />
-                      <span>{school.students}</span>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center">
-                      <GraduationCap className="h-3 w-3 mr-2" />
-                      <span>{school.teachers}</span>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <Badge 
-                      className={school.status === 'active' ? 'bg-green-100 text-green-800 hover:bg-green-200' : 'bg-amber-100 text-amber-800 hover:bg-amber-200'}
-                    >
-                      {school.status === 'active' ? 'Active' : 'Maintenance'}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <Button variant="outline" size="sm">Manage</Button>
-                  </TableCell>
-                </TableRow>
-              ))}
+              {MOCK_SCHOOLS.map((school) => {
+                // Find the headmaster for this school
+                const headmaster = MOCK_HEADMASTERS.find(hm => hm.id === school.headmasterId);
+                
+                return (
+                  <TableRow key={school.id}>
+                    <TableCell className="font-medium">{school.name}</TableCell>
+                    <TableCell>
+                      <div className="flex items-center">
+                        <MapPin className="h-3 w-3 mr-2" />
+                        <span>{school.location}</span>
+                      </div>
+                    </TableCell>
+                    <TableCell>{headmaster?.name}</TableCell>
+                    <TableCell>
+                      <div className="flex items-center">
+                        <Users className="h-3 w-3 mr-2" />
+                        <span>{school.students}</span>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center">
+                        <GraduationCap className="h-3 w-3 mr-2" />
+                        <span>{school.teachers}</span>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <Badge 
+                        className={school.status === 'active' ? 'bg-green-100 text-green-800 hover:bg-green-200' : 'bg-amber-100 text-amber-800 hover:bg-amber-200'}
+                      >
+                        {school.status === 'active' ? 'Active' : 'Maintenance'}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <Button variant="outline" size="sm">Manage</Button>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </div>

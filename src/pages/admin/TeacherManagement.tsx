@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { Card } from "@/components/ui/card";
@@ -14,85 +15,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-
-// Mock data for teachers
-const MOCK_TEACHERS = [
-  {
-    id: 1,
-    name: "Dr. Rajesh Kumar",
-    email: "rajesh.kumar@example.com",
-    phone: "+91-9876543210",
-    subjects: ["Mathematics"],
-    grades: [7, 8, 9],
-    school: "AP Vidya Pathshala Central",
-    joinDate: "2022-06-15",
-    status: "active",
-    qualification: "PhD in Mathematics",
-    specialization: "Algebra and Calculus",
-    studentCount: 124,
-    performance: 92
-  },
-  {
-    id: 2,
-    name: "Mrs. Ananya Sharma",
-    email: "ananya.sharma@example.com",
-    phone: "+91-8765432109",
-    subjects: ["Science", "Biology"],
-    grades: [6, 7],
-    school: "AP Vidya Pathshala South",
-    joinDate: "2021-07-10",
-    status: "active",
-    qualification: "MSc in Biological Sciences",
-    specialization: "Plant Biology",
-    studentCount: 98,
-    performance: 88
-  },
-  {
-    id: 3,
-    name: "Mr. Vikram Singh",
-    email: "vikram.singh@example.com",
-    phone: "+91-7654321098",
-    subjects: ["Hindi", "Sanskrit"],
-    grades: [8, 9, 10],
-    school: "AP Vidya Pathshala North",
-    joinDate: "2020-08-05",
-    status: "active",
-    qualification: "MA in Hindi Literature",
-    specialization: "Classical Literature",
-    studentCount: 145,
-    performance: 95
-  },
-  {
-    id: 4,
-    name: "Ms. Priya Patel",
-    email: "priya.patel@example.com",
-    phone: "+91-6543210987",
-    subjects: ["English"],
-    grades: [6, 7, 8],
-    school: "AP Vidya Pathshala East",
-    joinDate: "2021-06-12",
-    status: "leave",
-    qualification: "MA in English",
-    specialization: "Modern Literature",
-    studentCount: 112,
-    performance: 90
-  },
-  {
-    id: 5,
-    name: "Mr. Arjun Reddy",
-    email: "arjun.reddy@example.com",
-    phone: "+91-5432109876",
-    subjects: ["Social Studies", "History"],
-    grades: [9, 10],
-    school: "AP Vidya Pathshala West",
-    joinDate: "2019-07-20",
-    status: "active",
-    qualification: "MA in History",
-    specialization: "Modern Indian History",
-    studentCount: 102,
-    performance: 87
-  },
-];
+import { MOCK_TEACHERS } from "@/data/mockTeachers";
+import { MOCK_SCHOOLS } from "@/data/mockSchools";
 
 export default function TeacherManagement() {
   const { user } = useAuth();
@@ -176,63 +100,68 @@ export default function TeacherManagement() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredTeachers.map((teacher) => (
-                <TableRow key={teacher.id} className="hover:bg-gray-50 transition-colors">
-                  <TableCell className="font-medium">{teacher.name}</TableCell>
-                  <TableCell>
-                    <div className="space-y-1">
-                      <div className="flex items-center text-sm">
-                        <Mail className="h-3 w-3 mr-2" />
-                        <span>{teacher.email}</span>
+              {filteredTeachers.map((teacher) => {
+                // Find the school for this teacher
+                const school = MOCK_SCHOOLS.find(sch => sch.id === teacher.schoolId);
+                
+                return (
+                  <TableRow key={teacher.id} className="hover:bg-gray-50 transition-colors">
+                    <TableCell className="font-medium">{teacher.name}</TableCell>
+                    <TableCell>
+                      <div className="space-y-1">
+                        <div className="flex items-center text-sm">
+                          <Mail className="h-3 w-3 mr-2" />
+                          <span>{teacher.email}</span>
+                        </div>
+                        <div className="flex items-center text-sm">
+                          <Phone className="h-3 w-3 mr-2" />
+                          <span>{teacher.phone}</span>
+                        </div>
                       </div>
-                      <div className="flex items-center text-sm">
-                        <Phone className="h-3 w-3 mr-2" />
-                        <span>{teacher.phone}</span>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex flex-wrap gap-1">
+                        {teacher.subjects.map((subject) => (
+                          <Badge key={subject} variant="outline" className="bg-blue-50">
+                            <BookOpen className="h-3 w-3 mr-1" />
+                            {subject}
+                          </Badge>
+                        ))}
                       </div>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex flex-wrap gap-1">
-                      {teacher.subjects.map((subject) => (
-                        <Badge key={subject} variant="outline" className="bg-blue-50">
-                          <BookOpen className="h-3 w-3 mr-1" />
-                          {subject}
-                        </Badge>
-                      ))}
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex flex-wrap gap-1">
-                      {teacher.grades.map((grade) => (
-                        <Badge key={grade} variant="outline">Grade {grade}</Badge>
-                      ))}
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center">
-                      <School className="h-3 w-3 mr-2" />
-                      <span className="text-sm">{teacher.school}</span>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <Badge 
-                      className={
-                        teacher.status === 'active' ? 'bg-green-100 text-green-800 hover:bg-green-200' : 
-                        teacher.status === 'leave' ? 'bg-amber-100 text-amber-800 hover:bg-amber-200' : 
-                        'bg-red-100 text-red-800 hover:bg-red-200'
-                      }
-                    >
-                      {teacher.status === 'active' ? 'Active' : 
-                       teacher.status === 'leave' ? 'On Leave' : 'Inactive'}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <Button variant="outline" size="sm" onClick={() => handleViewTeacher(teacher)}>
-                      View Profile
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex flex-wrap gap-1">
+                        {teacher.grades.map((grade) => (
+                          <Badge key={grade} variant="outline">Grade {grade}</Badge>
+                        ))}
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center">
+                        <School className="h-3 w-3 mr-2" />
+                        <span className="text-sm">{school?.name}</span>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <Badge 
+                        className={
+                          teacher.status === 'active' ? 'bg-green-100 text-green-800 hover:bg-green-200' : 
+                          teacher.status === 'leave' ? 'bg-amber-100 text-amber-800 hover:bg-amber-200' : 
+                          'bg-red-100 text-red-800 hover:bg-red-200'
+                        }
+                      >
+                        {teacher.status === 'active' ? 'Active' : 
+                        teacher.status === 'leave' ? 'On Leave' : 'Inactive'}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <Button variant="outline" size="sm" onClick={() => handleViewTeacher(teacher)}>
+                        View Profile
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
               {filteredTeachers.length === 0 && (
                 <TableRow>
                   <TableCell colSpan={7} className="text-center py-6 text-gray-500">
@@ -286,7 +215,7 @@ export default function TeacherManagement() {
                     </div>
                     <div className="flex items-center">
                       <School className="h-4 w-4 mr-2 text-gray-500" />
-                      <span>{selectedTeacher.school}</span>
+                      <span>{MOCK_SCHOOLS.find(s => s.id === selectedTeacher.schoolId)?.name}</span>
                     </div>
                   </div>
                 </div>
@@ -321,7 +250,9 @@ export default function TeacherManagement() {
                     </div>
                     <div className="ml-3">
                       <div className="text-sm text-gray-500">Students</div>
-                      <div className="text-xl font-semibold">{selectedTeacher.studentCount}</div>
+                      <div className="text-xl font-semibold">
+                        {MOCK_SCHOOLS.find(s => s.id === selectedTeacher.schoolId)?.students / 3}
+                      </div>
                     </div>
                   </div>
                   
@@ -331,7 +262,7 @@ export default function TeacherManagement() {
                     </div>
                     <div className="ml-3">
                       <div className="text-sm text-gray-500">Performance</div>
-                      <div className="text-xl font-semibold">{selectedTeacher.performance}%</div>
+                      <div className="text-xl font-semibold">{85 + Math.floor(Math.random() * 10)}%</div>
                     </div>
                   </div>
                 </div>
