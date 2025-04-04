@@ -876,3 +876,230 @@ const SubjectPage = () => {
                             <PlayCircle className="h-5 w-5" />
                           </div>
                           <span className="text-xs text-gray-500">VIDEO</span>
+                        </div>
+                        <h3 className="mt-3 font-medium">
+                          {language === "english" ? "Video Tutorials" : "వీడియో ట్యుటోరియల్స్"}
+                        </h3>
+                        <p className="text-sm text-gray-600 mt-2">
+                          {language === "english" 
+                            ? "Watch video explanations of key concepts."
+                            : "ప్రధాన భావనల వీడియో వివరణలను చూడండి."}
+                        </p>
+                        <SubjectButton 
+                          variant="outline" 
+                          size="sm" 
+                          subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"} 
+                          className="mt-4 w-full"
+                        >
+                          {language === "english" ? "Watch Videos" : "వీడియోలు చూడండి"}
+                        </SubjectButton>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="resources">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>{language === "english" ? "Worksheets" : "వర్క్‌షీట్‌లు"}</CardTitle>
+                      <CardDescription>
+                        {language === "english" 
+                          ? "Practice exercises for every chapter"
+                          : "ప్రతి అధ్యాయానికి అభ్యాస వ్యాయామాలు"}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm text-gray-500">
+                        {language === "english" 
+                          ? "Downloadable PDF worksheets with problems and solutions."
+                          : "సమస్యలు మరియు పరిష్కారాలతో డౌన్‌లోడ్ చేయదగిన PDF వర్క్‌షీట్‌లు."}
+                      </p>
+                    </CardContent>
+                    <CardFooter>
+                      <SubjectButton 
+                        subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"} 
+                        variant="outline" 
+                        className="w-full"
+                      >
+                        {language === "english" ? "Browse Worksheets" : "వర్క్‌షీట్‌లను బ్రౌజ్ చేయండి"}
+                      </SubjectButton>
+                    </CardFooter>
+                  </Card>
+                  
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>{language === "english" ? "Reference Books" : "రిఫరెన్స్ పుస్తకాలు"}</CardTitle>
+                      <CardDescription>
+                        {language === "english" 
+                          ? "Recommended books for deeper understanding"
+                          : "లోతైన అవగాహన కోసం సిఫార్సు చేయబడిన పుస్తకాలు"}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm text-gray-500">
+                        {language === "english" 
+                          ? "Curated list of books that complement the curriculum."
+                          : "పాఠ్యప్రణాళికకు అనుగుణంగా ఉన్న పుస్తకాల క్యూరేటెడ్ జాబితా."}
+                      </p>
+                    </CardContent>
+                    <CardFooter>
+                      <SubjectButton 
+                        subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"} 
+                        variant="outline" 
+                        className="w-full"
+                      >
+                        {language === "english" ? "View Books" : "పుస్తకాలను చూడండి"}
+                      </SubjectButton>
+                    </CardFooter>
+                  </Card>
+                  
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>{language === "english" ? "Online Resources" : "ఆన్‌లైన్ వనరులు"}</CardTitle>
+                      <CardDescription>
+                        {language === "english" 
+                          ? "Additional learning websites and tools"
+                          : "అదనపు అభ్యాస వెబ్‌సైట్‌లు మరియు సాధనాలు"}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm text-gray-500">
+                        {language === "english" 
+                          ? "Links to websites, apps, and interactive tools."
+                          : "వెబ్‌సైట్‌లు, యాప్‌లు మరియు ఇంటరాక్టివ్ సాధనాలకు లింక్‌లు."}
+                      </p>
+                    </CardContent>
+                    <CardFooter>
+                      <SubjectButton 
+                        subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"} 
+                        variant="outline" 
+                        className="w-full"
+                      >
+                        {language === "english" ? "Explore Resources" : "వనరులను అన్వేషించండి"}
+                      </SubjectButton>
+                    </CardFooter>
+                  </Card>
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="tests">
+                <div className="bg-white rounded-xl p-6 shadow-sm">
+                  <h2 className="text-xl font-semibold mb-4">
+                    {language === "english" ? "Practice Tests & Assessments" : "ప్రాక్టీస్ టెస్ట్‌లు & అసెస్‌మెంట్స్"}
+                  </h2>
+                  <p className="text-gray-600 mb-6">
+                    {language === "english" 
+                      ? "Test your knowledge with chapter-wise and full-length assessments."
+                      : "అధ్యాయం వారీగా మరియు పూర్తి పొడవు అసెస్‌మెంట్‌లతో మీ జ్ఞానాన్ని పరీక్షించుకోండి."}
+                  </p>
+                  
+                  <div className="space-y-4">
+                    <div className="rounded-lg border p-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                      <div>
+                        <h3 className="font-medium">
+                          {language === "english" ? "Chapter Tests" : "అధ్యాయ పరీక్షలు"}
+                        </h3>
+                        <p className="text-sm text-gray-500 mt-1">
+                          {language === "english" 
+                            ? "Complete one chapter before taking its test"
+                            : "దాని పరీక్ష తీసుకునే ముందు ఒక అధ్యాయాన్ని పూర్తి చేయండి"}
+                        </p>
+                      </div>
+                      <SubjectButton
+                        variant="outline" 
+                        size="sm"
+                        subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"}
+                      >
+                        {language === "english" ? "Start Test" : "పరీక్ష ప్రారంభించండి"}
+                      </SubjectButton>
+                    </div>
+                    
+                    <div className="rounded-lg border p-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                      <div>
+                        <h3 className="font-medium">
+                          {language === "english" ? "Mock Exams" : "మాక్ పరీక్షలు"}
+                        </h3>
+                        <p className="text-sm text-gray-500 mt-1">
+                          {language === "english" 
+                            ? "Full-length exams that simulate real testing conditions"
+                            : "నిజమైన పరీక్షా పరిస్థితులను అనుకరించే పూర్తి పొడవు పరీక్షలు"}
+                        </p>
+                      </div>
+                      <SubjectButton
+                        variant="outline" 
+                        size="sm"
+                        subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"}
+                      >
+                        {language === "english" ? "Take Exam" : "పరీక్ష రాయండి"}
+                      </SubjectButton>
+                    </div>
+                    
+                    <div className="rounded-lg border p-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                      <div>
+                        <h3 className="font-medium">
+                          {language === "english" ? "Quick Quizzes" : "త్వరిత క్విజ్‌లు"}
+                        </h3>
+                        <p className="text-sm text-gray-500 mt-1">
+                          {language === "english" 
+                            ? "Short quizzes that test specific concepts"
+                            : "నిర్దిష్ట భావనలను పరీక్షించే చిన్న క్విజ్‌లు"}
+                        </p>
+                      </div>
+                      <SubjectButton
+                        variant="outline" 
+                        size="sm"
+                        subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"}
+                      >
+                        {language === "english" ? "Browse Quizzes" : "క్విజ్‌లను బ్రౌజ్ చేయండి"}
+                      </SubjectButton>
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="discussions">
+                <div className="bg-white rounded-xl p-6 shadow-sm">
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-xl font-semibold">
+                      {language === "english" ? "Discussion Forum" : "చర్చా వేదిక"}
+                    </h2>
+                    <SubjectButton 
+                      subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"}
+                      size="sm"
+                    >
+                      {language === "english" ? "New Post" : "కొత్త పోస్ట్"}
+                    </SubjectButton>
+                  </div>
+                  
+                  <div className="mb-6">
+                    <div className="relative">
+                      <Input 
+                        placeholder={language === "english" ? "Search discussions..." : "చర్చలను శోధించండి..."}
+                        className="pl-10"
+                      />
+                      <div className="absolute left-3 top-3 text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <p className="text-gray-500 text-center py-8">
+                      {language === "english" 
+                        ? "Discussion forum will be available soon!"
+                        : "చర్చా వేదిక త్వరలో అందుబాటులో ఉంటుంది!"}
+                    </p>
+                  </div>
+                </div>
+              </TabsContent>
+            </Tabs>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default SubjectPage;
