@@ -16,6 +16,7 @@ import { Label } from "@/components/ui/label";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Skeleton } from "@/components/ui/skeleton";
 import SlideshowView from "@/components/SlideshowView";
+import { Chapter } from "@/types/dashboard";
 
 type ChapterStatus = "completed" | "in-progress" | "locked";
 
@@ -43,14 +44,8 @@ type QuizQuestion = {
   correctAnswer: string;
 };
 
-// Update the chapter type to make quiz optional
-type Chapter = {
-  title: string;
-  description: string;
-  status: ChapterStatus;
-  duration: string;
-  quiz?: QuizQuestion[];
-};
+// Use the imported Chapter type from dashboard.ts instead of redefining it
+// This makes sure we're using the same Chapter type across the application
 
 type SubjectData = {
   id: string;
@@ -401,7 +396,7 @@ const SubjectPage = () => {
             status: originalChapter.status,
             duration: originalChapter.duration,
             quiz: originalChapter.quiz
-          };
+          } as Chapter; // Explicitly cast to Chapter type to ensure TypeScript knows this is valid
         });
         
         // If API returned fewer chapters than we had originally, append remaining originals
