@@ -15,6 +15,12 @@ export interface Chapter {
   description: string;
   status: "completed" | "in-progress" | "locked";
   duration: string;
+  quiz?: {
+    id: string;
+    question: string;
+    options: string[];
+    correctAnswer: string;
+  }[];
 }
 
 export interface Quiz {
