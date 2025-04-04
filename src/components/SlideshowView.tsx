@@ -118,18 +118,12 @@ const SlideshowView = ({
   };
 
   const handlePrevious = () => {
-    if (currentTopicIndex > 0 && isLastSlide) {
+    // Move to previous topic if available
+    if (currentTopicIndex > 0) {
       setCurrentTopicIndex(prev => prev - 1);
       setIsLastSlide(false);
     } else {
-      // Control the Canva presentation to move to previous slide
-      const canvaEmbedElement = document.getElementById('canva-embed') as HTMLIFrameElement;
-      if (canvaEmbedElement && canvaEmbedElement.contentWindow) {
-        // Send a message to the iframe to move to the previous slide
-        canvaEmbedElement.contentWindow.postMessage({ action: 'previousSlide' }, '*');
-        console.log('Moving to previous slide in presentation');
-      }
-      setIsLastSlide(false);
+      console.log('Already at first topic');
     }
   };
 
