@@ -14,6 +14,24 @@ import { Switch } from "@/components/ui/switch";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import SlideshowView from "@/components/SlideshowView";
+
+type ChapterStatus = "completed" | "in-progress" | "locked";
+
+type SyllabusData = {
+  grade: string;
+  semester: string;
+  chapter_number: number;
+  chapter_name: string;
+  chapter_description: string;
+  subject: string;
+  topics: {
+    name: string;
+    presentation_link: string;
+  }[];
+  learning_objectives: string[];
+  curriculum_type: string;
+}
 
 type QuizQuestion = {
   id: string;
@@ -32,7 +50,7 @@ type SubjectData = {
   chapters: {
     title: string;
     description: string;
-    status: "completed" | "in-progress" | "locked";
+    status: ChapterStatus;
     duration: string;
     quiz?: QuizQuestion[];
   }[];
@@ -49,8 +67,33 @@ const SubjectPage = () => {
   const [quizScore, setQuizScore] = useState<number>(0);
   const [currentChapter, setCurrentChapter] = useState<string>("");
   const [language, setLanguage] = useState<"english" | "telugu">("english");
+  const [syllabusData, setSyllabusData] = useState<SyllabusData[]>([]);
+  const [showSlideshow, setShowSlideshow] = useState<boolean>(false);
+  const [currentTopic, setCurrentTopic] = useState<{name: string, presentation_link: string} | null>(null);
+  const [completedTopics, setCompletedTopics] = useState<string[]>([]);
+  const [currentTopicIndex, setCurrentTopicIndex] = useState<number>(0);
+  const [isLastSlide, setIsLastSlide] = useState<boolean>(false);
   
   useEffect(() => {
+    // Fetch syllabus data from API
+    const fetchSyllabusData = async () => {
+      try {
+        const response = await fetch('https://ap-vidya-pathshala-api.vercel.app/api/syllabus');
+        if (!response.ok) {
+          throw new Error('Failed to fetch syllabus data');
+        }
+        const data = await response.json();
+        setSyllabusData(data.filter((item: SyllabusData) => 
+          item.subject.toLowerCase() === (subjectId || "").toLowerCase()
+        ));
+      } catch (error) {
+        console.error('Error fetching syllabus data:', error);
+        toast.error('Failed to load syllabus data');
+      }
+    };
+
+    fetchSyllabusData();
+
     // This would normally be a fetch from an API
     // Simulating getting subject data
     const getSubjectData = () => {
@@ -322,6 +365,22 @@ const SubjectPage = () => {
     setSubject(getSubjectData());
   }, [subjectId]);
 
+  useEffect(() => {
+    if (syllabusData.length > 0 && !showSlideshow) {
+      // Update the first chapter of the subject data to use the API data
+      const updatedSubject = { ...subject };
+      if (updatedSubject && updatedSubject.chapters && updatedSubject.chapters.length > 0) {
+        const apiChapter = syllabusData[0];
+        updatedSubject.chapters[0] = {
+          ...updatedSubject.chapters[0],
+          title: apiChapter.chapter_name,
+          description: apiChapter.chapter_description,
+        };
+        setSubject(updatedSubject);
+      }
+    }
+  }, [syllabusData, subject, showSlideshow]);
+
   const handleStartQuiz = (chapterTitle: string) => {
     setCurrentChapter(chapterTitle);
     setShowQuiz(true);
@@ -381,6 +440,67 @@ const SubjectPage = () => {
     setShowQuiz(false);
   };
 
+  const handleStartSlideshow = (chapterName: string) => {
+    const chapter = syllabusData.find(c => c.chapter_name === chapterName);
+    if (chapter && chapter.topics.length > 0) {
+      setCurrentChapter(chapterName);
+      setCurrentTopic(chapter.topics[0]);
+      setCurrentTopicIndex(0);
+      setShowSlideshow(true);
+      setIsLastSlide(false);
+      window.scrollTo(0, 0);
+    } else {
+      toast.error('No presentation available for this chapter');
+    }
+  };
+
+  const handleExitSlideshow = () => {
+    setShowSlideshow(false);
+    setCurrentTopic(null);
+  };
+
+  const handleNextTopic = () => {
+    const chapter = syllabusData.find(c => c.chapter_name === currentChapter);
+    if (!chapter) return;
+    
+    if (isLastSlide) {
+      // Mark current topic as completed
+      setCompletedTopics(prev => [...prev, currentTopic?.name || '']);
+      
+      // Move to next topic if available
+      if (currentTopicIndex < chapter.topics.length - 1) {
+        setCurrentTopicIndex(prev => prev + 1);
+        setCurrentTopic(chapter.topics[currentTopicIndex + 1]);
+        setIsLastSlide(false);
+      } else {
+        // All topics completed
+        toast.success('Chapter completed!');
+        handleExitSlideshow();
+      }
+    } else {
+      // Control the Canva presentation to move to next slide
+      // This is a placeholder - actual implementation would depend on Canva embed API
+      console.log('Move to next slide in presentation');
+      
+      // Simulate detecting last slide (this would be done by the Canva embed API)
+      setIsLastSlide(true);
+    }
+  };
+
+  const handlePreviousTopic = () => {
+    const chapter = syllabusData.find(c => c.chapter_name === currentChapter);
+    if (!chapter) return;
+    
+    if (currentTopicIndex > 0) {
+      setCurrentTopicIndex(prev => prev - 1);
+      setCurrentTopic(chapter.topics[currentTopicIndex - 1]);
+      setIsLastSlide(false);
+    } else {
+      // First topic, just reset the slides
+      setIsLastSlide(false);
+    }
+  };
+
   if (!subject) {
     return <div>Loading...</div>;
   }
@@ -394,7 +514,17 @@ const SubjectPage = () => {
       <Navbar />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {showQuiz ? (
+        {showSlideshow ? (
+          <SlideshowView 
+            chapterTitle={currentChapter}
+            topics={syllabusData.find(c => c.chapter_name === currentChapter)?.topics || []}
+            completedTopics={completedTopics}
+            onTopicComplete={(topicName) => {
+              setCompletedTopics(prev => [...prev, topicName]);
+            }}
+            onExit={handleExitSlideshow}
+          />
+        ) : showQuiz ? (
           <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
             <div className="flex items-center justify-between mb-6">
               <div>
@@ -617,6 +747,32 @@ const SubjectPage = () => {
                               </div>
                             </div>
                           )}
+                          {index === 0 && syllabusData.length > 0 && (
+                            <div className="mt-3 ml-0">
+                              <div className={`rounded-lg border border-${subject.color === 'blue' ? 'ap-blue' : `ap-${subject.color}`}/20 bg-white p-4 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5 flex items-center justify-between`}>
+                                <div>
+                                  <h4 className="font-medium">
+                                    {language === "english" ? "Slideshow Presentation" : "స్లైడ్‌షో ప్రజెంటేషన్"}
+                                  </h4>
+                                  <p className="text-sm text-gray-500 mt-1">
+                                    {language === "english" 
+                                      ? "Interactive learning slides" 
+                                      : "ఇంటరాక్టివ్ లెర్నింగ్ స్లైడ్‌లు"}
+                                  </p>
+                                </div>
+                                <SubjectButton
+                                  variant="default" 
+                                  size="sm"
+                                  subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"}
+                                  className={`bg-ap-${subject.color}`}
+                                  onClick={() => handleStartSlideshow(syllabusData[0].chapter_name)}
+                                >
+                                  <PlayCircle className="h-4 w-4 mr-1" />
+                                  {language === "english" ? "View Slides" : "స్లైడ్‌లను చూడండి"}
+                                </SubjectButton>
+                              </div>
+                            </div>
+                          )}
                         </div>
                       ))}
                     </div>
@@ -713,49 +869,4 @@ const SubjectPage = () => {
                       ? "Additional Resources Coming Soon" 
                       : "అదనపు వనరులు త్వరలో వస్తున్నాయి"}
                   </h2>
-                  <p className="text-gray-600 mt-2">
-                    {language === "english"
-                      ? "We're adding more study materials for this subject."
-                      : "మేము ఈ విషయానికి మరిన్ని అధ్యయన సామగ్రిని జోడిస్తున్నాము."}
-                  </p>
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="tests">
-                <div className="text-center py-16">
-                  <h2 className="text-xl font-semibold text-gray-800">
-                    {language === "english" 
-                      ? "Tests & Quizzes Coming Soon" 
-                      : "పరీక్షలు & క్విజ్‌లు త్వరలో"}
-                  </h2>
-                  <p className="text-gray-600 mt-2">
-                    {language === "english"
-                      ? "Practice tests will be available once you progress through the chapters."
-                      : "మీరు అధ్యాయాల ద్వారా పురోగమించిన తర్వాత అభ్యాస పరీక్షలు లభిస్తాయి."}
-                  </p>
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="discussions">
-                <div className="text-center py-16">
-                  <h2 className="text-xl font-semibold text-gray-800">
-                    {language === "english" 
-                      ? "Discussion Forum Coming Soon" 
-                      : "చర్చా వేదిక త్వరలో"}
-                  </h2>
-                  <p className="text-gray-600 mt-2">
-                    {language === "english"
-                      ? "Connect with teachers and peers to discuss topics and clear doubts."
-                      : "విషయాలను చర్చించడానికి మరియు సందేహాలను తీర్చడానికి ఉపాధ్యాయులు మరియు సహచరులతో కలవండి."}
-                  </p>
-                </div>
-              </TabsContent>
-            </Tabs>
-          </>
-        )}
-      </div>
-    </div>
-  );
-};
-
-export default SubjectPage;
+                  <p className="text

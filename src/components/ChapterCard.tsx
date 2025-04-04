@@ -12,6 +12,7 @@ type ChapterCardProps = {
   status: ChapterStatus;
   duration: string;
   subjectColor?: string;
+  onStartSlideshow?: (title: string) => void;
 };
 
 const ChapterCard = ({ 
@@ -19,7 +20,8 @@ const ChapterCard = ({
   description, 
   status, 
   duration,
-  subjectColor = "blue"
+  subjectColor = "blue",
+  onStartSlideshow
 }: ChapterCardProps) => {
   const navigate = useNavigate();
   const { subjectId } = useParams<{ subjectId: string }>();
@@ -28,8 +30,13 @@ const ChapterCard = ({
     if (status === "locked") return;
     
     if (status === "completed") {
-      // Navigate to slideshow for review
-      navigate(`/subject/${subjectId}/slideshow/${encodeURIComponent(title)}`);
+      // If onStartSlideshow is provided, use it instead of navigating
+      if (onStartSlideshow) {
+        onStartSlideshow(title);
+      } else {
+        // Navigate to slideshow for review
+        navigate(`/subject/${subjectId}/slideshow/${encodeURIComponent(title)}`);
+      }
     } else {
       // For "in-progress", continue with the original behavior
       console.log("Continue chapter:", title);
