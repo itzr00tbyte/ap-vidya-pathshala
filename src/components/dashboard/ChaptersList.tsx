@@ -27,6 +27,7 @@ const ChaptersList = ({ chapters, subjectColor = "blue" }: ChaptersListProps) =>
             status={chapter.status}
             duration={chapter.duration}
             subjectColor={subjectColor}
+            showStudyIcon={index === 0} // Show study icon for the first chapter as an example
           />
         ))}
       </div>

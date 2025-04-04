@@ -1,5 +1,5 @@
 
-import { Book, CheckCircle, Lock, PlayCircle } from "lucide-react";
+import { Book, CheckCircle, Lock, PlayCircle, GraduationCap } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useNavigate, useParams } from "react-router-dom";
@@ -12,6 +12,7 @@ type ChapterCardProps = {
   status: ChapterStatus;
   duration: string;
   subjectColor?: string;
+  showStudyIcon?: boolean;
   onStartSlideshow?: (title: string) => void;
 };
 
@@ -21,6 +22,7 @@ const ChapterCard = ({
   status, 
   duration,
   subjectColor = "blue",
+  showStudyIcon = false,
   onStartSlideshow
 }: ChapterCardProps) => {
   const navigate = useNavigate();
@@ -58,7 +60,9 @@ const ChapterCard = ({
             status === "in-progress" && `bg-ap-${subjectColor}/10 text-ap-${subjectColor}`,
             status === "locked" && "bg-gray-100 text-gray-400",
           )}>
-            {status === "completed" ? (
+            {showStudyIcon ? (
+              <GraduationCap className="h-5 w-5" />
+            ) : status === "completed" ? (
               <CheckCircle className="h-5 w-5" />
             ) : status === "in-progress" ? (
               <Book className="h-5 w-5" />
