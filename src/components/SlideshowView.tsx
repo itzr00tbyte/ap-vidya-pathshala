@@ -113,18 +113,7 @@ const SlideshowView = ({
           <h3 className="font-medium mb-4">Topics</h3>
           <div className="space-y-3">
             {topics.map((topic, index) => (
-              <div 
-                key={index} 
-                className={`flex items-center gap-3 p-2.5 rounded-md cursor-pointer ${
-                  index === currentTopicIndex 
-                    ? 'bg-blue-50 text-blue-600' 
-                    : ''
-                }`}
-                onClick={() => {
-                  setCurrentTopicIndex(index);
-                  setIsLastSlide(false);
-                }}
-              >
+              <div key={index} className="flex items-center gap-3">
                 <div className={`h-5 w-5 rounded-full flex items-center justify-center ${
                   completedTopics.includes(topic.name) 
                     ? 'bg-green-100 text-green-600' 
@@ -151,7 +140,7 @@ const SlideshowView = ({
           <div className="bg-gray-100 rounded-lg aspect-video mb-6">
             <iframe 
               id="canva-embed"
-              src={`${currentTopic?.presentation_link}/view?embed=true`}
+              src={`${currentTopic?.presentation_link}?embed=true&hideControls=true`}
               className="w-full h-full rounded-lg"
               allow="fullscreen"
               title={currentTopic?.name}
