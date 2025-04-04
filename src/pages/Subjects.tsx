@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -10,8 +10,10 @@ import {
   BookText, 
   Clock, 
   Globe, 
-  Laptop 
+  Laptop,
+  Loader2
 } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 // Mock subject data
 const mockSubjects = [
@@ -81,10 +83,48 @@ const Subjects = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [selectedGrade] = useState<number>(user?.grade || 6);
+  const [isLoading, setIsLoading] = useState(true);
+  const [subjects, setSubjects] = useState<any[]>([]);
+
+  useEffect(() => {
+    // Simulate fetching data from an API
+    const fetchSubjects = async () => {
+      setIsLoading(true);
+      try {
+        // Simulating API call delay
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        setSubjects(mockSubjects);
+      } catch (error) {
+        console.error("Error fetching subjects:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchSubjects();
+  }, []);
 
   const handleSubjectClick = (subjectId: string) => {
     navigate(`/subject/${subjectId}`);
   };
+
+  // Loading skeleton component
+  const SubjectCardSkeleton = () => (
+    <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+      <div className="flex items-start mb-4">
+        <Skeleton className="h-10 w-10 rounded-md" />
+        <div className="ml-3 space-y-2 flex-1">
+          <Skeleton className="h-5 w-1/2" />
+          <Skeleton className="h-4 w-4/5" />
+        </div>
+      </div>
+      <Skeleton className="h-4 w-full mt-4" />
+      <div className="mt-3 flex items-center justify-between">
+        <Skeleton className="h-4 w-1/3" />
+        <Skeleton className="h-6 w-16 rounded-full" />
+      </div>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -98,20 +138,34 @@ const Subjects = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {mockSubjects.map((subject) => (
-            <div key={subject.id} onClick={() => handleSubjectClick(subject.id)}>
-              <SubjectCard 
-                id={subject.id}
-                name={subject.name}
-                icon={subject.icon}
-                progress={subject.progress}
-                color={subject.color}
-                chaptersCount={subject.chapters}
-              />
+        {isLoading ? (
+          <>
+            <div className="text-center mb-6">
+              <Loader2 className="h-8 w-8 animate-spin text-ap-blue mx-auto" />
+              <p className="text-ap-blue mt-2">Loading subjects...</p>
             </div>
-          ))}
-        </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Array(6).fill(0).map((_, index) => (
+                <SubjectCardSkeleton key={index} />
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {subjects.map((subject) => (
+              <div key={subject.id} onClick={() => handleSubjectClick(subject.id)}>
+                <SubjectCard 
+                  id={subject.id}
+                  name={subject.name}
+                  icon={subject.icon}
+                  progress={subject.progress}
+                  color={subject.color}
+                  chaptersCount={subject.chapters}
+                />
+              </div>
+            ))}
+          </div>
+        )}
       </main>
     </div>
   );
