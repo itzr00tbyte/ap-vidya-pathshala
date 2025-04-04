@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -44,6 +43,15 @@ type QuizQuestion = {
   correctAnswer: string;
 };
 
+// Update the chapter type to make quiz optional
+type Chapter = {
+  title: string;
+  description: string;
+  status: ChapterStatus;
+  duration: string;
+  quiz?: QuizQuestion[];
+};
+
 type SubjectData = {
   id: string;
   name: string;
@@ -51,13 +59,7 @@ type SubjectData = {
   color: string;
   description: string;
   progress: number;
-  chapters: {
-    title: string;
-    description: string;
-    status: ChapterStatus;
-    duration: string;
-    quiz?: QuizQuestion[];
-  }[];
+  chapters: Chapter[];
 };
 
 const SubjectPage = () => {
@@ -874,104 +876,3 @@ const SubjectPage = () => {
                             <PlayCircle className="h-5 w-5" />
                           </div>
                           <span className="text-xs text-gray-500">VIDEO</span>
-                        </div>
-                        <h3 className="mt-3 font-medium">
-                          {language === "english" ? "Video Lessons" : "వీడియో పాఠాలు"}
-                        </h3>
-                        <p className="text-sm text-gray-600 mt-2">
-                          {language === "english"
-                            ? "Watch expert teachers explain key concepts."
-                            : "నిపుణ ఉపాధ్యాయులు కీలక భావనలను వివరించడం చూడండి."}
-                        </p>
-                        <SubjectButton 
-                          variant="outline" 
-                          size="sm" 
-                          subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"} 
-                          className="mt-4 w-full"
-                        >
-                          {language === "english" ? "Watch Videos" : "వీడియోలు చూడండి"}
-                        </SubjectButton>
-                      </div>
-                      
-                      <div className={`bg-gradient-to-br from-ap-${subject?.color}/10 to-white rounded-xl p-5 border border-ap-${subject?.color}/20`}>
-                        <div className="flex justify-between">
-                          <div className={`p-2 bg-white/80 rounded-lg text-ap-${subject?.color}`}>
-                            <Users className="h-5 w-5" />
-                          </div>
-                          <span className="text-xs text-gray-500">FORUM</span>
-                        </div>
-                        <h3 className="mt-3 font-medium">
-                          {language === "english" ? "Ask Doubts" : "సందేహాలు అడగండి"}
-                        </h3>
-                        <p className="text-sm text-gray-600 mt-2">
-                          {language === "english"
-                            ? "Connect with teachers and peers to clear your doubts."
-                            : "మీ సందేహాలను తీర్చడానికి ఉపాధ్యాయులు మరియు సహచరులతో కలవండి."}
-                        </p>
-                        <SubjectButton 
-                          variant="outline" 
-                          size="sm" 
-                          subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"} 
-                          className="mt-4 w-full"
-                        >
-                          {language === "english" ? "Join Discussion" : "చర్చలో చేరండి"}
-                        </SubjectButton>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="resources">
-                <div className="text-center py-16">
-                  <h2 className="text-xl font-semibold text-gray-800">
-                    {language === "english" 
-                      ? "Additional Resources Coming Soon" 
-                      : "అదనపు వనరులు త్వరలో వస్తున్నాయి"}
-                  </h2>
-                  <p className="text-gray-500 mt-2">
-                    {language === "english"
-                      ? "We're working hard to provide the best learning resources for you."
-                      : "మేము మీకు ఉత్తమమైన అభ్యాస వనరులను అందించడానికి కష్టపడుతున్నాము."}
-                  </p>
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="tests">
-                <div className="text-center py-16">
-                  <h2 className="text-xl font-semibold text-gray-800">
-                    {language === "english" 
-                      ? "Tests & Quizzes Coming Soon" 
-                      : "పరీక్షలు మరియు క్విజ్‌లు త్వరలో వస్తున్నాయి"}
-                  </h2>
-                  <p className="text-gray-500 mt-2">
-                    {language === "english"
-                      ? "We're developing comprehensive tests to help you assess your knowledge."
-                      : "మీ జ్ఞానాన్ని అంచనా వేయడానికి సహాయపడే సమగ్ర పరీక్షలను మేము అభివృద్ధి చేస్తున్నాము."}
-                  </p>
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="discussions">
-                <div className="text-center py-16">
-                  <h2 className="text-xl font-semibold text-gray-800">
-                    {language === "english" 
-                      ? "Discussion Forum Coming Soon" 
-                      : "చర్చా వేదిక త్వరలో వస్తోంది"}
-                  </h2>
-                  <p className="text-gray-500 mt-2">
-                    {language === "english"
-                      ? "Connect with teachers and peers to discuss concepts and clear doubts."
-                      : "భావనలను చర్చించడానికి మరియు సందేహాలను తీర్చడానికి ఉపాధ్యాయులు మరియు సహచరులతో కలవండి."}
-                  </p>
-                </div>
-              </TabsContent>
-            </Tabs>
-          </>
-        )}
-      </div>
-    </div>
-  );
-};
-
-export default SubjectPage;
