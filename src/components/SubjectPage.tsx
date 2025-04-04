@@ -803,32 +803,6 @@ const SubjectPage = () => {
                                 </div>
                               </div>
                             )}
-                            {syllabusData.length > 0 && syllabusData[index] && (
-                              <div className="mt-3 ml-0">
-                                <div className={`rounded-lg border border-${subject.color === 'blue' ? 'ap-blue' : `ap-${subject.color}`}/20 bg-white p-4 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5 flex items-center justify-between`}>
-                                  <div>
-                                    <h4 className="font-medium">
-                                      {language === "english" ? "Slideshow Presentation" : "స్లైడ్‌షో ప్రజెంటేషన్"}
-                                    </h4>
-                                    <p className="text-sm text-gray-500 mt-1">
-                                      {language === "english" 
-                                        ? "Interactive learning slides" 
-                                        : "ఇంటరాక్టివ్ లెర్నింగ్ స్లైడ్‌లు"}
-                                    </p>
-                                  </div>
-                                  <SubjectButton
-                                    variant="default" 
-                                    size="sm"
-                                    subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"}
-                                    className={`bg-ap-${subject.color}`}
-                                    onClick={() => handleStartSlideshow(syllabusData[index].chapter_name)}
-                                  >
-                                    <PlayCircle className="h-4 w-4 mr-1" />
-                                    {language === "english" ? "View Slides" : "స్లైడ్‌లను చూడండి"}
-                                  </SubjectButton>
-                                </div>
-                              </div>
-                            )}
                           </div>
                         ))}
                       </div>
