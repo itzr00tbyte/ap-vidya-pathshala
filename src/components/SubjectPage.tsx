@@ -1,11 +1,10 @@
-
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import ProgressBar from "@/components/ProgressBar";
 import ChapterCard from "@/components/ChapterCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calculator, Beaker, Globe, BookOpen, Book, BookUser, FileText, Users, PlayCircle, CheckCircle, XCircle, HelpCircle, Clock } from "lucide-react";
+import { Calculator, Beaker, Globe, BookOpen, Book, BookUser, FileText, Users, PlayCircle, CheckCircle, XCircle, HelpCircle, Clock, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SubjectButton } from "@/components/ui/subject-button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,11 +14,13 @@ import { Switch } from "@/components/ui/switch";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Skeleton } from "@/components/ui/skeleton";
 import SlideshowView from "@/components/SlideshowView";
 
 type ChapterStatus = "completed" | "in-progress" | "locked";
 
 type SyllabusData = {
+  _id: string;
   grade: string;
   semester: string;
   chapter_number: number;
@@ -29,6 +30,7 @@ type SyllabusData = {
   topics: {
     name: string;
     presentation_link: string;
+    _id: string;
   }[];
   learning_objectives: string[];
   curriculum_type: string;
@@ -74,22 +76,27 @@ const SubjectPage = () => {
   const [completedTopics, setCompletedTopics] = useState<string[]>([]);
   const [currentTopicIndex, setCurrentTopicIndex] = useState<number>(0);
   const [isLastSlide, setIsLastSlide] = useState<boolean>(false);
+  const [isLoadingSyllabus, setIsLoadingSyllabus] = useState<boolean>(true);
   
   useEffect(() => {
     // Fetch syllabus data from API
     const fetchSyllabusData = async () => {
+      setIsLoadingSyllabus(true);
       try {
         const response = await fetch('https://ap-vidya-pathshala-api.vercel.app/api/syllabus');
         if (!response.ok) {
           throw new Error('Failed to fetch syllabus data');
         }
         const data = await response.json();
-        setSyllabusData(data.filter((item: SyllabusData) => 
+        const filteredData = data.filter((item: SyllabusData) => 
           item.subject.toLowerCase() === (subjectId || "").toLowerCase()
-        ));
+        );
+        setSyllabusData(filteredData);
       } catch (error) {
         console.error('Error fetching syllabus data:', error);
         toast.error('Failed to load syllabus data');
+      } finally {
+        setIsLoadingSyllabus(false);
       }
     };
 
@@ -367,16 +374,39 @@ const SubjectPage = () => {
   }, [subjectId]);
 
   useEffect(() => {
-    if (syllabusData.length > 0 && !showSlideshow) {
-      // Update the first chapter of the subject data to use the API data
+    if (syllabusData.length > 0 && !showSlideshow && subject) {
+      // Create a copy of the subject
       const updatedSubject = { ...subject };
-      if (updatedSubject && updatedSubject.chapters && updatedSubject.chapters.length > 0) {
-        const apiChapter = syllabusData[0];
-        updatedSubject.chapters[0] = {
-          ...updatedSubject.chapters[0],
-          title: apiChapter.chapter_name,
-          description: apiChapter.chapter_description,
-        };
+      
+      // Update the subject's chapters based on API data, preserving status, duration, and quiz
+      if (updatedSubject && updatedSubject.chapters) {
+        // First, keep the original chapters in memory
+        const originalChapters = [...updatedSubject.chapters];
+        
+        // Create new chapters array by merging API data with original chapter properties
+        const newChapters = syllabusData.map((apiChapter, index) => {
+          // Use original chapter data if available (for this index), otherwise use defaults
+          const originalChapter = index < originalChapters.length ? originalChapters[index] : {
+            status: index === 0 ? "completed" : index === 1 ? "in-progress" : "locked",
+            duration: "45 mins",
+            quiz: undefined
+          };
+          
+          return {
+            title: apiChapter.chapter_name,
+            description: apiChapter.chapter_description,
+            status: originalChapter.status,
+            duration: originalChapter.duration,
+            quiz: originalChapter.quiz
+          };
+        });
+        
+        // If API returned fewer chapters than we had originally, append remaining originals
+        if (newChapters.length < originalChapters.length) {
+          newChapters.push(...originalChapters.slice(newChapters.length));
+        }
+        
+        updatedSubject.chapters = newChapters;
         setSubject(updatedSubject);
       }
     }
@@ -502,7 +532,14 @@ const SubjectPage = () => {
   };
 
   if (!subject) {
-    return <div>Loading...</div>;
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="h-10 w-10 animate-spin text-ap-blue mx-auto" />
+          <p className="text-ap-blue mt-4">Loading subject data...</p>
+        </div>
+      </div>
+    );
   }
 
   // Find the chapter with quiz
@@ -702,81 +739,102 @@ const SubjectPage = () => {
                       </ToggleGroup>
                     </div>
 
-                    <div className="space-y-4">
-                      {subject?.chapters.map((chapter, index) => (
-                        <div key={index}>
-                          <ChapterCard
-                            title={
-                              language === "english" 
-                                ? chapter.title 
-                                : `${chapter.title} (తెలుగులో)`
-                            }
-                            description={
-                              language === "english"
-                                ? chapter.description
-                                : `${chapter.description} తెలుగులో`
-                            }
-                            status={chapter.status}
-                            duration={chapter.duration}
-                            subjectColor={subject.color}
-                            onStartSlideshow={handleStartSlideshow}
-                          />
-                          {chapter.quiz && chapter.status === "in-progress" && (
-                            <div className="mt-3 ml-0">
-                              <div className={`rounded-lg border border-${subject.color === 'blue' ? 'ap-blue' : `ap-${subject.color}`}/20 bg-white p-4 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5 flex items-center justify-between`}>
-                                <div>
-                                  <h4 className="font-medium">
-                                    {language === "english" ? `${chapter.title} Quiz` : `${chapter.title} క్విజ్`}
-                                  </h4>
-                                  <p className="text-sm text-gray-500 mt-1">
-                                    {language === "english" 
-                                      ? "Test your understanding" 
-                                      : "మీ అవగాహనను పరీక్షించండి"}
-                                  </p>
-                                </div>
-                                <SubjectButton
-                                  variant="default" 
-                                  size="sm"
-                                  isQuizStyle={true}
-                                  subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"}
-                                  className={`bg-ap-${subject.color}`}
-                                  onClick={() => handleStartQuiz(chapter.title)}
-                                >
-                                  <PlayCircle className="h-4 w-4 mr-1" />
-                                  {language === "english" ? "Start Quiz" : "క్విజ్ ప్రారంభించండి"}
-                                </SubjectButton>
+                    {isLoadingSyllabus ? (
+                      <div className="space-y-4">
+                        {[1, 2, 3].map((_, index) => (
+                          <div key={index} className="bg-white rounded-lg p-6 shadow-sm">
+                            <div className="flex items-start">
+                              <Skeleton className="h-10 w-10 rounded-md" />
+                              <div className="ml-3 space-y-2 flex-1">
+                                <Skeleton className="h-5 w-1/2" />
+                                <Skeleton className="h-4 w-4/5" />
                               </div>
                             </div>
-                          )}
-                          {index === 0 && syllabusData.length > 0 && (
-                            <div className="mt-3 ml-0">
-                              <div className={`rounded-lg border border-${subject.color === 'blue' ? 'ap-blue' : `ap-${subject.color}`}/20 bg-white p-4 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5 flex items-center justify-between`}>
-                                <div>
-                                  <h4 className="font-medium">
-                                    {language === "english" ? "Slideshow Presentation" : "స్లైడ్‌షో ప్రజెంటేషన్"}
-                                  </h4>
-                                  <p className="text-sm text-gray-500 mt-1">
-                                    {language === "english" 
-                                      ? "Interactive learning slides" 
-                                      : "ఇంటరాక్టివ్ లెర్నింగ్ స్లైడ్‌లు"}
-                                  </p>
-                                </div>
-                                <SubjectButton
-                                  variant="default" 
-                                  size="sm"
-                                  subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"}
-                                  className={`bg-ap-${subject.color}`}
-                                  onClick={() => handleStartSlideshow(syllabusData[0].chapter_name)}
-                                >
-                                  <PlayCircle className="h-4 w-4 mr-1" />
-                                  {language === "english" ? "View Slides" : "స్లైడ్‌లను చూడండి"}
-                                </SubjectButton>
-                              </div>
+                            <Skeleton className="h-4 w-full mt-4" />
+                            <div className="mt-3 flex items-center justify-between">
+                              <Skeleton className="h-4 w-1/3" />
+                              <Skeleton className="h-8 w-24 rounded-md" />
                             </div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="space-y-4">
+                        {subject?.chapters.map((chapter, index) => (
+                          <div key={index}>
+                            <ChapterCard
+                              title={
+                                language === "english" 
+                                  ? chapter.title 
+                                  : `${chapter.title} (తెలుగులో)`
+                              }
+                              description={
+                                language === "english"
+                                  ? chapter.description
+                                  : `${chapter.description} తెలుగులో`
+                              }
+                              status={chapter.status}
+                              duration={chapter.duration}
+                              subjectColor={subject.color}
+                              onStartSlideshow={handleStartSlideshow}
+                            />
+                            {chapter.quiz && chapter.status === "in-progress" && (
+                              <div className="mt-3 ml-0">
+                                <div className={`rounded-lg border border-${subject.color === 'blue' ? 'ap-blue' : `ap-${subject.color}`}/20 bg-white p-4 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5 flex items-center justify-between`}>
+                                  <div>
+                                    <h4 className="font-medium">
+                                      {language === "english" ? `${chapter.title} Quiz` : `${chapter.title} క్విజ్`}
+                                    </h4>
+                                    <p className="text-sm text-gray-500 mt-1">
+                                      {language === "english" 
+                                        ? "Test your understanding" 
+                                        : "మీ అవగాహనను పరీక్షించండి"}
+                                    </p>
+                                  </div>
+                                  <SubjectButton
+                                    variant="default" 
+                                    size="sm"
+                                    isQuizStyle={true}
+                                    subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"}
+                                    className={`bg-ap-${subject.color}`}
+                                    onClick={() => handleStartQuiz(chapter.title)}
+                                  >
+                                    <PlayCircle className="h-4 w-4 mr-1" />
+                                    {language === "english" ? "Start Quiz" : "క్విజ్ ప్రారంభించండి"}
+                                  </SubjectButton>
+                                </div>
+                              </div>
+                            )}
+                            {syllabusData.length > 0 && syllabusData[index] && (
+                              <div className="mt-3 ml-0">
+                                <div className={`rounded-lg border border-${subject.color === 'blue' ? 'ap-blue' : `ap-${subject.color}`}/20 bg-white p-4 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5 flex items-center justify-between`}>
+                                  <div>
+                                    <h4 className="font-medium">
+                                      {language === "english" ? "Slideshow Presentation" : "స్లైడ్‌షో ప్రజెంటేషన్"}
+                                    </h4>
+                                    <p className="text-sm text-gray-500 mt-1">
+                                      {language === "english" 
+                                        ? "Interactive learning slides" 
+                                        : "ఇంటరాక్టివ్ లెర్నింగ్ స్లైడ్‌లు"}
+                                    </p>
+                                  </div>
+                                  <SubjectButton
+                                    variant="default" 
+                                    size="sm"
+                                    subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"}
+                                    className={`bg-ap-${subject.color}`}
+                                    onClick={() => handleStartSlideshow(syllabusData[index].chapter_name)}
+                                  >
+                                    <PlayCircle className="h-4 w-4 mr-1" />
+                                    {language === "english" ? "View Slides" : "స్లైడ్‌లను చూడండి"}
+                                  </SubjectButton>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                   
                   <div>
