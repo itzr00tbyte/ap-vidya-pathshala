@@ -211,7 +211,11 @@ const SlideshowView = ({
                   onClick={() => {
                     handleTopicClick(index);
                     // Close sheet automatically on mobile when selecting a topic
-                    document.querySelector('[data-radix-collection-item]')?.click();
+                    // Fix: Use optional chaining and type assertion for click method
+                    const sheetCloseButton = document.querySelector('[data-radix-collection-item]') as HTMLButtonElement | null;
+                    if (sheetCloseButton) {
+                      sheetCloseButton.click();
+                    }
                   }}
                 >
                   <div className={`h-5 w-5 rounded-full flex items-center justify-center ${
@@ -289,3 +293,4 @@ const SlideshowView = ({
 };
 
 export default SlideshowView;
+
