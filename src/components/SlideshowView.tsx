@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { CheckCircle, Maximize2, Minimize2 } from 'lucide-react';
@@ -282,7 +281,7 @@ const SlideshowView = ({
                 ? currentTopicIndex < topics.length - 1
                   ? 'Mark Complete & Next Topic'
                   : 'Complete Chapter'
-                : 'Next Slide'
+                : 'Next Topic'
               }
             </Button>
           </div>
@@ -293,4 +292,3 @@ const SlideshowView = ({
 };
 
 export default SlideshowView;
-
