@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -387,7 +388,7 @@ const SubjectPage = () => {
         const newChapters = syllabusData.map((apiChapter, index) => {
           // Use original chapter data if available (for this index), otherwise use defaults
           const originalChapter = index < originalChapters.length ? originalChapters[index] : {
-            status: index === 0 ? "completed" : index === 1 ? "in-progress" : "locked",
+            status: index === 0 ? "completed" as ChapterStatus : index === 1 ? "in-progress" as ChapterStatus : "locked" as ChapterStatus,
             duration: "45 mins",
             quiz: undefined
           };
