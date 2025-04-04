@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -869,51 +868,4 @@ const SubjectPage = () => {
                   <h2 className="text-xl font-semibold text-gray-800">
                     {language === "english" 
                       ? "Additional Resources Coming Soon" 
-                      : "అదనపు వనరులు త్వరలో వస్తున్నాయి"}
-                  </h2>
-                  <p className="text-gray-500 mt-2">
-                    {language === "english"
-                      ? "We're working hard to provide the best learning resources for you."
-                      : "మేము మీకు ఉత్తమమైన అభ్యాస వనరులను అందించడానికి కష్టపడుతున్నాము."}
-                  </p>
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="tests">
-                <div className="text-center py-16">
-                  <h2 className="text-xl font-semibold text-gray-800">
-                    {language === "english" 
-                      ? "Tests & Quizzes Coming Soon" 
-                      : "పరీక్షలు మరియు క్విజ్‌లు త్వరలో వస్తున్నాయి"}
-                  </h2>
-                  <p className="text-gray-500 mt-2">
-                    {language === "english"
-                      ? "We're developing comprehensive tests to help you assess your knowledge."
-                      : "మీ జ్ఞానాన్ని అంచనా వేయడానికి సహాయపడే సమగ్ర పరీక్షలను మేము అభివృద్ధి చేస్తున్నాము."}
-                  </p>
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="discussions">
-                <div className="text-center py-16">
-                  <h2 className="text-xl font-semibold text-gray-800">
-                    {language === "english" 
-                      ? "Discussion Forum Coming Soon" 
-                      : "చర్చా వేదిక త్వరలో వస్తోంది"}
-                  </h2>
-                  <p className="text-gray-500 mt-2">
-                    {language === "english"
-                      ? "Connect with teachers and peers to discuss concepts and clear doubts."
-                      : "భావనలను చర్చించడానికి మరియు సందేహాలను తీర్చడానికి ఉపాధ్యాయులు మరియు సహచరులతో కలవండి."}
-                  </p>
-                </div>
-              </TabsContent>
-            </Tabs>
-          </>
-        )}
-      </div>
-    </div>
-  );
-};
-
-export default SubjectPage;
+                      : "అదనపు వనరులు త్వరలో వ
