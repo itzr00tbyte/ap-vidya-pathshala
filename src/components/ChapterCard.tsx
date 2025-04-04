@@ -31,7 +31,7 @@ const ChapterCard = ({
   const handleButtonClick = () => {
     if (status === "locked") return;
     
-    if (status === "completed") {
+    if (status === "completed" || status === "in-progress") {
       // If onStartSlideshow is provided, use it instead of navigating
       if (onStartSlideshow) {
         onStartSlideshow(title);
@@ -39,9 +39,6 @@ const ChapterCard = ({
         // Navigate to slideshow for review
         navigate(`/subject/${subjectId}/slideshow/${encodeURIComponent(title)}`);
       }
-    } else {
-      // For "in-progress", continue with the original behavior
-      console.log("Continue chapter:", title);
     }
   };
 
