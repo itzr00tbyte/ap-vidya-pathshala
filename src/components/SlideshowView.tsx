@@ -73,9 +73,13 @@ const SlideshowView = ({
         onExit();
       }
     } else {
-      // This would control the Canva presentation to move to next slide
-      // In a real implementation, you would use the Canva embed API
-      console.log('Move to next slide in presentation');
+      // Control the Canva presentation to move to next slide
+      const canvaEmbedElement = document.getElementById('canva-embed') as HTMLIFrameElement;
+      if (canvaEmbedElement && canvaEmbedElement.contentWindow) {
+        // Send a message to the iframe to move to the next slide
+        canvaEmbedElement.contentWindow.postMessage({ action: 'nextSlide' }, '*');
+        console.log('Moving to next slide in presentation');
+      }
       
       // Simulate detecting last slide for demo
       setIsLastSlide(true);
@@ -83,11 +87,17 @@ const SlideshowView = ({
   };
 
   const handlePrevious = () => {
-    if (currentTopicIndex > 0) {
+    if (currentTopicIndex > 0 && isLastSlide) {
       setCurrentTopicIndex(prev => prev - 1);
       setIsLastSlide(false);
     } else {
-      // First topic, just reset the slides
+      // Control the Canva presentation to move to previous slide
+      const canvaEmbedElement = document.getElementById('canva-embed') as HTMLIFrameElement;
+      if (canvaEmbedElement && canvaEmbedElement.contentWindow) {
+        // Send a message to the iframe to move to the previous slide
+        canvaEmbedElement.contentWindow.postMessage({ action: 'previousSlide' }, '*');
+        console.log('Moving to previous slide in presentation');
+      }
       setIsLastSlide(false);
     }
   };
@@ -156,6 +166,8 @@ const SlideshowView = ({
             </Button>
             <Button 
               onClick={handleNext}
+              variant={isLastSlide ? "default" : "default"}
+              className={isLastSlide ? "bg-green-600 hover:bg-green-700" : ""}
             >
               {isLastSlide 
                 ? currentTopicIndex < topics.length - 1
