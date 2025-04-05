@@ -5,7 +5,6 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 import Index from "./pages/Index";
@@ -35,53 +34,51 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <HelmetProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Routes>
-                {/* Public routes */}
-                <Route path="/" element={<Index />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/forgot-password" element={<ForgotPassword />} />
-                
-                {/* Admin Portal Routes */}
-                <Route path="/admin-portal/login" element={<AdminLogin />} />
-                
-                {/* Admin Protected Routes */}
-                <Route element={<PrivateRoute roles={["admin", "headmaster", "teacher"]} redirectTo="/admin-portal/login" />}>
-                  <Route path="/admin-portal" element={<AdminLayout />}>
-                    <Route index element={<AdminDashboard />} />
-                    <Route path="users" element={<UserManagement />} />
-                    <Route path="courses" element={<CourseManagement />} />
-                    <Route path="teachers" element={<TeacherManagement />} />
-                    <Route path="schools" element={<SchoolManagement />} />
-                    <Route path="classes" element={<ClassProgression />} />
-                  </Route>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              {/* Public routes */}
+              <Route path="/" element={<Index />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              
+              {/* Admin Portal Routes */}
+              <Route path="/admin-portal/login" element={<AdminLogin />} />
+              
+              {/* Admin Protected Routes */}
+              <Route element={<PrivateRoute roles={["admin", "headmaster", "teacher"]} redirectTo="/admin-portal/login" />}>
+                <Route path="/admin-portal" element={<AdminLayout />}>
+                  <Route index element={<AdminDashboard />} />
+                  <Route path="users" element={<UserManagement />} />
+                  <Route path="courses" element={<CourseManagement />} />
+                  <Route path="teachers" element={<TeacherManagement />} />
+                  <Route path="schools" element={<SchoolManagement />} />
+                  <Route path="classes" element={<ClassProgression />} />
                 </Route>
-                
-                {/* Protected routes */}
-                <Route element={<PrivateRoute />}>
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="/subjects" element={<Subjects />} />
-                  <Route path="/subject/:subjectId" element={<SubjectPage />} />
-                  <Route path="/subject/:subjectId/slideshow/:chapterId" element={<SlideshowCanvas />} />
-                </Route>
-                
-                {/* Routes for teachers and headmasters */}
-                <Route element={<PrivateRoute roles={["teacher", "headmaster", "admin"]} />}>
-                  <Route path="/students" element={<StudentManagement />} />
-                </Route>
-                
-                {/* 404 route */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </TooltipProvider>
-        </HelmetProvider>
+              </Route>
+              
+              {/* Protected routes */}
+              <Route element={<PrivateRoute />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/subjects" element={<Subjects />} />
+                <Route path="/subject/:subjectId" element={<SubjectPage />} />
+                <Route path="/subject/:subjectId/slideshow/:chapterId" element={<SlideshowCanvas />} />
+              </Route>
+              
+              {/* Routes for teachers and headmasters */}
+              <Route element={<PrivateRoute roles={["teacher", "headmaster"]} />}>
+                <Route path="/students" element={<StudentManagement />} />
+              </Route>
+              
+              {/* 404 route */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
       </AuthProvider>
     </QueryClientProvider>
   );
