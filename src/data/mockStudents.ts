@@ -1,4 +1,3 @@
-
 // Define Student type that's compatible with what StudentTable expects
 export type Student = {
   id: string;
@@ -801,53 +800,4 @@ export const MOCK_STUDENTS: Student[] = [
     dateOfBirth: "2011-11-12",
     address: "L-15, Chanakyapuri, New Delhi",
     enrollmentDate: "2018-04-12",
-    attendance: 91,
-    performance: "Good",
-    lastActive: "2023-03-31",
-    teacher: "Mr. Deepak Mishra",
-    status: "active",
-    learningStats: {
-      completedLessons: 165,
-      avgQuizScore: 86,
-      timeSpent: "138 hours",
-      strongSubjects: ["Hindi", "Social Studies"],
-      weakSubjects: ["Science"]
-    },
-    // Add subject progress data for the last student
-    subjectProgress: [
-      { subject: "Mathematics", progress: 78 },
-      { subject: "Science", progress: 68 },
-      { subject: "English", progress: 75 },
-      { subject: "Hindi", progress: 88 },
-      { subject: "Social Studies", progress: 92 }
-    ]
-  }
-];
-
-// Update the implementation to add status to all mock students
-for (let i = 4; i < MOCK_STUDENTS.length; i++) {
-  if (!MOCK_STUDENTS[i].status) {
-    // If attendance > 90: active, between 80-90: pending, below 80: inactive
-    if (MOCK_STUDENTS[i].attendance > 90) {
-      MOCK_STUDENTS[i].status = "active";
-    } else if (MOCK_STUDENTS[i].attendance >= 80) {
-      MOCK_STUDENTS[i].status = "pending";
-    } else {
-      MOCK_STUDENTS[i].status = "inactive";
-    }
-  }
-}
-
-// Add subject progress data to students that don't have it yet
-for (let i = 4; i < MOCK_STUDENTS.length; i++) {
-  if (!MOCK_STUDENTS[i].subjectProgress) {
-    // Generate random subject progress data for each student
-    MOCK_STUDENTS[i].subjectProgress = [
-      { subject: "Mathematics", progress: Math.floor(Math.random() * 30) + 60 }, // 60-90
-      { subject: "Science", progress: Math.floor(Math.random() * 30) + 60 },
-      { subject: "English", progress: Math.floor(Math.random() * 30) + 60 },
-      { subject: "Hindi", progress: Math.floor(Math.random() * 30) + 60 },
-      { subject: "Social Studies", progress: Math.floor(Math.random() * 30) + 60 }
-    ];
-  }
-}
+    attendance: 9
