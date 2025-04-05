@@ -14,7 +14,7 @@ import {
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, User, BarChart2 } from "lucide-react";
+import { MoreHorizontal, User, BarChart2, LineChart } from "lucide-react";
 import { Student } from "@/data/mockStudents";
 import { useIsMobile } from "@/hooks/use-mobile";
 import ProgressBar from "@/components/ProgressBar";
@@ -24,13 +24,15 @@ interface StudentTableProps {
   onViewStats: (student: Student) => void;
   canEditStudents: boolean;
   onViewSubjectProgress?: (student: Student) => void;
+  onViewStudentProgression?: (student: Student) => void;
 }
 
 const StudentTable = ({ 
   students, 
   onViewStats, 
   canEditStudents,
-  onViewSubjectProgress 
+  onViewSubjectProgress,
+  onViewStudentProgression
 }: StudentTableProps) => {
   const isMobile = useIsMobile();
 
@@ -73,6 +75,11 @@ const StudentTable = ({
                     {onViewSubjectProgress && (
                       <DropdownMenuItem onClick={() => onViewSubjectProgress(student)}>
                         View Subject Progress
+                      </DropdownMenuItem>
+                    )}
+                    {onViewStudentProgression && (
+                      <DropdownMenuItem onClick={() => onViewStudentProgression(student)}>
+                        View Student Progression
                       </DropdownMenuItem>
                     )}
                     <DropdownMenuItem>View details</DropdownMenuItem>
@@ -201,6 +208,12 @@ const StudentTable = ({
                         <DropdownMenuItem onClick={() => onViewSubjectProgress(student)}>
                           <BarChart2 className="h-4 w-4 mr-2" />
                           View Subject Progress
+                        </DropdownMenuItem>
+                      )}
+                      {onViewStudentProgression && (
+                        <DropdownMenuItem onClick={() => onViewStudentProgression(student)}>
+                          <LineChart className="h-4 w-4 mr-2" />
+                          View Student Progression
                         </DropdownMenuItem>
                       )}
                       <DropdownMenuItem>View details</DropdownMenuItem>

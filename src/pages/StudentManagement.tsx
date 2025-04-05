@@ -26,6 +26,7 @@ import StudentStatsCard from "@/components/student/StudentStatsCard";
 import StudentTable from "@/components/student/StudentTable";
 import StudentToolbar from "@/components/student/StudentToolbar";
 import GradeTabs from "@/components/student/GradeTabs";
+import StudentProgressionView from "@/components/student/StudentProgressionView";
 import { MOCK_STUDENTS, Student } from "@/data/mockStudents";
 import ProgressBar from "@/components/ProgressBar";
 
@@ -56,6 +57,7 @@ export default function StudentManagement() {
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [showStatsCard, setShowStatsCard] = useState(false);
   const [showSubjectProgressDialog, setShowSubjectProgressDialog] = useState(false);
+  const [showStudentProgressionView, setShowStudentProgressionView] = useState(false);
   const [progressSort, setProgressSort] = useState<"none" | "asc" | "desc">("none");
 
   useEffect(() => {
@@ -134,6 +136,11 @@ export default function StudentManagement() {
     setSelectedStudent(student);
     setShowSubjectProgressDialog(true);
   };
+  
+  const viewStudentProgression = (student: Student) => {
+    setSelectedStudent(student);
+    setShowStudentProgressionView(true);
+  };
 
   const closeStatsCard = () => {
     setShowStatsCard(false);
@@ -142,6 +149,11 @@ export default function StudentManagement() {
   
   const closeSubjectProgressDialog = () => {
     setShowSubjectProgressDialog(false);
+  };
+  
+  const closeStudentProgressionView = () => {
+    setShowStudentProgressionView(false);
+    setSelectedStudent(null);
   };
   
   const toggleProgressSort = () => {
@@ -230,6 +242,13 @@ export default function StudentManagement() {
               onClose={closeStatsCard}
             />
           )}
+          
+          {showStudentProgressionView && selectedStudent && (
+            <StudentProgressionView
+              student={selectedStudent}
+              onClose={closeStudentProgressionView}
+            />
+          )}
         </div>
         
         <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -247,6 +266,7 @@ export default function StudentManagement() {
               onViewStats={viewStudentStats} 
               canEditStudents={canEditStudents}
               onViewSubjectProgress={viewSubjectProgress}
+              onViewStudentProgression={viewStudentProgression}
             />
           </GradeTabs>
         </div>
