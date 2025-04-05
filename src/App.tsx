@@ -26,6 +26,7 @@ import CourseManagement from "./pages/admin/CourseManagement";
 import TeacherManagement from "./pages/admin/TeacherManagement";
 import SchoolManagement from "./pages/admin/SchoolManagement";
 import ClassProgression from "./pages/admin/ClassProgression";
+import TeacherPortal from "./pages/admin/TeacherPortal";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -57,6 +58,7 @@ const App = () => {
                   <Route path="teachers" element={<TeacherManagement />} />
                   <Route path="schools" element={<SchoolManagement />} />
                   <Route path="classes" element={<ClassProgression />} />
+                  <Route path="teacher-portal" element={<TeacherPortal />} />
                 </Route>
               </Route>
               

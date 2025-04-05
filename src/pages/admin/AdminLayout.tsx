@@ -4,7 +4,7 @@ import { Outlet, useNavigate, Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { 
   Users, School, BookOpen, GraduationCap, 
-  BarChart3, Settings, LogOut, UserCog, Calendar 
+  BarChart3, Settings, LogOut, UserCog, Calendar, Briefcase 
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -72,6 +72,12 @@ export default function AdminLayout() {
       path: "/admin-portal/classes", 
       icon: Calendar,
       roles: ["admin", "headmaster"] 
+    },
+    { 
+      name: "Teacher Portal", 
+      path: "/admin-portal/teacher-portal", 
+      icon: Briefcase,
+      roles: ["teacher"] 
     },
   ];
 
