@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { ReactNode } from "react";
 import SubjectCard from "@/components/SubjectCard";
 import { Subject } from "@/types/dashboard";
 import { useAuth } from "@/context/AuthContext";
