@@ -12,6 +12,7 @@ import ChaptersList from "@/components/dashboard/ChaptersList";
 import QuizAndTips from "@/components/dashboard/QuizAndTips";
 import StudentProgressSection from "@/components/dashboard/StudentProgressSection";
 import { Subject, Chapter, Quiz } from "@/types/dashboard";
+import { MOCK_STUDENTS } from "@/data/mockStudents";
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -133,6 +134,22 @@ const Dashboard = () => {
   // Check if the current user is a teacher
   const isTeacher = user?.role === "teacher";
 
+  // Add subject progress data to students
+  const enrichStudentsWithProgress = () => {
+    return MOCK_STUDENTS.slice(0, 6).map(student => {
+      if (!student.subjectProgress) {
+        student.subjectProgress = subjects.map(subject => ({
+          subject: subject.name,
+          progress: Math.floor(Math.random() * 100)
+        }));
+      }
+      return student;
+    });
+  };
+
+  // Get enriched student data
+  const enrichedStudents = enrichStudentsWithProgress();
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
@@ -163,8 +180,13 @@ const Dashboard = () => {
           </div>
         </div>
         
-        {/* Show student progress section only for teachers */}
-        {isTeacher && <StudentProgressSection />}
+        {/* Show student progress section for teachers */}
+        {isTeacher && (
+          <StudentProgressSection
+            customStudents={enrichedStudents} 
+            teacherName={user?.name || "Current Teacher"}
+          />
+        )}
       </div>
     </div>
   );

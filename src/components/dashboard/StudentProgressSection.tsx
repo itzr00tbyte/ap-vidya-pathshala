@@ -15,15 +15,23 @@ import {
 } from "@/components/ui/dialog";
 import { MOCK_STUDENTS } from "@/data/mockStudents";
 
-const StudentProgressSection = () => {
+type StudentProgressSectionProps = {
+  customStudents?: any[];
+  teacherName?: string;
+};
+
+const StudentProgressSection = ({ 
+  customStudents, 
+  teacherName 
+}: StudentProgressSectionProps) => {
   const { user } = useAuth();
   const [selectedStudent, setSelectedStudent] = useState<any>(null);
   const [showDetailsDialog, setShowDetailsDialog] = useState(false);
   const [showProgressDialog, setShowProgressDialog] = useState(false);
 
-  // Filter students assigned to the current teacher
-  const assignedStudents = MOCK_STUDENTS.filter(
-    (student) => student.teacher === user?.name
+  // Filter students assigned to the current teacher or use custom students if provided
+  const assignedStudents = customStudents || MOCK_STUDENTS.filter(
+    (student) => student.teacher === (teacherName || user?.name)
   );
 
   // Calculate average progress for a student across all subjects
@@ -231,8 +239,8 @@ const StudentProgressSection = () => {
                   </div>
                   <div className="text-center">
                     <p className="text-xs text-gray-500">Last Activity</p>
-                    <p className="font-bold text-lg">{selectedStudent.learningStats.lastActivity.split(" ")[0]}</p>
-                    <p className="text-xs">{selectedStudent.learningStats.lastActivity.split(" ")[1]}</p>
+                    <p className="font-bold text-lg">{selectedStudent.learningStats.lastActivity?.split(" ")[0] || "Today"}</p>
+                    <p className="text-xs">{selectedStudent.learningStats.lastActivity?.split(" ")[1] || "2hr ago"}</p>
                   </div>
                 </div>
               </div>
