@@ -1,10 +1,9 @@
 
-import { ReactNode } from "react";
-
+// Dashboard types
 export interface Subject {
   id: string;
   name: string;
-  icon: ReactNode;
+  icon: React.ReactNode;
   progress: number;
   color: string;
   chaptersCount: number;
@@ -13,14 +12,8 @@ export interface Subject {
 export interface Chapter {
   title: string;
   description: string;
-  status: "completed" | "in-progress" | "locked";
+  status: 'completed' | 'in-progress' | 'locked';
   duration: string;
-  quiz?: {
-    id: string;
-    question: string;
-    options: string[];
-    correctAnswer: string;
-  }[];
 }
 
 export interface Quiz {
@@ -32,7 +25,20 @@ export interface Quiz {
   isUpcoming: boolean;
 }
 
-// Adding new types for the dashboard statistics
+export interface Student {
+  id: string;
+  name: string;
+  email: string;
+  grade: number;
+  section: string;
+  teacher: string;
+  performance: string;
+  attendance: number;
+  lastActive: string;
+  learningStats: LearningStats;
+  subjectProgress?: StudentProgress[];
+}
+
 export interface StudentProgress {
   subject: string;
   progress: number;
@@ -41,7 +47,10 @@ export interface StudentProgress {
 export interface LearningStats {
   completedLessons: number;
   avgQuizScore: number;
-  lastActivity: string;
+  timeSpent: string;
+  strongSubjects: string[];
+  weakSubjects: string[];
+  lastActivity?: string;
 }
 
 export interface SchoolPerformance {

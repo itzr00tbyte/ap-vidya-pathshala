@@ -136,7 +136,12 @@ const Dashboard = () => {
 
   // Add subject progress data to students
   const enrichStudentsWithProgress = () => {
-    return MOCK_STUDENTS.slice(0, 6).map(student => {
+    // Filter students that belong to this teacher
+    const teacherStudents = MOCK_STUDENTS.filter(student => 
+      student.teacher === (user?.name || "Current Teacher")
+    ).slice(0, 6);
+
+    return teacherStudents.map(student => {
       if (!student.subjectProgress) {
         student.subjectProgress = subjects.map(subject => ({
           subject: subject.name,

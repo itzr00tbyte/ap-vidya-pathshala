@@ -70,7 +70,7 @@ const App = () => {
               </Route>
               
               {/* Routes for teachers and headmasters */}
-              <Route element={<PrivateRoute roles={["teacher", "headmaster"]} />}>
+              <Route element={<PrivateRoute roles={["teacher", "headmaster", "admin"]} />}>
                 <Route path="/students" element={<StudentManagement />} />
               </Route>
               
