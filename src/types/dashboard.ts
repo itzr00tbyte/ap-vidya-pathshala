@@ -42,6 +42,9 @@ export interface LearningStats {
   completedLessons: number;
   avgQuizScore: number;
   lastActivity: string;
+  timeSpent?: string;
+  strongSubjects?: string[];
+  weakSubjects?: string[];
 }
 
 export interface SchoolPerformance {
@@ -77,4 +80,5 @@ export interface Student {
   lastActive: string;
   subjectProgress?: StudentProgress[];
   learningStats: LearningStats;
+  status?: "active" | "inactive" | "pending";
 }

@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate, Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
@@ -151,7 +150,7 @@ export default function AdminLayout() {
                 className="w-full"
               >
                 <CollapsibleTrigger className="flex items-center px-4 py-2 w-full text-sm font-medium text-gray-500 hover:bg-gray-50">
-                  <Students className="h-5 w-5 mr-3" />
+                  <Student className="h-5 w-5 mr-3" />
                   <span>My Students</span>
                   <svg
                     width="15"

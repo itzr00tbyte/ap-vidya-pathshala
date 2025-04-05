@@ -1,12 +1,11 @@
-
 import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useSearchParams } from "react-router-dom";
 import StudentTable from "@/components/student/StudentTable";
-import { Student } from "@/types/dashboard";
-import { MOCK_STUDENTS } from "@/data/mockStudents";
+import { Student as DashboardStudent } from "@/types/dashboard";
+import { MOCK_STUDENTS, Student as MockStudent } from "@/data/mockStudents";
 import {
   generatePerformanceData,
   generateSubjectProgressData,
@@ -24,11 +23,36 @@ import {
   LineChart, BarChart as BarChartIcon, School
 } from "lucide-react";
 
+// Helper function to map MockStudent to DashboardStudent
+const mapToDashboardStudent = (student: MockStudent): DashboardStudent => {
+  return {
+    id: student.id,
+    name: student.name,
+    email: student.email,
+    grade: student.grade,
+    section: student.section,
+    attendance: student.attendance,
+    performance: student.performance,
+    teacher: student.teacher,
+    lastActive: student.lastActive,
+    status: student.status,
+    subjectProgress: student.subjectProgress,
+    learningStats: {
+      completedLessons: student.learningStats.completedLessons,
+      avgQuizScore: student.learningStats.avgQuizScore,
+      lastActivity: student.lastActive,
+      timeSpent: student.learningStats.timeSpent,
+      strongSubjects: student.learningStats.strongSubjects,
+      weakSubjects: student.learningStats.weakSubjects
+    }
+  };
+};
+
 export default function TeacherPortal() {
   const { user } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [teacherStudents, setTeacherStudents] = useState<Student[]>([]);
-  const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
+  const [teacherStudents, setTeacherStudents] = useState<MockStudent[]>([]);
+  const [selectedStudent, setSelectedStudent] = useState<MockStudent | null>(null);
   const [showStatsDialog, setShowStatsDialog] = useState(false);
   const [showProgressDialog, setShowProgressDialog] = useState(false);
   
@@ -112,12 +136,12 @@ export default function TeacherPortal() {
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d'];
   
   // Handlers for the student table
-  const handleViewStats = (student: Student) => {
+  const handleViewStats = (student: MockStudent) => {
     setSelectedStudent(student);
     setShowStatsDialog(true);
   };
   
-  const handleViewSubjectProgress = (student: Student) => {
+  const handleViewSubjectProgress = (student: MockStudent) => {
     setSelectedStudent(student);
     setShowProgressDialog(true);
   };
