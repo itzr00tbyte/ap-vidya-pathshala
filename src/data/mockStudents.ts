@@ -157,7 +157,14 @@ export const MOCK_STUDENTS: Student[] = [
       timeSpent: "150 hours",
       strongSubjects: ["Mathematics", "Physics"],
       weakSubjects: ["Hindi"]
-    }
+    },
+    subjectProgress: [
+      { subject: "Mathematics", progress: 70 },
+      { subject: "Science", progress: 80 },
+      { subject: "English", progress: 75 },
+      { subject: "Hindi", progress: 60 },
+      { subject: "Social Studies", progress: 85 }
+    ]
   },
   {
     id: "s5",
@@ -182,7 +189,14 @@ export const MOCK_STUDENTS: Student[] = [
       timeSpent: "125 hours",
       strongSubjects: ["Science", "English"],
       weakSubjects: []
-    }
+    },
+    subjectProgress: [
+      { subject: "Mathematics", progress: 82 },
+      { subject: "Science", progress: 90 },
+      { subject: "English", progress: 88 },
+      { subject: "Hindi", progress: 70 },
+      { subject: "Social Studies", progress: 80 }
+    ]
   },
   {
     id: "s6",
@@ -207,7 +221,14 @@ export const MOCK_STUDENTS: Student[] = [
       timeSpent: "130 hours",
       strongSubjects: ["Social Studies", "Hindi"],
       weakSubjects: ["Mathematics"]
-    }
+    },
+    subjectProgress: [
+      { subject: "Mathematics", progress: 68 },
+      { subject: "Science", progress: 75 },
+      { subject: "English", progress: 82 },
+      { subject: "Hindi", progress: 90 },
+      { subject: "Social Studies", progress: 85 }
+    ]
   },
   {
     id: "s7",
@@ -232,7 +253,14 @@ export const MOCK_STUDENTS: Student[] = [
       timeSpent: "90 hours",
       strongSubjects: ["Art", "English"],
       weakSubjects: ["Science"]
-    }
+    },
+    subjectProgress: [
+      { subject: "Mathematics", progress: 75 },
+      { subject: "Science", progress: 62 },
+      { subject: "English", progress: 88 },
+      { subject: "Hindi", progress: 78 },
+      { subject: "Social Studies", progress: 70 }
+    ]
   },
   {
     id: "s8",
@@ -257,7 +285,14 @@ export const MOCK_STUDENTS: Student[] = [
       timeSpent: "145 hours",
       strongSubjects: ["Mathematics", "Computer Science"],
       weakSubjects: ["Hindi"]
-    }
+    },
+    subjectProgress: [
+      { subject: "Mathematics", progress: 90 },
+      { subject: "Science", progress: 72 },
+      { subject: "English", progress: 80 },
+      { subject: "Hindi", progress: 65 },
+      { subject: "Social Studies", progress: 78 }
+    ]
   },
   {
     id: "s9",
@@ -282,7 +317,14 @@ export const MOCK_STUDENTS: Student[] = [
       timeSpent: "128 hours",
       strongSubjects: ["Science", "Mathematics"],
       weakSubjects: []
-    }
+    },
+    subjectProgress: [
+      { subject: "Mathematics", progress: 95 },
+      { subject: "Science", progress: 92 },
+      { subject: "English", progress: 85 },
+      { subject: "Hindi", progress: 70 },
+      { subject: "Social Studies", progress: 88 }
+    ]
   },
   {
     id: "s10",
@@ -307,7 +349,14 @@ export const MOCK_STUDENTS: Student[] = [
       timeSpent: "132 hours",
       strongSubjects: ["Social Studies"],
       weakSubjects: ["Science", "Mathematics"]
-    }
+    },
+    subjectProgress: [
+      { subject: "Mathematics", progress: 65 },
+      { subject: "Science", progress: 70 },
+      { subject: "English", progress: 88 },
+      { subject: "Hindi", progress: 82 },
+      { subject: "Social Studies", progress: 90 }
+    ]
   },
   
   // School 2 Students (10 students)
@@ -334,7 +383,14 @@ export const MOCK_STUDENTS: Student[] = [
       timeSpent: "122 hours",
       strongSubjects: ["Science", "Tamil"],
       weakSubjects: ["Mathematics"]
-    }
+    },
+    subjectProgress: [
+      { subject: "Mathematics", progress: 72 },
+      { subject: "Science", progress: 85 },
+      { subject: "English", progress: 78 },
+      { subject: "Hindi", progress: 60 },
+      { subject: "Social Studies", progress: 88 }
+    ]
   },
   {
     id: "s12",
@@ -359,7 +415,14 @@ export const MOCK_STUDENTS: Student[] = [
       timeSpent: "138 hours",
       strongSubjects: ["Mathematics", "English"],
       weakSubjects: []
-    }
+    },
+    subjectProgress: [
+      { subject: "Mathematics", progress: 92 },
+      { subject: "Science", progress: 80 },
+      { subject: "English", progress: 90 },
+      { subject: "Hindi", progress: 75 },
+      { subject: "Social Studies", progress: 85 }
+    ]
   },
   {
     id: "s13",
@@ -384,7 +447,14 @@ export const MOCK_STUDENTS: Student[] = [
       timeSpent: "92 hours",
       strongSubjects: ["Tamil"],
       weakSubjects: ["Mathematics", "English"]
-    }
+    },
+    subjectProgress: [
+      { subject: "Mathematics", progress: 60 },
+      { subject: "Science", progress: 70 },
+      { subject: "English", progress: 65 },
+      { subject: "Hindi", progress: 80 },
+      { subject: "Social Studies", progress: 72 }
+    ]
   },
   {
     id: "s14",
@@ -409,7 +479,14 @@ export const MOCK_STUDENTS: Student[] = [
       timeSpent: "152 hours",
       strongSubjects: ["Mathematics", "Science"],
       weakSubjects: ["Social Studies"]
-    }
+    },
+    subjectProgress: [
+      { subject: "Mathematics", progress: 88 },
+      { subject: "Science", progress: 92 },
+      { subject: "English", progress: 70 },
+      { subject: "Hindi", progress: 65 },
+      { subject: "Social Studies", progress: 78 }
+    ]
   },
   {
     id: "s15",
@@ -434,7 +511,14 @@ export const MOCK_STUDENTS: Student[] = [
       timeSpent: "125 hours",
       strongSubjects: ["Tamil", "English"],
       weakSubjects: ["Science"]
-    }
+    },
+    subjectProgress: [
+      { subject: "Mathematics", progress: 70 },
+      { subject: "Science", progress: 78 },
+      { subject: "English", progress: 85 },
+      { subject: "Hindi", progress: 92 },
+      { subject: "Social Studies", progress: 80 }
+    ]
   },
   {
     id: "s16",
@@ -459,7 +543,14 @@ export const MOCK_STUDENTS: Student[] = [
       timeSpent: "128 hours",
       strongSubjects: ["Computer Science", "Mathematics"],
       weakSubjects: ["Social Studies"]
-    }
+    },
+    subjectProgress: [
+      { subject: "Mathematics", progress: 82 },
+      { subject: "Science", progress: 75 },
+      { subject: "English", progress: 70 },
+      { subject: "Hindi", progress: 88 },
+      { subject: "Social Studies", progress: 65 }
+    ]
   },
   {
     id: "s17",
@@ -484,7 +575,14 @@ export const MOCK_STUDENTS: Student[] = [
       timeSpent: "95 hours",
       strongSubjects: ["Art", "Tamil"],
       weakSubjects: ["Mathematics"]
-    }
+    },
+    subjectProgress: [
+      { subject: "Mathematics", progress: 68 },
+      { subject: "Science", progress: 72 },
+      { subject: "English", progress: 80 },
+      { subject: "Hindi", progress: 85 },
+      { subject: "Social Studies", progress: 70 }
+    ]
   },
   {
     id: "s18",
@@ -509,7 +607,14 @@ export const MOCK_STUDENTS: Student[] = [
       timeSpent: "148 hours",
       strongSubjects: ["Science", "Mathematics"],
       weakSubjects: ["Hindi"]
-    }
+    },
+    subjectProgress: [
+      { subject: "Mathematics", progress: 85 },
+      { subject: "Science", progress: 95 },
+      { subject: "English", progress: 72 },
+      { subject: "Hindi", progress: 68 },
+      { subject: "Social Studies", progress: 80 }
+    ]
   },
   {
     id: "s19",
@@ -534,7 +639,14 @@ export const MOCK_STUDENTS: Student[] = [
       timeSpent: "130 hours",
       strongSubjects: ["English", "Science"],
       weakSubjects: []
-    }
+    },
+    subjectProgress: [
+      { subject: "Mathematics", progress: 78 },
+      { subject: "Science", progress: 90 },
+      { subject: "English", progress: 92 },
+      { subject: "Hindi", progress: 70 },
+      { subject: "Social Studies", progress: 85 }
+    ]
   },
   {
     id: "s20",
@@ -559,7 +671,14 @@ export const MOCK_STUDENTS: Student[] = [
       timeSpent: "130 hours",
       strongSubjects: ["Computer Science"],
       weakSubjects: ["English", "Social Studies"]
-    }
+    },
+    subjectProgress: [
+      { subject: "Mathematics", progress: 70 },
+      { subject: "Science", progress: 75 },
+      { subject: "English", progress: 62 },
+      { subject: "Hindi", progress: 88 },
+      { subject: "Social Studies", progress: 68 }
+    ]
   },
   
   // School 3 Students (10 students)
@@ -586,7 +705,14 @@ export const MOCK_STUDENTS: Student[] = [
       timeSpent: "122 hours",
       strongSubjects: ["Hindi", "Mathematics"],
       weakSubjects: ["English"]
-    }
+    },
+    subjectProgress: [
+      { subject: "Mathematics", progress: 85 },
+      { subject: "Science", progress: 70 },
+      { subject: "English", progress: 75 },
+      { subject: "Hindi", progress: 90 },
+      { subject: "Social Studies", progress: 82 }
+    ]
   },
   {
     id: "s22",
@@ -611,7 +737,14 @@ export const MOCK_STUDENTS: Student[] = [
       timeSpent: "140 hours",
       strongSubjects: ["Science", "Social Studies"],
       weakSubjects: []
-    }
+    },
+    subjectProgress: [
+      { subject: "Mathematics", progress: 72 },
+      { subject: "Science", progress: 92 },
+      { subject: "English", progress: 80 },
+      { subject: "Hindi", progress: 85 },
+      { subject: "Social Studies", progress: 90 }
+    ]
   },
   {
     id: "s23",
@@ -636,7 +769,14 @@ export const MOCK_STUDENTS: Student[] = [
       timeSpent: "95 hours",
       strongSubjects: ["Hindi", "Art"],
       weakSubjects: ["Mathematics"]
-    }
+    },
+    subjectProgress: [
+      { subject: "Mathematics", progress: 65 },
+      { subject: "Science", progress: 78 },
+      { subject: "English", progress: 70 },
+      { subject: "Hindi", progress: 82 },
+      { subject: "Social Studies", progress: 75 }
+    ]
   },
   {
     id: "s24",
@@ -647,157 +787,4 @@ export const MOCK_STUDENTS: Student[] = [
     schoolId: "sch3",
     guardianName: "Vivek Khanna",
     guardianContact: "+91-7654321101",
-    dateOfBirth: "2010-02-14",
-    address: "E-12, Defence Colony, New Delhi",
-    enrollmentDate: "2017-04-10",
-    attendance: 91,
-    performance: "Good",
-    lastActive: "2023-04-01",
-    teacher: "Dr. Ravi Verma",
-    status: "active",
-    learningStats: {
-      completedLessons: 182,
-      avgQuizScore: 86,
-      timeSpent: "150 hours",
-      strongSubjects: ["Computer Science", "Mathematics"],
-      weakSubjects: ["Hindi"]
-    }
-  },
-  {
-    id: "s25",
-    name: "Anvi Malhotra",
-    email: "anvi.m@student.apvidya.edu",
-    grade: 7,
-    section: "B",
-    schoolId: "sch3",
-    guardianName: "Neha Malhotra",
-    guardianContact: "+91-7654321102",
-    dateOfBirth: "2012-12-20",
-    address: "F-7, Rajouri Garden, New Delhi",
-    enrollmentDate: "2019-04-10",
-    attendance: 94,
-    performance: "Good",
-    lastActive: "2023-04-02",
-    teacher: "Mrs. Sunita Gupta",
-    status: "active",
-    learningStats: {
-      completedLessons: 149,
-      avgQuizScore: 87,
-      timeSpent: "125 hours",
-      strongSubjects: ["English", "Science"],
-      weakSubjects: ["Social Studies"]
-    }
-  },
-  {
-    id: "s26",
-    name: "Aadi Mehra",
-    email: "aadi.m@student.apvidya.edu",
-    grade: 8,
-    section: "A",
-    schoolId: "sch3",
-    guardianName: "Rahul Mehra",
-    guardianContact: "+91-7654321103",
-    dateOfBirth: "2011-07-30",
-    address: "G-22, Lajpat Nagar, New Delhi",
-    enrollmentDate: "2018-04-12",
-    attendance: 90,
-    performance: "Good",
-    lastActive: "2023-03-31",
-    teacher: "Dr. Ravi Verma",
-    status: "active",
-    learningStats: {
-      completedLessons: 162,
-      avgQuizScore: 85,
-      timeSpent: "135 hours",
-      strongSubjects: ["Social Studies", "Hindi"],
-      weakSubjects: ["Science"]
-    }
-  },
-  {
-    id: "s27",
-    name: "Myra Agarwal",
-    email: "myra.a@student.apvidya.edu",
-    grade: 6,
-    section: "B",
-    schoolId: "sch3",
-    guardianName: "Sanjay Agarwal",
-    guardianContact: "+91-7654321104",
-    dateOfBirth: "2013-02-16",
-    address: "H-45, Malviya Nagar, New Delhi",
-    enrollmentDate: "2020-04-15",
-    attendance: 93,
-    performance: "Good",
-    lastActive: "2023-04-01",
-    teacher: "Mrs. Sunita Gupta",
-    status: "active",
-    learningStats: {
-      completedLessons: 125,
-      avgQuizScore: 84,
-      timeSpent: "100 hours",
-      strongSubjects: ["Art", "Hindi"],
-      weakSubjects: ["Mathematics"]
-    }
-  },
-  {
-    id: "s28",
-    name: "Vihaan Bhatia",
-    email: "vihaan.b@student.apvidya.edu",
-    grade: 9,
-    section: "B",
-    schoolId: "sch3",
-    guardianName: "Ravi Bhatia",
-    guardianContact: "+91-7654321105",
-    dateOfBirth: "2010-09-08",
-    address: "J-10, Saket, New Delhi",
-    enrollmentDate: "2017-04-10",
-    attendance: 89,
-    performance: "Good",
-    lastActive: "2023-03-31",
-    teacher: "Mr. Deepak Mishra",
-    status: "pending",
-    learningStats: {
-      completedLessons: 175,
-      avgQuizScore: 88,
-      timeSpent: "145 hours",
-      strongSubjects: ["Mathematics", "Computer Science"],
-      weakSubjects: ["English"]
-    }
-  },
-  {
-    id: "s29",
-    name: "Zara Khan",
-    email: "zara.k@student.apvidya.edu",
-    grade: 7,
-    section: "A",
-    schoolId: "sch3",
-    guardianName: "Faisal Khan",
-    guardianContact: "+91-7654321106",
-    dateOfBirth: "2012-04-25",
-    address: "K-8, Hauz Khas, New Delhi",
-    enrollmentDate: "2019-04-10",
-    attendance: 96,
-    performance: "Excellent",
-    lastActive: "2023-04-02",
-    teacher: "Mrs. Sunita Gupta",
-    status: "active",
-    learningStats: {
-      completedLessons: 155,
-      avgQuizScore: 92,
-      timeSpent: "130 hours",
-      strongSubjects: ["Science", "English"],
-      weakSubjects: []
-    }
-  },
-  {
-    id: "s30",
-    name: "Advait Joshi",
-    email: "advait.j@student.apvidya.edu",
-    grade: 8,
-    section: "A",
-    schoolId: "sch3",
-    guardianName: "Mohan Joshi",
-    guardianContact: "+91-7654321107",
-    dateOfBirth: "2011-11-12",
-    address: "L-15, Chanakyapuri, New Delhi",
-    enrollmentDate: "2018-04-12",
-    attendance: 9
+    date
