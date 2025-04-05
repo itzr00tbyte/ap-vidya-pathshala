@@ -3,15 +3,18 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import { BookOpen, Calculator, Globe, Beaker, Book, BookUser } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import ProgressOverview from "@/components/dashboard/ProgressOverview";
 import SubjectsGrid from "@/components/dashboard/SubjectsGrid";
 import ChaptersList from "@/components/dashboard/ChaptersList";
 import QuizAndTips from "@/components/dashboard/QuizAndTips";
+import StudentProgressSection from "@/components/dashboard/StudentProgressSection";
 import { Subject, Chapter, Quiz } from "@/types/dashboard";
 
 const Dashboard = () => {
+  const { user } = useAuth();
   const [searchParams] = useSearchParams();
   const gradeParam = searchParams.get('grade');
   const [currentGrade, setCurrentGrade] = useState(gradeParam ? parseInt(gradeParam) : 6);
@@ -127,6 +130,9 @@ const Dashboard = () => {
     subjects.reduce((acc, subject) => acc + subject.progress, 0) / subjects.length
   );
 
+  // Check if the current user is a teacher
+  const isTeacher = user?.role === "teacher";
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
@@ -156,6 +162,9 @@ const Dashboard = () => {
             <QuizAndTips quizzes={quizzes} />
           </div>
         </div>
+        
+        {/* Show student progress section only for teachers */}
+        {isTeacher && <StudentProgressSection />}
       </div>
     </div>
   );
