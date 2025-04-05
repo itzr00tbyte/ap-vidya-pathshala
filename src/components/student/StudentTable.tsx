@@ -14,18 +14,35 @@ import {
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, User } from "lucide-react";
+import { MoreHorizontal, User, BarChart2 } from "lucide-react";
 import { Student } from "@/data/mockStudents";
 import { useIsMobile } from "@/hooks/use-mobile";
+import ProgressBar from "@/components/ProgressBar";
 
 interface StudentTableProps {
   students: Student[];
   onViewStats: (student: Student) => void;
   canEditStudents: boolean;
+  onViewSubjectProgress?: (student: Student) => void;
 }
 
-const StudentTable = ({ students, onViewStats, canEditStudents }: StudentTableProps) => {
+const StudentTable = ({ 
+  students, 
+  onViewStats, 
+  canEditStudents,
+  onViewSubjectProgress 
+}: StudentTableProps) => {
   const isMobile = useIsMobile();
+
+  // Calculate average progress for a student across all subjects
+  const getAverageProgress = (student: Student) => {
+    if (!student.subjectProgress || student.subjectProgress.length === 0) {
+      return 0;
+    }
+    
+    const total = student.subjectProgress.reduce((sum, subject) => sum + subject.progress, 0);
+    return Math.round(total / student.subjectProgress.length);
+  };
 
   // Mobile card view for students
   if (isMobile) {
@@ -53,6 +70,11 @@ const StudentTable = ({ students, onViewStats, canEditStudents }: StudentTablePr
                     <DropdownMenuItem onClick={() => onViewStats(student)}>
                       View Learning Stats
                     </DropdownMenuItem>
+                    {onViewSubjectProgress && (
+                      <DropdownMenuItem onClick={() => onViewSubjectProgress(student)}>
+                        View Subject Progress
+                      </DropdownMenuItem>
+                    )}
                     <DropdownMenuItem>View details</DropdownMenuItem>
                     <DropdownMenuItem>View performance</DropdownMenuItem>
                     {canEditStudents && (
@@ -86,6 +108,19 @@ const StudentTable = ({ students, onViewStats, canEditStudents }: StudentTablePr
                   </span>
                 </div>
               </div>
+              
+              {/* Add progress section */}
+              <div className="mt-3">
+                <div className="text-xs font-medium mb-1">Overall Progress</div>
+                <ProgressBar 
+                  progress={getAverageProgress(student)} 
+                  color={
+                    getAverageProgress(student) >= 75 ? "green" : 
+                    getAverageProgress(student) >= 40 ? "blue" : "yellow"
+                  }
+                  size="sm"
+                />
+              </div>
             </div>
           ))
         ) : (
@@ -111,6 +146,7 @@ const StudentTable = ({ students, onViewStats, canEditStudents }: StudentTablePr
             <TableHead>Section</TableHead>
             <TableHead>Attendance</TableHead>
             <TableHead>Performance</TableHead>
+            <TableHead>Progress</TableHead>
             <TableHead className="hidden md:table-cell">Last Active</TableHead>
             <TableHead className="text-right">Actions</TableHead>
           </TableRow>
@@ -134,6 +170,20 @@ const StudentTable = ({ students, onViewStats, canEditStudents }: StudentTablePr
                     {student.performance}
                   </span>
                 </TableCell>
+                <TableCell>
+                  <div className="w-28">
+                    <ProgressBar 
+                      progress={getAverageProgress(student)} 
+                      color={
+                        getAverageProgress(student) >= 75 ? "green" : 
+                        getAverageProgress(student) >= 40 ? "blue" : "yellow"
+                      }
+                      size="sm"
+                      showLabel={false}
+                    />
+                    <span className="text-xs ml-1">{getAverageProgress(student)}%</span>
+                  </div>
+                </TableCell>
                 <TableCell className="hidden md:table-cell">{student.lastActive}</TableCell>
                 <TableCell className="text-right">
                   <DropdownMenu>
@@ -147,6 +197,12 @@ const StudentTable = ({ students, onViewStats, canEditStudents }: StudentTablePr
                       <DropdownMenuItem onClick={() => onViewStats(student)}>
                         View Learning Stats
                       </DropdownMenuItem>
+                      {onViewSubjectProgress && (
+                        <DropdownMenuItem onClick={() => onViewSubjectProgress(student)}>
+                          <BarChart2 className="h-4 w-4 mr-2" />
+                          View Subject Progress
+                        </DropdownMenuItem>
+                      )}
                       <DropdownMenuItem>View details</DropdownMenuItem>
                       <DropdownMenuItem>View performance</DropdownMenuItem>
                       {canEditStudents && (
@@ -162,7 +218,7 @@ const StudentTable = ({ students, onViewStats, canEditStudents }: StudentTablePr
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={9} className="h-24 text-center">
+              <TableCell colSpan={10} className="h-24 text-center">
                 No students found
               </TableCell>
             </TableRow>

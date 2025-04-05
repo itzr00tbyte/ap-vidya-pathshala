@@ -3,6 +3,7 @@ import { Book, CheckCircle, Lock, PlayCircle, GraduationCap } from "lucide-react
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useNavigate, useParams } from "react-router-dom";
+import ProgressBar from "@/components/ProgressBar";
 
 type ChapterStatus = "completed" | "in-progress" | "locked";
 
@@ -14,6 +15,7 @@ type ChapterCardProps = {
   subjectColor?: string;
   showStudyIcon?: boolean;
   onStartSlideshow?: (title: string) => void;
+  progress?: number; // Add progress prop to show completion percentage
 };
 
 const ChapterCard = ({ 
@@ -23,7 +25,8 @@ const ChapterCard = ({
   duration,
   subjectColor = "blue",
   showStudyIcon = false,
-  onStartSlideshow
+  onStartSlideshow,
+  progress // Default to 0 if not provided
 }: ChapterCardProps) => {
   const navigate = useNavigate();
   const { subjectId } = useParams<{ subjectId: string }>();
@@ -41,6 +44,11 @@ const ChapterCard = ({
       }
     }
   };
+
+  // Calculate progress percentage
+  const progressPercentage = progress !== undefined ? progress : 
+                            status === "completed" ? 100 : 
+                            status === "in-progress" ? 50 : 0;
 
   return (
     <div className={cn(
@@ -80,6 +88,18 @@ const ChapterCard = ({
         </div>
         <div className="text-sm text-gray-500">{duration}</div>
       </div>
+      
+      {/* Add progress bar */}
+      {status !== "locked" && (
+        <div className="mt-3 mb-3">
+          <ProgressBar 
+            progress={progressPercentage} 
+            color={status === "completed" ? "green" : subjectColor}
+            size="sm"
+            showLabel={true}
+          />
+        </div>
+      )}
       
       <div className="mt-4 flex items-center justify-between">
         {status === "locked" ? (
