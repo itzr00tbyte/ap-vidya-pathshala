@@ -13,18 +13,28 @@ import QuizAndTips from "@/components/dashboard/QuizAndTips";
 import StudentProgressSection from "@/components/dashboard/StudentProgressSection";
 import { Subject, Chapter, Quiz } from "@/types/dashboard";
 import { MOCK_STUDENTS } from "@/data/mockStudents";
+import { getFilteredStudents, generateSubjectProgressData, generatePerformanceData, generateAttendanceData } from "@/utils/dashboardData";
 
 const Dashboard = () => {
   const { user } = useAuth();
   const [searchParams] = useSearchParams();
   const gradeParam = searchParams.get('grade');
   const [currentGrade, setCurrentGrade] = useState(gradeParam ? parseInt(gradeParam) : 6);
+  const [teacherStudents, setTeacherStudents] = useState([]);
   
   useEffect(() => {
     if (gradeParam) {
       setCurrentGrade(parseInt(gradeParam));
     }
   }, [gradeParam]);
+
+  useEffect(() => {
+    // Filter students based on teacher name
+    if (user?.role === "teacher" && user?.name) {
+      const filteredStudents = getFilteredStudents(user.name, user.role);
+      setTeacherStudents(filteredStudents);
+    }
+  }, [user]);
 
   // Subject data
   const subjects: Subject[] = [
@@ -134,21 +144,15 @@ const Dashboard = () => {
   // Check if the current user is a teacher
   const isTeacher = user?.role === "teacher";
 
-  // Add subject progress data to students
-  const enrichStudentsWithProgress = () => {
-    return MOCK_STUDENTS.slice(0, 6).map(student => {
-      if (!student.subjectProgress) {
-        student.subjectProgress = subjects.map(subject => ({
-          subject: subject.name,
-          progress: Math.floor(Math.random() * 100)
-        }));
-      }
-      return student;
-    });
-  };
+  // Get enriched student data from utility function
+  const filteredStudents = isTeacher && user?.name 
+    ? getFilteredStudents(user.name, "teacher") 
+    : [];
 
-  // Get enriched student data
-  const enrichedStudents = enrichStudentsWithProgress();
+  // Prepare student data visualizations
+  const studentPerformanceData = generatePerformanceData(filteredStudents);
+  const subjectProgressData = generateSubjectProgressData(filteredStudents);
+  const attendanceData = generateAttendanceData(filteredStudents);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -159,6 +163,37 @@ const Dashboard = () => {
           currentGrade={currentGrade}
           setCurrentGrade={setCurrentGrade}
         />
+        
+        {isTeacher && (
+          <div className="mb-8 bg-white p-6 rounded-lg shadow">
+            <h2 className="text-xl font-bold mb-4">Class Overview</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-blue-50 rounded-lg p-4">
+                <h3 className="font-medium text-blue-700 mb-2">Total Students</h3>
+                <p className="text-3xl font-bold">{filteredStudents.length}</p>
+                <p className="text-sm text-gray-500 mt-1">Assigned to you</p>
+              </div>
+              <div className="bg-green-50 rounded-lg p-4">
+                <h3 className="font-medium text-green-700 mb-2">Average Progress</h3>
+                <p className="text-3xl font-bold">
+                  {Math.round(filteredStudents.reduce((sum, student) => {
+                    return sum + (student.subjectProgress ? 
+                      student.subjectProgress.reduce((subSum, subject) => subSum + subject.progress, 0) / 
+                      student.subjectProgress.length : 0);
+                  }, 0) / (filteredStudents.length || 1))}%
+                </p>
+                <p className="text-sm text-gray-500 mt-1">Across all subjects</p>
+              </div>
+              <div className="bg-amber-50 rounded-lg p-4">
+                <h3 className="font-medium text-amber-700 mb-2">Honor Roll Students</h3>
+                <p className="text-3xl font-bold">
+                  {filteredStudents.filter(student => student.performance === "Excellent").length}
+                </p>
+                <p className="text-sm text-gray-500 mt-1">Excellent performance</p>
+              </div>
+            </div>
+          </div>
+        )}
         
         <ProgressOverview 
           subjects={subjects}
@@ -183,7 +218,7 @@ const Dashboard = () => {
         {/* Show student progress section for teachers */}
         {isTeacher && (
           <StudentProgressSection
-            customStudents={enrichedStudents} 
+            customStudents={filteredStudents} 
             teacherName={user?.name || "Current Teacher"}
           />
         )}

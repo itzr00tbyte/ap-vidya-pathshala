@@ -63,3 +63,18 @@ export interface AttendanceRange {
   name: string;
   value: number;
 }
+
+// Ensure the Student interface is properly defined
+export interface Student {
+  id: string;
+  name: string;
+  email: string;
+  grade: number;
+  section: string;
+  attendance: number;
+  performance: string;
+  teacher: string;
+  lastActive: string;
+  subjectProgress?: StudentProgress[];
+  learningStats: LearningStats;
+}
