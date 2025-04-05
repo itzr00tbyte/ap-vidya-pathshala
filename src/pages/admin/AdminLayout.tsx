@@ -1,20 +1,25 @@
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useNavigate, Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { 
   Users, School, BookOpen, GraduationCap, 
-  BarChart3, Settings, LogOut, UserCog, Calendar, Briefcase 
+  BarChart3, Settings, LogOut, UserCog, Calendar, Briefcase,
+  BookOpenCheck, GraduationCap as Student
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { MOCK_STUDENTS } from "@/data/mockStudents";
 
 export default function AdminLayout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
   const location = useLocation();
+  const [teacherStudents, setTeacherStudents] = useState([]);
+  const [isStudentsOpen, setIsStudentsOpen] = useState(false);
   
   // Ensure only admin, headmaster, or teacher can access
   useEffect(() => {
@@ -25,6 +30,12 @@ export default function AdminLayout() {
         description: "You don't have permission to access the admin portal",
         variant: "destructive",
       });
+    }
+    
+    // If teacher, load their students
+    if (user && user.role === "teacher" && user.name) {
+      const filteredStudents = MOCK_STUDENTS.filter(student => student.teacher === user.name);
+      setTeacherStudents(filteredStudents);
     }
   }, [user, navigate, toast]);
 
@@ -108,7 +119,7 @@ export default function AdminLayout() {
           </div>
         </div>
         
-        <nav className="mt-4">
+        <nav className="mt-4 overflow-y-auto max-h-[calc(100vh-220px)]">
           <ul className="space-y-1">
             {filteredNavigation.map((item) => {
               const isActive = location.pathname === item.path;
@@ -130,6 +141,52 @@ export default function AdminLayout() {
               );
             })}
           </ul>
+          
+          {/* Students section for teachers */}
+          {user.role === "teacher" && teacherStudents.length > 0 && (
+            <div className="mt-6">
+              <Collapsible
+                open={isStudentsOpen}
+                onOpenChange={setIsStudentsOpen}
+                className="w-full"
+              >
+                <CollapsibleTrigger className="flex items-center px-4 py-2 w-full text-sm font-medium text-gray-500 hover:bg-gray-50">
+                  <Students className="h-5 w-5 mr-3" />
+                  <span>My Students</span>
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 15 15"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className={`ml-auto h-4 w-4 transition-transform ${isStudentsOpen ? "transform rotate-180" : ""}`}
+                  >
+                    <path
+                      d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                    ></path>
+                  </svg>
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <ul className="pl-8 space-y-1 mt-1 mb-2">
+                    {teacherStudents.map((student) => (
+                      <li key={student.id}>
+                        <Link
+                          to={`/admin-portal/teacher-portal?student=${student.id}`}
+                          className="flex items-center px-4 py-2 text-xs font-medium text-gray-600 hover:bg-gray-50 rounded-md"
+                        >
+                          <Student className="h-3 w-3 mr-2" />
+                          {student.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </CollapsibleContent>
+              </Collapsible>
+            </div>
+          )}
         </nav>
         
         <div className="absolute bottom-0 w-full p-4 border-t">
