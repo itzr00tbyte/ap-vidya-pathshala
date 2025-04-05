@@ -9,11 +9,19 @@ export interface Subject {
   chaptersCount: number;
 }
 
+export interface QuizQuestion {
+  id: string;
+  question: string;
+  options: string[];
+  correctAnswer: string;
+}
+
 export interface Chapter {
   title: string;
   description: string;
   status: 'completed' | 'in-progress' | 'locked';
   duration: string;
+  quiz?: QuizQuestion[]; // Added the quiz property as optional
 }
 
 export interface Quiz {
