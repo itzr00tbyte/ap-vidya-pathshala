@@ -31,3 +31,35 @@ export interface Quiz {
   subjectColor: string;
   isUpcoming: boolean;
 }
+
+// Adding new types for the dashboard statistics
+export interface StudentProgress {
+  subject: string;
+  progress: number;
+}
+
+export interface LearningStats {
+  completedLessons: number;
+  avgQuizScore: number;
+  lastActivity: string;
+}
+
+export interface SchoolPerformance {
+  name: string;
+  performance: number;
+}
+
+export interface GradeDistribution {
+  grade: string;
+  students: number;
+}
+
+export interface PerformanceData {
+  name: string;
+  value: number;
+}
+
+export interface AttendanceRange {
+  name: string;
+  value: number;
+}
