@@ -23,7 +23,12 @@ export type Student = {
     timeSpent: string;
     strongSubjects: string[];
     weakSubjects: string[];
-  }
+  };
+  // Add the subjectProgress property to the Student type
+  subjectProgress?: {
+    subject: string;
+    progress: number;
+  }[];
 };
 
 // This file contains mock student data for 30 students (10 per school)
