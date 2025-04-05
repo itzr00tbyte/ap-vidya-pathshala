@@ -74,12 +74,14 @@ const StudentTable = ({
                     </DropdownMenuItem>
                     {onViewSubjectProgress && (
                       <DropdownMenuItem onClick={() => onViewSubjectProgress(student)}>
-                        View Subject Progress
+                        <BarChart2 className="h-4 w-4 mr-2" />
+                        Subject Progress
                       </DropdownMenuItem>
                     )}
                     {onViewStudentProgression && (
                       <DropdownMenuItem onClick={() => onViewStudentProgression(student)}>
-                        View Student Progression
+                        <LineChart className="h-4 w-4 mr-2" />
+                        Student Progression
                       </DropdownMenuItem>
                     )}
                     <DropdownMenuItem>View details</DropdownMenuItem>
@@ -207,13 +209,13 @@ const StudentTable = ({
                       {onViewSubjectProgress && (
                         <DropdownMenuItem onClick={() => onViewSubjectProgress(student)}>
                           <BarChart2 className="h-4 w-4 mr-2" />
-                          View Subject Progress
+                          Subject Progress
                         </DropdownMenuItem>
                       )}
                       {onViewStudentProgression && (
                         <DropdownMenuItem onClick={() => onViewStudentProgression(student)}>
                           <LineChart className="h-4 w-4 mr-2" />
-                          View Student Progression
+                          Student Progression
                         </DropdownMenuItem>
                       )}
                       <DropdownMenuItem>View details</DropdownMenuItem>

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
@@ -274,44 +273,41 @@ export default function StudentManagement() {
       
       {/* Subject Progress Dialog */}
       <Dialog open={showSubjectProgressDialog} onOpenChange={setShowSubjectProgressDialog}>
-        <DialogContent className="sm:max-w-[500px]">
+        <DialogContent className="sm:max-w-[600px]">
           <DialogHeader>
-            <DialogTitle>Subject Progress</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="text-xl font-bold">Subject Progress</DialogTitle>
+            <DialogDescription className="text-base">
               {selectedStudent?.name}'s learning progress by subject
             </DialogDescription>
           </DialogHeader>
           
           {selectedStudent && selectedStudent.subjectProgress && (
-            <div className="space-y-4">
+            <div className="space-y-6 my-4">
               {selectedStudent.subjectProgress.map((subject, index) => (
-                <div key={index} className="space-y-1">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">{subject.subject}</span>
-                    <span className="text-sm">{subject.progress}%</span>
+                <div key={index}>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-lg font-medium">{subject.subject}</span>
+                    <span className="text-lg font-bold">{subject.progress}%</span>
                   </div>
-                  <ProgressBar 
-                    progress={subject.progress} 
-                    color={
-                      subject.progress >= 75 ? "green" : 
-                      subject.progress >= 40 ? "blue" : "yellow"
-                    }
-                    size="md"
-                    showLabel={false}
+                  <Progress 
+                    value={subject.progress}
+                    className={`h-3 rounded-full ${
+                      subject.progress >= 80 ? 'bg-green-200' :
+                      subject.progress >= 60 ? 'bg-amber-200' :
+                      'bg-red-200'
+                    }`}
                   />
                 </div>
               ))}
               
-              <div className="pt-4 border-t border-gray-200">
-                <div className="flex justify-between items-center mb-1">
-                  <span className="text-sm font-medium">Overall Progress</span>
-                  <span className="text-sm">{getAverageProgress(selectedStudent)}%</span>
+              <div className="pt-6 border-t border-gray-200">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-lg font-medium">Overall Progress</span>
+                  <span className="text-lg font-bold">{getAverageProgress(selectedStudent)}%</span>
                 </div>
-                <ProgressBar 
-                  progress={getAverageProgress(selectedStudent)} 
-                  color="blue"
-                  size="lg"
-                  showLabel={false}
+                <Progress 
+                  value={getAverageProgress(selectedStudent)}
+                  className="h-4 rounded-full bg-blue-200"
                 />
               </div>
             </div>
