@@ -19,6 +19,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Progress } from "@/components/ui/progress"; // Add this import
 
 // Import our refactored components
 import StudentStatsCard from "@/components/student/StudentStatsCard";
