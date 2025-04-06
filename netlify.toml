@@ -1,0 +1,41 @@
+
+# Netlify configuration file
+
+# Build settings
+[build]
+  # Directory to publish (the build output)
+  publish = "dist"
+  # Default build command
+  command = "npm run build"
+
+# Redirects and rewrites
+[[redirects]]
+  # Redirect all paths to index.html for SPA routing
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers for security and caching
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+
+# Asset optimization
+[build.processing]
+  skip_processing = false
+[build.processing.css]
+  bundle = true
+  minify = true
+[build.processing.js]
+  bundle = true
+  minify = true
+[build.processing.images]
+  compress = true
+
+# Environment variable configuration can be done through the Netlify UI
+# or by adding env variables below (not recommended for sensitive data)
+# [build.environment]
+#   NODE_VERSION = "16"
