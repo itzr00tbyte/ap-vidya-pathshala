@@ -1,3 +1,4 @@
+
 import { GraduationCap, BookOpen, Users, BarChart } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
@@ -13,8 +14,8 @@ import { motion } from "framer-motion";
 const features = [
   {
     icon: <BookOpen className="h-6 w-6" />,
-    title: "AP State Curriculum",
-    description: "Aligned with the latest AP State Board syllabus.",
+    title: "State Curriculum",
+    description: "Aligned with the latest State Board syllabus.",
   },
   {
     icon: <GraduationCap className="h-6 w-6" />,
@@ -24,7 +25,7 @@ const features = [
   {
     icon: <Users className="h-6 w-6" />,
     title: "Expert Teachers",
-    description: "Learn from experienced AP state board teachers.",
+    description: "Learn from experienced state board teachers.",
   },
   {
     icon: <BarChart className="h-6 w-6" />,
@@ -130,7 +131,7 @@ const Index = () => {
             variants={fadeIn}
           >
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
-              <span className="gradient-text">AP Vidya Pathshala</span>
+              <span className="gradient-text">EVidya Pathshala</span>
             </h1>
             <motion.p 
               className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto"
@@ -138,7 +139,7 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
             >
-              Digital learning platform for students following the AP State Government curriculum from 6th to 10th standard.
+              Digital learning platform for students following the State Government curriculum from 6th to 10th standard.
             </motion.p>
             <motion.div 
               className="mt-8 flex justify-center"
@@ -235,8 +236,8 @@ const Index = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl font-bold text-gray-900">Why AP Vidya Pathshala?</h2>
-            <p className="mt-4 text-gray-600">Designed specifically for AP state curriculum students</p>
+            <h2 className="text-3xl font-bold text-gray-900">Why EVidya Pathshala?</h2>
+            <p className="mt-4 text-gray-600">Designed specifically for state curriculum students</p>
           </motion.div>
           
           <motion.div 
@@ -300,7 +301,7 @@ const Index = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            Join thousands of students across Andhra Pradesh who are improving their academic performance with AP Vidya Pathshala.
+            Join thousands of students who are improving their academic performance with EVidya Pathshala.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -324,10 +325,10 @@ const Index = () => {
             <div className="mb-8 md:mb-0">
               <div className="flex items-center space-x-2">
                 <GraduationCap className="h-8 w-8 text-ap-red" />
-                <span className="text-xl font-bold text-white">AP Vidya Pathshala</span>
+                <span className="text-xl font-bold text-white">EVidya Pathshala</span>
               </div>
               <p className="mt-4 text-gray-400 max-w-xs">
-                A digital learning platform for AP State curriculum students.
+                A digital learning platform for State curriculum students.
               </p>
             </div>
             
@@ -358,7 +359,7 @@ const Index = () => {
             </div>
           </div>
           <div className="mt-12 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400">&copy; 2023 AP Vidya Pathshala. All rights reserved.</p>
+            <p className="text-gray-400">&copy; 2023 EVidya Pathshala. All rights reserved.</p>
             <div className="mt-4 md:mt-0 flex space-x-6">
               <a href="#" className="text-gray-400 hover:text-white">
                 <span className="sr-only">Facebook</span>

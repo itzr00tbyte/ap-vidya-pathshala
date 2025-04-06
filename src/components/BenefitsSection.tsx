@@ -1,13 +1,13 @@
 
 import { CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
-const benefits = ["Comprehensive coverage of AP State Board curriculum", "Interactive lessons with animated explanations", "Self-paced learning with personalized feedback", "Regular practice tests and mock exams", "Detailed performance analytics and progress tracking", "Easy access on all devices, anywhere, anytime", "Expert teachers with years of experience", "Engaging content that makes learning enjoyable"];
+const benefits = ["Comprehensive coverage of State Board curriculum", "Interactive lessons with animated explanations", "Self-paced learning with personalized feedback", "Regular practice tests and mock exams", "Detailed performance analytics and progress tracking", "Easy access on all devices, anywhere, anytime", "Expert teachers with years of experience", "Engaging content that makes learning enjoyable"];
 export default function BenefitsSection() {
   return <section className="py-16 bg-gradient-to-br from-white to-ap-green/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row gap-12 items-center">
           <div className="md:w-1/2">
-            <h2 className="text-3xl font-bold text-gray-900">Benefits of Learning with AP Vidya Pathshala</h2>
+            <h2 className="text-3xl font-bold text-gray-900">Benefits of Learning with EVidya Pathshala</h2>
             <p className="mt-4 text-gray-600">
               Our platform offers numerous advantages to help students excel in their academic journey.
             </p>

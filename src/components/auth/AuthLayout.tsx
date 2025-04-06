@@ -32,7 +32,7 @@ export default function AuthLayout({
         <div className="flex justify-center mb-8">
           <Button variant="link" className="flex items-center space-x-2 p-0" onClick={handleBackToHome}>
             <GraduationCap className="h-12 w-12 text-blue-600" />
-            <span className="text-2xl font-bold text-blue-600">E Vidya Pathshala</span>
+            <span className="text-2xl font-bold text-blue-600">EVidya Pathshala</span>
           </Button>
         </div>
 

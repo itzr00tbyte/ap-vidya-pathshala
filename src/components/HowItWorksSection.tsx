@@ -6,7 +6,7 @@ const steps = [
   {
     icon: <Target className="h-6 w-6" />,
     title: "Choose Your Grade",
-    description: "Select your grade to access curriculum-aligned learning materials specifically designed for AP State Board students.",
+    description: "Select your grade to access curriculum-aligned learning materials specifically designed for State Board students.",
     color: "bg-ap-blue/10 text-ap-blue"
   },
   {
@@ -174,7 +174,7 @@ export default function HowItWorksSection() {
         >
           <h2 className="text-3xl font-bold text-gray-900 relative">
             <span className="relative inline-block">
-              How AP Vidya Pathshala Works
+              How EVidya Pathshala Works
               <motion.span 
                 className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-ap-yellow to-ap-red"
                 initial={{ width: 0 }}
