@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate, Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
@@ -101,14 +102,14 @@ export default function AdminLayout() {
       {/* Sidebar */}
       <div className="w-64 bg-white shadow-lg fixed h-full z-10">
         <div className="flex items-center justify-center h-16 border-b">
-          <GraduationCap className="h-8 w-8 text-ap-blue" />
+          <GraduationCap className="h-8 w-8 text-ev-blue" />
           <span className="ml-2 text-lg font-bold">Admin Portal</span>
         </div>
         
         <div className="p-4 border-b">
           <div className="text-sm font-medium text-gray-400">LOGGED IN AS</div>
           <div className="mt-2 flex items-center">
-            <div className="w-8 h-8 bg-ap-blue text-white rounded-full flex items-center justify-center">
+            <div className="w-8 h-8 bg-ev-blue text-white rounded-full flex items-center justify-center">
               {user.name.charAt(0)}
             </div>
             <div className="ml-2">
@@ -129,7 +130,7 @@ export default function AdminLayout() {
                     className={cn(
                       "flex items-center px-4 py-3 text-sm font-medium",
                       isActive
-                        ? "text-ap-blue bg-blue-50 border-l-4 border-ap-blue"
+                        ? "text-ev-blue bg-blue-50 border-l-4 border-ev-blue"
                         : "text-gray-600 hover:bg-gray-50"
                     )}
                   >

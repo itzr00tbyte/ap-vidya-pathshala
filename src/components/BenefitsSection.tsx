@@ -3,7 +3,7 @@ import { CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 const benefits = ["Comprehensive coverage of State Board curriculum", "Interactive lessons with animated explanations", "Self-paced learning with personalized feedback", "Regular practice tests and mock exams", "Detailed performance analytics and progress tracking", "Easy access on all devices, anywhere, anytime", "Expert teachers with years of experience", "Engaging content that makes learning enjoyable"];
 export default function BenefitsSection() {
-  return <section className="py-16 bg-gradient-to-br from-white to-ap-green/5">
+  return <section className="py-16 bg-gradient-to-br from-white to-ev-green/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row gap-12 items-center">
           <div className="md:w-1/2">
@@ -25,7 +25,7 @@ export default function BenefitsSection() {
             }} viewport={{
               once: true
             }} className="flex items-start space-x-3">
-                  <CheckCircle2 className="h-5 w-5 text-ap-green flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="h-5 w-5 text-ev-green flex-shrink-0 mt-0.5" />
                   <span className="text-gray-700">{benefit}</span>
                 </motion.div>)}
             </div>
@@ -33,8 +33,8 @@ export default function BenefitsSection() {
           
           <div className="md:w-1/2">
             <div className="relative h-80 md:h-96">
-              <div className="absolute w-full h-full bg-ap-blue rounded-lg transform rotate-3 opacity-10"></div>
-              <div className="absolute w-full h-full bg-ap-green rounded-lg transform -rotate-3 opacity-10"></div>
+              <div className="absolute w-full h-full bg-ev-blue rounded-lg transform rotate-3 opacity-10"></div>
+              <div className="absolute w-full h-full bg-ev-green rounded-lg transform -rotate-3 opacity-10"></div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-full h-full max-w-md flex items-center justify-center">
                   <img 

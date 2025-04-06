@@ -61,23 +61,23 @@ const Index = () => {
       
       {/* Animated floating shapes background */}
       <div className="absolute inset-0 overflow-hidden -z-10 opacity-25">
-        <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-ap-yellow/30 animate-pulse" style={{ animationDuration: '8s' }}></div>
-        <div className="absolute top-60 right-20 w-80 h-80 rounded-full bg-ap-red/20 animate-pulse" style={{ animationDuration: '10s' }}></div>
-        <div className="absolute bottom-40 left-1/3 w-72 h-72 rounded-full bg-ap-green/20 animate-pulse" style={{ animationDuration: '12s' }}></div>
+        <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-ev-yellow/30 animate-pulse" style={{ animationDuration: '8s' }}></div>
+        <div className="absolute top-60 right-20 w-80 h-80 rounded-full bg-ev-red/20 animate-pulse" style={{ animationDuration: '10s' }}></div>
+        <div className="absolute bottom-40 left-1/3 w-72 h-72 rounded-full bg-ev-green/20 animate-pulse" style={{ animationDuration: '12s' }}></div>
         
         {/* Educational patterns */}
-        <div className="absolute top-1/4 right-1/3 w-24 h-24 border-4 border-ap-yellow/30 rounded-lg rotate-12"></div>
-        <div className="absolute bottom-1/3 left-1/4 w-20 h-20 border-4 border-ap-red/30 rotate-45"></div>
+        <div className="absolute top-1/4 right-1/3 w-24 h-24 border-4 border-ev-yellow/30 rounded-lg rotate-12"></div>
+        <div className="absolute bottom-1/3 left-1/4 w-20 h-20 border-4 border-ev-red/30 rotate-45"></div>
         
         {/* Math symbols */}
-        <div className="absolute top-1/3 left-20 text-6xl text-ap-yellow/20 font-bold">+</div>
-        <div className="absolute top-2/3 right-32 text-7xl text-ap-red/20 font-bold">÷</div>
-        <div className="absolute bottom-1/4 left-1/2 text-8xl text-ap-green/20 font-bold">×</div>
-        <div className="absolute top-1/2 right-1/4 text-5xl text-ap-yellow/20 font-bold">−</div>
+        <div className="absolute top-1/3 left-20 text-6xl text-ev-yellow/20 font-bold">+</div>
+        <div className="absolute top-2/3 right-32 text-7xl text-ev-red/20 font-bold">÷</div>
+        <div className="absolute bottom-1/4 left-1/2 text-8xl text-ev-green/20 font-bold">×</div>
+        <div className="absolute top-1/2 right-1/4 text-5xl text-ev-yellow/20 font-bold">−</div>
       </div>
       
       {/* Hero Section - with enhanced animations and patterns */}
-      <section className="bg-gradient-to-br from-ap-blue/5 via-white to-ap-red/10 relative py-28 overflow-hidden">
+      <section className="bg-gradient-to-br from-ev-blue/5 via-white to-ev-red/10 relative py-28 overflow-hidden">
         {/* Educational Pattern Overlay */}
         <div className="absolute inset-0 opacity-5 pattern-grid z-0"></div>
         
@@ -85,7 +85,7 @@ const Index = () => {
         <div className="absolute inset-0 overflow-hidden z-0">
           {/* Animated Formulas */}
           <motion.div 
-            className="absolute top-10 left-[10%] text-4xl font-mono opacity-10 text-ap-blue"
+            className="absolute top-10 left-[10%] text-4xl font-mono opacity-10 text-ev-blue"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 0.1, y: 0 }}
             transition={{ duration: 1.5, delay: 0.2 }}
@@ -94,7 +94,7 @@ const Index = () => {
           </motion.div>
           
           <motion.div 
-            className="absolute bottom-20 right-[15%] text-3xl font-mono opacity-10 text-ap-red"
+            className="absolute bottom-20 right-[15%] text-3xl font-mono opacity-10 text-ev-red"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 0.1, y: 0 }}
             transition={{ duration: 1.5, delay: 0.5 }}
@@ -104,14 +104,14 @@ const Index = () => {
           
           {/* Animated Geometric Shapes */}
           <motion.div 
-            className="absolute top-1/4 right-[20%] w-32 h-32 border-2 border-ap-yellow/20 rounded-lg"
+            className="absolute top-1/4 right-[20%] w-32 h-32 border-2 border-ev-yellow/20 rounded-lg"
             initial={{ rotate: 0, opacity: 0 }}
             animate={{ rotate: 45, opacity: 0.2 }}
             transition={{ duration: 2, delay: 0.3 }}
           ></motion.div>
           
           <motion.div 
-            className="absolute bottom-1/3 left-[25%] w-24 h-24 border-2 border-ap-green/20"
+            className="absolute bottom-1/3 left-[25%] w-24 h-24 border-2 border-ev-green/20"
             initial={{ rotate: 0, opacity: 0 }}
             animate={{ rotate: 15, opacity: 0.2 }}
             transition={{ duration: 2, delay: 0.5 }}
@@ -147,7 +147,7 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
             >
-              <Button asChild size="lg" className="rounded-full bg-ap-red hover:bg-ap-red/90">
+              <Button asChild size="lg" className="rounded-full bg-ev-red hover:bg-ev-red/90">
                 <Link to="/dashboard">
                   Start Learning
                 </Link>
@@ -253,7 +253,7 @@ const Index = () => {
                 className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-md transition-all"
                 variants={fadeIn}
               >
-                <div className="inline-flex items-center justify-center p-3 bg-ap-red/10 text-ap-red rounded-lg mb-4">
+                <div className="inline-flex items-center justify-center p-3 bg-ev-red/10 text-ev-red rounded-lg mb-4">
                   {feature.icon}
                 </div>
                 <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
@@ -274,7 +274,7 @@ const Index = () => {
       <NewsletterSection />
       
       {/* Call to Action */}
-      <section className="py-16 bg-ap-red relative overflow-hidden">
+      <section className="py-16 bg-ev-red relative overflow-hidden">
         {/* Educational background elements */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 text-9xl font-bold">+</div>
@@ -309,7 +309,7 @@ const Index = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
           >
-            <Button asChild size="lg" className="mt-8 rounded-full bg-white text-ap-red hover:bg-gray-100">
+            <Button asChild size="lg" className="mt-8 rounded-full bg-white text-ev-red hover:bg-gray-100">
               <Link to="/dashboard">
                 Get Started Now
               </Link>
@@ -324,7 +324,7 @@ const Index = () => {
           <div className="flex flex-col md:flex-row justify-between">
             <div className="mb-8 md:mb-0">
               <div className="flex items-center space-x-2">
-                <GraduationCap className="h-8 w-8 text-ap-red" />
+                <GraduationCap className="h-8 w-8 text-ev-red" />
                 <span className="text-xl font-bold text-white">EVidya Pathshala</span>
               </div>
               <p className="mt-4 text-gray-400 max-w-xs">
