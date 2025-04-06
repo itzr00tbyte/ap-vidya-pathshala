@@ -26,11 +26,11 @@ export default function NewsletterSection() {
   };
 
   return (
-    <section className="py-16 bg-gradient-to-br from-ap-blue/10 to-ap-light-blue/10">
+    <section className="py-16 bg-gradient-to-br from-blue-600/10 to-blue-400/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="max-w-xl">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Stay Updated with AP Vidya Pathshala</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Stay Updated with E Vidya Pathshala</h2>
             <p className="mt-4 text-gray-600">
               Subscribe to our newsletter to receive updates on new study materials, exam tips, and exclusive content to help enhance your learning experience.
             </p>
@@ -51,7 +51,7 @@ export default function NewsletterSection() {
               </div>
               <Button 
                 type="submit" 
-                className="bg-ap-blue hover:bg-ap-blue/90" 
+                className="bg-blue-600 hover:bg-blue-600/90" 
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Subscribing..." : "Subscribe"}

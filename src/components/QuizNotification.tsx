@@ -23,12 +23,12 @@ const QuizNotification = ({
   return (
     <div className={cn(
       "relative border rounded-lg p-4 bg-white transition-all hover:shadow-md",
-      isUpcoming ? "border-ap-yellow/30" : "border-ap-blue/30"
+      isUpcoming ? "border-yellow-600/30" : "border-blue-600/30"
     )}>
       <div className="flex items-start space-x-3">
         <div className={cn(
           "mt-0.5 p-2 rounded-md",
-          isUpcoming ? "bg-ap-yellow/10 text-ap-yellow" : `bg-ap-${subjectColor}/10 text-ap-${subjectColor}`,
+          isUpcoming ? "bg-yellow-600/10 text-yellow-600" : `bg-${subjectColor}-600/10 text-${subjectColor}-600`,
         )}>
           <BellRing className="h-5 w-5" />
         </div>
@@ -36,7 +36,7 @@ const QuizNotification = ({
           <div className="flex items-center justify-between">
             <h3 className="font-medium text-gray-900">{title}</h3>
             {isUpcoming && (
-              <span className="bg-ap-yellow/10 text-ap-yellow text-xs px-2 py-0.5 rounded">Upcoming</span>
+              <span className="bg-yellow-600/10 text-yellow-600 text-xs px-2 py-0.5 rounded">Upcoming</span>
             )}
           </div>
           <p className="text-sm mt-1 text-gray-500">{subject}</p>
@@ -54,7 +54,7 @@ const QuizNotification = ({
             <Button 
               size="sm" 
               variant={isUpcoming ? "outline" : "default"} 
-              className={isUpcoming ? "border-ap-yellow text-ap-yellow hover:bg-ap-yellow/10" : ""}
+              className={isUpcoming ? "border-yellow-600 text-yellow-600 hover:bg-yellow-600/10" : ""}
             >
               {isUpcoming ? "Set Reminder" : "Start Quiz"}
             </Button>

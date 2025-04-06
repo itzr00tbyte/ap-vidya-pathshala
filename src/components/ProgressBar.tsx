@@ -21,12 +21,12 @@ const ProgressBar = ({
           <span className="text-sm text-gray-500">Progress</span>
           <span className={cn(
             "text-sm font-medium",
-            color === "blue" && "text-ap-blue",
-            color === "green" && "text-ap-green",
-            color === "yellow" && "text-ap-yellow",
-            color === "orange" && "text-ap-orange",
-            color === "purple" && "text-ap-purple",
-            color === "red" && "text-ap-red",
+            color === "blue" && "text-blue-600",
+            color === "green" && "text-green-600",
+            color === "yellow" && "text-yellow-600",
+            color === "orange" && "text-orange-600",
+            color === "purple" && "text-purple-600",
+            color === "red" && "text-red-600",
           )}>
             {progress}%
           </span>
@@ -41,12 +41,12 @@ const ProgressBar = ({
         <div 
           className={cn(
             "h-full rounded-full transition-all duration-500",
-            color === "blue" && "bg-ap-blue",
-            color === "green" && "bg-ap-green",
-            color === "yellow" && "bg-ap-yellow",
-            color === "orange" && "bg-ap-orange",
-            color === "purple" && "bg-ap-purple",
-            color === "red" && "bg-ap-red",
+            color === "blue" && "bg-blue-600",
+            color === "green" && "bg-green-600",
+            color === "yellow" && "bg-yellow-600",
+            color === "orange" && "bg-orange-600",
+            color === "purple" && "bg-purple-600",
+            color === "red" && "bg-red-600",
           )}
           style={{ width: `${progress}%` }}
         ></div>
