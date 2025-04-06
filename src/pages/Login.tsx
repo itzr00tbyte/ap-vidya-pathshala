@@ -21,21 +21,12 @@ export default function Login() {
     navigate('/signup');
   };
 
-  const demoAccountsNotice = (
-    <div className="bg-amber-50 p-2 rounded-md border border-amber-200 text-amber-800 text-sm">
-      <p className="font-medium">Demo Accounts:</p>
-      <p>Student: student@example.com | password123</p>
-      <p>Teacher: teacher@example.com | teacher123</p>
-      <p>Headmaster: headmaster@example.com | headmaster123</p>
-    </div>
-  );
-
   const footerContent = (
     <div className="mt-2 text-center text-sm">
       Don't have an account?{" "}
       <Button 
         variant="link" 
-        className="font-medium text-ap-blue hover:underline p-0"
+        className="font-medium text-ev-blue hover:underline p-0"
         onClick={handleSignUp}
       >
         Sign up
@@ -47,7 +38,6 @@ export default function Login() {
     <AuthLayout
       title="Sign in"
       description="Enter your email and password to access your account"
-      headerContent={demoAccountsNotice}
       footerContent={footerContent}
     >
       <LoginForm />

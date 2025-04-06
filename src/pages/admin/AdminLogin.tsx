@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -88,15 +89,15 @@ export default function AdminLogin() {
       <div className="w-full max-w-md">
         <div className="flex justify-center mb-8">
           <div className="flex items-center space-x-2">
-            <GraduationCap className="h-12 w-12 text-ap-blue" />
-            <span className="text-2xl font-bold text-ap-blue">E Vidhya Pathshala</span>
+            <GraduationCap className="h-12 w-12 text-ev-blue" />
+            <span className="text-2xl font-bold text-ev-blue">E Vidhya Pathshala</span>
           </div>
         </div>
 
-        <Card className="border-t-4 border-t-ap-blue">
+        <Card className="border-t-4 border-t-ev-blue">
           <CardHeader className="space-y-1">
             <div className="flex items-center justify-center mb-4">
-              <div className="bg-ap-blue p-3 rounded-full">
+              <div className="bg-ev-blue p-3 rounded-full">
                 <Lock className="h-6 w-6 text-white" />
               </div>
             </div>
@@ -104,12 +105,6 @@ export default function AdminLogin() {
             <CardDescription className="text-center">
               Sign in to access the administrative dashboard
             </CardDescription>
-            <div className="bg-amber-50 p-2 rounded-md border border-amber-200 text-amber-800 text-sm mt-4">
-              <p className="font-medium">Demo Accounts:</p>
-              <p>Admin: admin@example.com | admin123</p>
-              <p>Headmaster: headmaster@example.com | headmaster123</p>
-              <p>Teacher: teacher@example.com | teacher123</p>
-            </div>
           </CardHeader>
           <CardContent>
             <Form {...form}>
@@ -173,7 +168,7 @@ export default function AdminLogin() {
           </CardContent>
           <CardFooter className="flex justify-center">
             <div className="text-sm text-gray-500">
-              Regular student? <a href="/login" className="text-ap-blue hover:underline">Student login</a>
+              Regular student? <a href="/login" className="text-ev-blue hover:underline">Student login</a>
             </div>
           </CardFooter>
         </Card>
