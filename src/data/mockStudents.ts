@@ -39,7 +39,7 @@ export const MOCK_STUDENTS: Student[] = [
   {
     id: "s1",
     name: "Aarav Sharma",
-    email: "aarav.s@student.apvidya.edu",
+    email: "aarav.s@student.evidya.edu",
     grade: 7,
     section: "A",
     schoolId: "sch1",
@@ -73,7 +73,7 @@ export const MOCK_STUDENTS: Student[] = [
   {
     id: "s11",
     name: "Aditya Rajan",
-    email: "aditya.r@student.apvidya.edu",
+    email: "aditya.r@student.evidya.edu",
     grade: 7,
     section: "A",
     schoolId: "sch2",
@@ -107,7 +107,7 @@ export const MOCK_STUDENTS: Student[] = [
   {
     id: "s21",
     name: "Aryan Sharma",
-    email: "aryan.s@student.apvidya.edu",
+    email: "aryan.s@student.evidya.edu",
     grade: 7,
     section: "A",
     schoolId: "sch3",

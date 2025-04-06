@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -90,7 +89,7 @@ export default function AdminLogin() {
         <div className="flex justify-center mb-8">
           <div className="flex items-center space-x-2">
             <GraduationCap className="h-12 w-12 text-ap-blue" />
-            <span className="text-2xl font-bold text-ap-blue">AP Vidya Pathshala</span>
+            <span className="text-2xl font-bold text-ap-blue">E Vidhya Pathshala</span>
           </div>
         </div>
 
