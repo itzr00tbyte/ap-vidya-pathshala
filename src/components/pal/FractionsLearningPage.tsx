@@ -202,6 +202,28 @@ const FractionsLearningPage: React.FC = () => {
                     <div className="text-ev-green font-medium text-sm mt-1">Completed</div>
                   </div>
                 </div>
+                
+                {/* Video Section - Moved to top */}
+                <div className="bg-white border-2 border-ev-purple/20 rounded-lg p-4 sm:p-6 mt-2 w-full shadow-sm">
+                  <h3 className="text-xl font-semibold mb-4 text-ev-purple">Video Lesson: Understanding Fractions</h3>
+                  <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden relative cursor-pointer group" onClick={handlePlayVideo}>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="bg-white/90 rounded-full p-4 shadow-lg transform transition-transform group-hover:scale-110">
+                        <PlayCircle className="h-12 w-12 text-ev-purple" />
+                      </div>
+                    </div>
+                    <div className="w-full h-full bg-gradient-to-r from-ev-purple/20 to-ev-green/20 flex items-center justify-center">
+                      <div className="text-center">
+                        <h4 className="font-bold text-lg text-gray-800">Fractions Video Lesson</h4>
+                        <p className="text-sm text-gray-600">Click to play</p>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="mt-3 text-gray-700 text-sm">
+                    This comprehensive video explains the concept of fractions, types of fractions, and operations with fractions through visual examples and step-by-step explanations.
+                  </p>
+                </div>
+                
                 {/* Theory Content Section */}
                 <div className="bg-white border-2 border-ev-green/20 rounded-lg p-4 sm:p-6 mt-2 w-full shadow-sm">
                   <h3 className="text-xl font-semibold mb-4 text-ev-green">Fractions: Theory & Examples</h3>
@@ -289,26 +311,7 @@ const FractionsLearningPage: React.FC = () => {
                     Tip: Always simplify your answers!
                   </div>
                 </div>
-                {/* Video Section */}
-                <div className="bg-white border-2 border-ev-purple/20 rounded-lg p-4 sm:p-6 mt-2 w-full shadow-sm">
-                  <h3 className="text-xl font-semibold mb-4 text-ev-purple">Video Lesson: Understanding Fractions</h3>
-                  <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden relative cursor-pointer group" onClick={handlePlayVideo}>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="bg-white/90 rounded-full p-4 shadow-lg transform transition-transform group-hover:scale-110">
-                        <PlayCircle className="h-12 w-12 text-ev-purple" />
-                      </div>
-                    </div>
-                    <div className="w-full h-full bg-gradient-to-r from-ev-purple/20 to-ev-green/20 flex items-center justify-center">
-                      <div className="text-center">
-                        <h4 className="font-bold text-lg text-gray-800">Fractions Video Lesson</h4>
-                        <p className="text-sm text-gray-600">Click to play</p>
-                      </div>
-                    </div>
-                  </div>
-                  <p className="mt-3 text-gray-700 text-sm">
-                    This comprehensive video explains the concept of fractions, types of fractions, and operations with fractions through visual examples and step-by-step explanations.
-                  </p>
-                </div>
+                
                 {/* Fractions Quiz Card */}
                 <div className="border-2 border-ev-purple/30 bg-white rounded-lg p-4 sm:p-5 card-hover flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 w-full shadow-sm">
                   <div className="flex items-center gap-3">
