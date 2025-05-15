@@ -156,27 +156,6 @@ const FractionsLearningPage: React.FC = () => {
             </div>
           </div>
 
-          {showVideo && (
-            <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
-              <div className="relative w-full max-w-4xl bg-black rounded-lg overflow-hidden">
-                <button 
-                  onClick={handleCloseVideo}
-                  className="absolute top-2 right-2 text-white bg-black/50 hover:bg-black/70 rounded-full p-2 z-10"
-                >
-                  <X className="h-6 w-6" />
-                </button>
-                <video 
-                  ref={videoRef}
-                  className="w-full aspect-video"
-                  controls
-                  src="/videos/fractions.mp4"
-                >
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            </div>
-          )}
-
           {activeTab === 'chapters' && (
             <div className="w-full">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Chapters</h2>
@@ -203,22 +182,45 @@ const FractionsLearningPage: React.FC = () => {
                   </div>
                 </div>
                 
-                {/* Video Section - Moved to top */}
+                {/* Video Section - Embedded directly in the page */}
                 <div className="bg-white border-2 border-ev-purple/20 rounded-lg p-4 sm:p-6 mt-2 w-full shadow-sm">
                   <h3 className="text-xl font-semibold mb-4 text-ev-purple">Video Lesson: Understanding Fractions</h3>
-                  <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden relative cursor-pointer group" onClick={handlePlayVideo}>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="bg-white/90 rounded-full p-4 shadow-lg transform transition-transform group-hover:scale-110">
-                        <PlayCircle className="h-12 w-12 text-ev-purple" />
+                  
+                  {showVideo ? (
+                    <div className="relative rounded-lg overflow-hidden">
+                      <div className="aspect-video bg-black">
+                        <video 
+                          ref={videoRef}
+                          className="w-full h-full"
+                          controls
+                          src="/videos/fractions.mp4"
+                        >
+                          Your browser does not support the video tag.
+                        </video>
+                      </div>
+                      <button 
+                        onClick={handleCloseVideo}
+                        className="absolute top-2 right-2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 z-10"
+                      >
+                        <X className="h-5 w-5" />
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden relative cursor-pointer group" onClick={handlePlayVideo}>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="bg-white/90 rounded-full p-4 shadow-lg transform transition-transform group-hover:scale-110">
+                          <PlayCircle className="h-12 w-12 text-ev-purple" />
+                        </div>
+                      </div>
+                      <div className="w-full h-full bg-gradient-to-r from-ev-purple/20 to-ev-green/20 flex items-center justify-center">
+                        <div className="text-center">
+                          <h4 className="font-bold text-lg text-gray-800">Fractions Video Lesson</h4>
+                          <p className="text-sm text-gray-600">Click to play</p>
+                        </div>
                       </div>
                     </div>
-                    <div className="w-full h-full bg-gradient-to-r from-ev-purple/20 to-ev-green/20 flex items-center justify-center">
-                      <div className="text-center">
-                        <h4 className="font-bold text-lg text-gray-800">Fractions Video Lesson</h4>
-                        <p className="text-sm text-gray-600">Click to play</p>
-                      </div>
-                    </div>
-                  </div>
+                  )}
+                  
                   <p className="mt-3 text-gray-700 text-sm">
                     This comprehensive video explains the concept of fractions, types of fractions, and operations with fractions through visual examples and step-by-step explanations.
                   </p>
@@ -370,7 +372,10 @@ const FractionsLearningPage: React.FC = () => {
                     size="sm" 
                     subjectColor="purple" 
                     className="mt-4 w-full font-medium border-2"
-                    onClick={handlePlayVideo}
+                    onClick={() => {
+                      setActiveTab('chapters');
+                      setShowVideo(true);
+                    }}
                   >
                     <PlayCircle className="h-4 w-4 mr-1" />
                     Watch Video
