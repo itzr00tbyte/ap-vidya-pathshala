@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -61,7 +60,7 @@ export default function ForgotPassword() {
         <div className="flex justify-center mb-8">
           <Link to="/" className="flex items-center space-x-2">
             <GraduationCap className="h-12 w-12 text-ap-blue" />
-            <span className="text-2xl font-bold text-ap-blue">AP Vidya Pathshala</span>
+            <span className="text-2xl font-bold text-ap-blue">E Vidhya Pathshala</span>
           </Link>
         </div>
 

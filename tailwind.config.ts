@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -81,14 +80,14 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				// Custom theme colors
-				"ap-blue": "#6A5ACD", // Keep purple-blue for contrast
-				"ap-light-blue": "#B39DDB", // Keep light purple for contrast
-				"ap-green": "#43A047",
-				"ap-light-green": "#66BB6A",
-				"ap-yellow": "#FFD700", // Bright yellow
-				"ap-orange": "#FB8C00",
-				"ap-red": "#E53935", // Vibrant red
-				"ap-purple": "#8E24AA",
+				"ev-blue": "#6A5ACD", // Keep purple-blue for contrast
+				"ev-light-blue": "#B39DDB", // Keep light purple for contrast
+				"ev-green": "#43A047",
+				"ev-light-green": "#66BB6A",
+				"ev-yellow": "#FFD700", // Bright yellow
+				"ev-orange": "#FB8C00",
+				"ev-red": "#E53935", // Vibrant red
+				"ev-purple": "#8E24AA",
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

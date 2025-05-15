@@ -13,8 +13,8 @@ const Navbar = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <span className="text-ap-green font-bold text-xl">AP Vidya</span>
-              <span className="text-ap-purple font-bold text-xl ml-1">Pathshala</span>
+              <span className="text-ev-green font-bold text-xl">E Vidhya</span>
+              <span className="text-ev-purple font-bold text-xl ml-1">Pathshala</span>
             </Link>
           </div>
           <div className="flex items-center space-x-4">
@@ -48,13 +48,13 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-            <p className="text-gray-600 text-sm">© 2023 AP Vidya Pathshala. All rights reserved.</p>
+            <p className="text-gray-600 text-sm">© 2023 E Vidhya Pathshala. All rights reserved.</p>
           </div>
           <div className="flex space-x-6">
-            <a href="#" className="text-gray-600 hover:text-ap-green text-sm">Terms</a>
-            <a href="#" className="text-gray-600 hover:text-ap-green text-sm">Privacy</a>
-            <a href="#" className="text-gray-600 hover:text-ap-green text-sm">Contact</a>
-            <a href="#" className="text-gray-600 hover:text-ap-green text-sm">Support</a>
+            <a href="#" className="text-gray-600 hover:text-ev-green text-sm">Terms</a>
+            <a href="#" className="text-gray-600 hover:text-ev-green text-sm">Privacy</a>
+            <a href="#" className="text-gray-600 hover:text-ev-green text-sm">Contact</a>
+            <a href="#" className="text-gray-600 hover:text-ev-green text-sm">Support</a>
           </div>
         </div>
       </div>
@@ -141,10 +141,10 @@ const FractionsLearningPage: React.FC = () => {
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Chapters</h2>
               <div className="space-y-5">
                 {/* Fractions Chapter Card (without Review button) */}
-                <div className="border-2 border-ap-green/30 bg-white rounded-lg p-4 sm:p-5 card-hover w-full shadow-sm">
+                <div className="border-2 border-ev-green/30 bg-white rounded-lg p-4 sm:p-5 card-hover w-full shadow-sm">
                   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2 gap-2">
                     <div className="flex items-center gap-2">
-                      <span className="bg-ap-green/15 text-ap-green rounded-full p-2">
+                      <span className="bg-ev-green/15 text-ev-green rounded-full p-2">
                         <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" strokeWidth="2" d="M5 13l4 4L19 7"/></svg>
                       </span>
                       <div>
@@ -152,18 +152,18 @@ const FractionsLearningPage: React.FC = () => {
                         <div className="text-sm text-gray-700">Learn about types of fractions, equivalent fractions, and operations on fractions.</div>
                       </div>
                     </div>
-                    <div className="text-sm font-medium text-ap-green whitespace-nowrap">45 mins</div>
+                    <div className="text-sm font-medium text-ev-green whitespace-nowrap">45 mins</div>
                   </div>
                   <div className="mb-2">
-                    <div className="h-2 bg-ap-green/15 rounded-full">
-                      <div className="h-2 bg-ap-green rounded-full" style={{ width: '100%' }}></div>
+                    <div className="h-2 bg-ev-green/15 rounded-full">
+                      <div className="h-2 bg-ev-green rounded-full" style={{ width: '100%' }}></div>
                     </div>
-                    <div className="text-ap-green font-medium text-sm mt-1">Completed</div>
+                    <div className="text-ev-green font-medium text-sm mt-1">Completed</div>
                   </div>
                 </div>
                 {/* Theory Content Section */}
-                <div className="bg-white border-2 border-ap-green/20 rounded-lg p-4 sm:p-6 mt-2 w-full shadow-sm">
-                  <h3 className="text-xl font-semibold mb-4 text-ap-green">Fractions: Theory & Examples</h3>
+                <div className="bg-white border-2 border-ev-green/20 rounded-lg p-4 sm:p-6 mt-2 w-full shadow-sm">
+                  <h3 className="text-xl font-semibold mb-4 text-ev-green">Fractions: Theory & Examples</h3>
                   <ul className="list-disc pl-6 mb-4 text-gray-800 space-y-2 text-sm">
                     <li><span className="font-semibold">Types of Fractions:</span> Proper (e.g., 3/8), Improper (e.g., 5/4), Mixed (e.g., 1 2/3)</li>
                     <li><span className="font-semibold">Equivalent Fractions:</span> Fractions that represent the same value (e.g., 1/2 = 2/4 = 4/8)</li>
@@ -173,8 +173,8 @@ const FractionsLearningPage: React.FC = () => {
                     <li><span className="font-semibold">Converting Between Forms:</span> Changing between improper fractions and mixed numbers</li>
                   </ul>
                   
-                  <div className="mb-4 bg-ap-green/5 p-3 rounded-md text-gray-800 border border-ap-green/20">
-                    <p className="font-semibold mb-2 text-ap-green text-sm">Examples:</p>
+                  <div className="mb-4 bg-ev-green/5 p-3 rounded-md text-gray-800 border border-ev-green/20">
+                    <p className="font-semibold mb-2 text-ev-green text-sm">Examples:</p>
                     <div className="space-y-3 text-sm">
                       <div>
                         <p className="font-medium">Addition:</p>
@@ -249,9 +249,9 @@ const FractionsLearningPage: React.FC = () => {
                   </div>
                 </div>
                 {/* Fractions Quiz Card */}
-                <div className="border-2 border-ap-purple/30 bg-white rounded-lg p-4 sm:p-5 card-hover flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 w-full shadow-sm">
+                <div className="border-2 border-ev-purple/30 bg-white rounded-lg p-4 sm:p-5 card-hover flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 w-full shadow-sm">
                   <div className="flex items-center gap-3">
-                    <div className="p-2 bg-ap-purple/15 rounded-lg text-ap-purple">
+                    <div className="p-2 bg-ev-purple/15 rounded-lg text-ev-purple">
                       <PlayCircle className="h-6 w-6" />
                     </div>
                     <div>
@@ -264,7 +264,7 @@ const FractionsLearningPage: React.FC = () => {
                     size="sm"
                     isQuizStyle
                     subjectColor="purple"
-                    className="bg-ap-purple hover:bg-ap-purple/90 text-white font-medium w-full sm:w-auto"
+                    className="bg-ev-purple hover:bg-ev-purple/90 text-white font-medium w-full sm:w-auto"
                     onClick={() => setShowQuiz(true)}
                   >
                     <PlayCircle className="h-4 w-4 mr-1" />
@@ -280,36 +280,36 @@ const FractionsLearningPage: React.FC = () => {
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Learning Resources</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {/* Study Materials */}
-                <div className="bg-gradient-to-br from-ap-purple/10 to-white rounded-xl p-4 sm:p-5 border-2 border-ap-purple/30 shadow-sm">
+                <div className="bg-gradient-to-br from-ev-purple/10 to-white rounded-xl p-4 sm:p-5 border-2 border-ev-purple/30 shadow-sm w-full">
                   <div className="flex justify-between items-center">
-                    <div className="p-2 bg-white rounded-lg text-ap-purple shadow-sm">
+                    <div className="p-2 bg-white rounded-lg text-ev-purple shadow-sm">
                       <FileText className="h-5 w-5" />
                     </div>
-                    <span className="text-xs font-medium bg-ap-purple/10 text-ap-purple px-2 py-1 rounded">PDF</span>
+                    <span className="text-xs font-medium bg-ev-purple/10 text-ev-purple px-2 py-1 rounded">PDF</span>
                   </div>
                   <h3 className="mt-3 font-semibold text-gray-900">Study Materials</h3>
                   <p className="text-sm text-gray-700 mt-2">Comprehensive notes and examples for all chapters.</p>
                   <SubjectButton variant="outline" size="sm" subjectColor="purple" className="mt-4 w-full font-medium border-2">Download</SubjectButton>
                 </div>
                 {/* Video Tutorials */}
-                <div className="bg-gradient-to-br from-ap-purple/10 to-white rounded-xl p-4 sm:p-5 border-2 border-ap-purple/30 shadow-sm">
+                <div className="bg-gradient-to-br from-ev-purple/10 to-white rounded-xl p-4 sm:p-5 border-2 border-ev-purple/30 shadow-sm w-full">
                   <div className="flex justify-between items-center">
-                    <div className="p-2 bg-white rounded-lg text-ap-purple shadow-sm">
+                    <div className="p-2 bg-white rounded-lg text-ev-purple shadow-sm">
                       <Video className="h-5 w-5" />
                     </div>
-                    <span className="text-xs font-medium bg-ap-purple/10 text-ap-purple px-2 py-1 rounded">VIDEO</span>
+                    <span className="text-xs font-medium bg-ev-purple/10 text-ev-purple px-2 py-1 rounded">VIDEO</span>
                   </div>
                   <h3 className="mt-3 font-semibold text-gray-900">Video Tutorials</h3>
                   <p className="text-sm text-gray-700 mt-2">Watch video explanations of key concepts.</p>
                   <SubjectButton variant="outline" size="sm" subjectColor="purple" className="mt-4 w-full font-medium border-2">Watch Videos</SubjectButton>
                 </div>
                 {/* Practice Worksheets */}
-                <div className="bg-gradient-to-br from-ap-purple/10 to-white rounded-xl p-4 sm:p-5 border-2 border-ap-purple/30 shadow-sm">
+                <div className="bg-gradient-to-br from-ev-purple/10 to-white rounded-xl p-4 sm:p-5 border-2 border-ev-purple/30 shadow-sm w-full">
                   <div className="flex justify-between items-center">
-                    <div className="p-2 bg-white rounded-lg text-ap-purple shadow-sm">
+                    <div className="p-2 bg-white rounded-lg text-ev-purple shadow-sm">
                       <FileText className="h-5 w-5" />
                     </div>
-                    <span className="text-xs font-medium bg-ap-purple/10 text-ap-purple px-2 py-1 rounded">PDF</span>
+                    <span className="text-xs font-medium bg-ev-purple/10 text-ev-purple px-2 py-1 rounded">PDF</span>
                   </div>
                   <h3 className="mt-3 font-semibold text-gray-900">Practice Worksheets</h3>
                   <p className="text-sm text-gray-700 mt-2">Printable worksheets with practice problems.</p>
@@ -323,9 +323,9 @@ const FractionsLearningPage: React.FC = () => {
             <div className="w-full">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Tests & Quizzes</h2>
               <div className="space-y-5">
-                <div className="border-2 border-ap-purple/30 bg-white rounded-lg p-4 sm:p-5 card-hover flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 w-full shadow-sm">
+                <div className="border-2 border-ev-purple/30 bg-white rounded-lg p-4 sm:p-5 card-hover flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 w-full shadow-sm">
                   <div className="flex items-center gap-3">
-                    <div className="p-2 bg-ap-purple/15 rounded-lg text-ap-purple">
+                    <div className="p-2 bg-ev-purple/15 rounded-lg text-ev-purple">
                       <PlayCircle className="h-6 w-6" />
                     </div>
                     <div>
@@ -338,7 +338,7 @@ const FractionsLearningPage: React.FC = () => {
                     size="sm"
                     isQuizStyle
                     subjectColor="purple"
-                    className="bg-ap-purple hover:bg-ap-purple/90 text-white font-medium w-full sm:w-auto"
+                    className="bg-ev-purple hover:bg-ev-purple/90 text-white font-medium w-full sm:w-auto"
                     onClick={() => {
                       setShowQuiz(true);
                       setActiveTab('chapters');
@@ -357,7 +357,7 @@ const FractionsLearningPage: React.FC = () => {
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Discussions</h2>
               <div className="bg-white border border-gray-200 rounded-lg p-6 text-center">
                 <p className="text-gray-600">No active discussions for this topic yet.</p>
-                <button className="mt-4 bg-ap-orange/90 hover:bg-ap-orange text-white px-4 py-2 rounded-md font-medium">
+                <button className="mt-4 bg-ev-orange/90 hover:bg-ev-orange text-white px-4 py-2 rounded-md font-medium">
                   Start a New Discussion
                 </button>
               </div>

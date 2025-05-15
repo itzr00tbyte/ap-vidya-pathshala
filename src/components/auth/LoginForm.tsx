@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -49,7 +48,7 @@ export default function LoginForm() {
       await login(data.email, data.password);
       toast({
         title: "Login successful",
-        description: "Welcome back to AP Vidya Pathshala!",
+        description: "Welcome back to E Vidhya Pathshala!",
       });
       navigate("/dashboard");
     } catch (error) {

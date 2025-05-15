@@ -293,7 +293,7 @@ const FractionsQuiz: React.FC = () => {
     }
     
     return (
-      <Card className="border-2 border-ap-green/30 shadow-md bg-white">
+      <Card className="border-2 border-ev-green/30 shadow-md bg-white">
         <CardHeader>
           <CardTitle className="text-xl text-gray-900">Quiz Completed!</CardTitle>
           <CardDescription className="text-base font-medium">
@@ -337,7 +337,7 @@ const FractionsQuiz: React.FC = () => {
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
-    <Card className="border-2 border-ap-purple/30 shadow-md bg-white">
+    <Card className="border-2 border-ev-purple/30 shadow-md bg-white">
       <CardHeader>
         <div className="flex justify-between items-center">
           <CardTitle className="text-xl text-gray-900">Fractions Quiz</CardTitle>
@@ -347,7 +347,7 @@ const FractionsQuiz: React.FC = () => {
         </div>
         <div className="w-full bg-gray-100 h-2 rounded-full mt-2">
           <div 
-            className="bg-ap-purple h-2 rounded-full transition-all duration-300"
+            className="bg-ev-purple h-2 rounded-full transition-all duration-300"
             style={{ width: `${((currentQuestionIndex + 1) / questions.length) * 100}%` }}
           ></div>
         </div>
@@ -434,7 +434,7 @@ const FractionsQuiz: React.FC = () => {
             
             <Button 
               onClick={handleNextQuestion}
-              className="w-full bg-ap-purple hover:bg-ap-purple/90 text-white font-medium"
+              className="w-full bg-ev-purple hover:bg-ev-purple/90 text-white font-medium"
             >
               {currentQuestionIndex === questions.length - 1 ? 'Finish Quiz' : 'Next Question'}
             </Button>

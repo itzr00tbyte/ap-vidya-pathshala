@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -71,8 +70,8 @@ export default function SignupForm({ onSignupSuccess }: SignupFormProps) {
       
       setIsLoading(false);
       toast({
-        title: "Account created successfully",
-        description: "Welcome to AP Vidya Pathshala!",
+        title: "Account created!",
+        description: "Welcome to E Vidhya Pathshala!",
       });
       onSignupSuccess();
     }, 1500);

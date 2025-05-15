@@ -1,4 +1,3 @@
-
 import { User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { 
@@ -47,7 +46,7 @@ const Testimonial = ({ content, name, role, color = "blue" }: TestimonialProps) 
 
 const testimonialData = [
   {
-    content: "AP Vidya Pathshala helped my daughter improve her science scores tremendously. The interactive lessons and practice quizzes made learning enjoyable for her.",
+    content: "E Vidhya Pathshala helped my daughter improve her science scores tremendously. The interactive lessons and practice quizzes made learning enjoyable for her.",
     name: "Priya Reddy",
     role: "Parent of 8th Grade Student",
     color: "blue"
@@ -59,7 +58,7 @@ const testimonialData = [
     color: "green"
   },
   {
-    content: "I used to struggle with mathematics, but the step-by-step explanations on AP Vidya Pathshala made complex concepts so much easier to understand.",
+    content: "I used to struggle with mathematics, but the step-by-step explanations on E Vidhya Pathshala made complex concepts so much easier to understand.",
     name: "Kavitha Singh",
     role: "9th Grade Student",
     color: "yellow"
@@ -78,7 +77,7 @@ export default function TestimonialsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold text-gray-900">What Our Users Say</h2>
-          <p className="mt-4 text-gray-600">Hear from students, parents, and teachers using AP Vidya Pathshala</p>
+          <p className="mt-4 text-gray-600">Hear from students, parents, and teachers using E Vidhya Pathshala</p>
         </div>
         
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">

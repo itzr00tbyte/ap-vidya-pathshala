@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
@@ -9,12 +8,12 @@ const subjectButtonVariants = cva(
   {
     variants: {
       subjectColor: {
-        blue: "border-ap-blue text-ap-blue hover:bg-ap-blue/10",
-        green: "border-ap-green text-ap-green hover:bg-ap-green/10",
-        orange: "border-ap-orange text-ap-orange hover:bg-ap-orange/10",
-        purple: "border-ap-purple text-ap-purple hover:bg-ap-purple/10",
-        yellow: "border-ap-yellow text-ap-yellow hover:bg-ap-yellow/10",
-        red: "border-ap-red text-ap-red hover:bg-ap-red/10",
+        blue: "border-ev-blue text-ev-blue hover:bg-ev-blue/10",
+        green: "border-ev-green text-ev-green hover:bg-ev-green/10",
+        orange: "border-ev-orange text-ev-orange hover:bg-ev-orange/10",
+        purple: "border-ev-purple text-ev-purple hover:bg-ev-purple/10",
+        yellow: "border-ev-yellow text-ev-yellow hover:bg-ev-yellow/10",
+        red: "border-ev-red text-ev-red hover:bg-ev-red/10",
       },
       fontSize: {
         default: "text-base",
@@ -52,7 +51,7 @@ const SubjectButton = React.forwardRef<HTMLButtonElement, SubjectButtonProps>(
   ({ className, variant = "outline", subjectColor, fontSize, isChapterStyle, isQuizStyle, size, ...props }, ref) => {
     // If we're using isQuizStyle with a color, set the background color to match that subject
     const backgroundColorClass = isQuizStyle && subjectColor && variant === "default" 
-      ? `bg-ap-${subjectColor} text-white hover:bg-ap-${subjectColor}/90` 
+      ? `bg-ev-${subjectColor} text-white hover:bg-ev-${subjectColor}/90` 
       : "";
     
     return (
