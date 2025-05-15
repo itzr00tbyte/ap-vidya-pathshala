@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ChapterCard from '@/components/ChapterCard';
 import { SubjectButton } from '@/components/ui/subject-button';
 import FractionsQuiz from './FractionsQuiz';
-import { FileText, PlayCircle, Video, Home, Book, User, HelpCircle } from 'lucide-react';
+import { FileText, PlayCircle, Video, Home, Book, User, HelpCircle, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 // Navbar Component
@@ -84,6 +84,26 @@ const chapters = [
 const FractionsLearningPage: React.FC = () => {
   const [showQuiz, setShowQuiz] = useState(false);
   const [activeTab, setActiveTab] = useState('chapters');
+  const [showVideo, setShowVideo] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handlePlayVideo = () => {
+    setShowVideo(true);
+    setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.play().catch(error => {
+          console.error("Error playing video:", error);
+        });
+      }
+    }, 100);
+  };
+
+  const handleCloseVideo = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
+    setShowVideo(false);
+  };
 
   return (
     <div className="bg-gray-50 min-h-screen w-full flex flex-col">
@@ -135,6 +155,27 @@ const FractionsLearningPage: React.FC = () => {
               </button>
             </div>
           </div>
+
+          {showVideo && (
+            <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+              <div className="relative w-full max-w-4xl bg-black rounded-lg overflow-hidden">
+                <button 
+                  onClick={handleCloseVideo}
+                  className="absolute top-2 right-2 text-white bg-black/50 hover:bg-black/70 rounded-full p-2 z-10"
+                >
+                  <X className="h-6 w-6" />
+                </button>
+                <video 
+                  ref={videoRef}
+                  className="w-full aspect-video"
+                  controls
+                  src="/videos/fractions.mp4"
+                >
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+          )}
 
           {activeTab === 'chapters' && (
             <div className="w-full">
@@ -248,6 +289,26 @@ const FractionsLearningPage: React.FC = () => {
                     Tip: Always simplify your answers!
                   </div>
                 </div>
+                {/* Video Section */}
+                <div className="bg-white border-2 border-ev-purple/20 rounded-lg p-4 sm:p-6 mt-2 w-full shadow-sm">
+                  <h3 className="text-xl font-semibold mb-4 text-ev-purple">Video Lesson: Understanding Fractions</h3>
+                  <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden relative cursor-pointer group" onClick={handlePlayVideo}>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="bg-white/90 rounded-full p-4 shadow-lg transform transition-transform group-hover:scale-110">
+                        <PlayCircle className="h-12 w-12 text-ev-purple" />
+                      </div>
+                    </div>
+                    <div className="w-full h-full bg-gradient-to-r from-ev-purple/20 to-ev-green/20 flex items-center justify-center">
+                      <div className="text-center">
+                        <h4 className="font-bold text-lg text-gray-800">Fractions Video Lesson</h4>
+                        <p className="text-sm text-gray-600">Click to play</p>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="mt-3 text-gray-700 text-sm">
+                    This comprehensive video explains the concept of fractions, types of fractions, and operations with fractions through visual examples and step-by-step explanations.
+                  </p>
+                </div>
                 {/* Fractions Quiz Card */}
                 <div className="border-2 border-ev-purple/30 bg-white rounded-lg p-4 sm:p-5 card-hover flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 w-full shadow-sm">
                   <div className="flex items-center gap-3">
@@ -301,7 +362,16 @@ const FractionsLearningPage: React.FC = () => {
                   </div>
                   <h3 className="mt-3 font-semibold text-gray-900">Video Tutorials</h3>
                   <p className="text-sm text-gray-700 mt-2">Watch video explanations of key concepts.</p>
-                  <SubjectButton variant="outline" size="sm" subjectColor="purple" className="mt-4 w-full font-medium border-2">Watch Videos</SubjectButton>
+                  <SubjectButton 
+                    variant="outline" 
+                    size="sm" 
+                    subjectColor="purple" 
+                    className="mt-4 w-full font-medium border-2"
+                    onClick={handlePlayVideo}
+                  >
+                    <PlayCircle className="h-4 w-4 mr-1" />
+                    Watch Video
+                  </SubjectButton>
                 </div>
                 {/* Practice Worksheets */}
                 <div className="bg-gradient-to-br from-ev-purple/10 to-white rounded-xl p-4 sm:p-5 border-2 border-ev-purple/30 shadow-sm w-full">
