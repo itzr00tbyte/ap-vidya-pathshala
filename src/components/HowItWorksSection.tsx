@@ -1,4 +1,3 @@
-
 import { Target, BookMarked, Sparkles, Medal } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -103,7 +102,7 @@ const renderShape = (shape: string) => {
     case 'sigma':
       return <span className="text-ap-orange font-serif">∑</span>;
     case 'division':
-      return <span className="text-ap-red font-serif">÷</span>;
+      return <span className="text-ev-red font-serif">÷</span>;
     default:
       return null;
   }
@@ -145,7 +144,7 @@ export default function HowItWorksSection() {
         animate={{ opacity: 0.03 }}
         transition={{ duration: 1.5 }}
       >
-        <div className="pattern-dots text-ap-blue"></div>
+        <div className="pattern-dots text-ev-blue"></div>
       </motion.div>
       
       {/* Wave pattern */}
@@ -176,7 +175,7 @@ export default function HowItWorksSection() {
             <span className="relative inline-block">
               How EVidya Pathshala Works
               <motion.span 
-                className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-ap-yellow to-ap-red"
+                className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-ev-yellow to-ev-red"
                 initial={{ width: 0 }}
                 whileInView={{ width: "100%" }}
                 transition={{ duration: 0.8, delay: 0.3 }}
@@ -198,7 +197,7 @@ export default function HowItWorksSection() {
         <div className="relative">
           {/* Timeline connector - animated */}
           <motion.div 
-            className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-ap-yellow via-ap-orange to-ap-red transform -translate-x-1/2"
+            className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-ev-yellow via-ev-orange to-ev-red transform -translate-x-1/2"
             variants={connectorVariants}
             initial="hidden"
             whileInView="visible"
@@ -258,7 +257,7 @@ export default function HowItWorksSection() {
         {/* Floating educational elements */}
         <div className="relative h-20 mt-8">
           <motion.div 
-            className="absolute left-[10%] top-0 w-12 h-12 text-ap-yellow/30 text-3xl font-bold"
+            className="absolute left-[10%] top-0 w-12 h-12 text-ev-yellow/30 text-3xl font-bold"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.5 }}
@@ -269,7 +268,7 @@ export default function HowItWorksSection() {
           </motion.div>
           
           <motion.div 
-            className="absolute left-[25%] bottom-0 w-8 h-8 rounded-md border-2 border-ap-red/30 rotate-12"
+            className="absolute left-[25%] bottom-0 w-8 h-8 rounded-md border-2 border-ev-red/30 rotate-12"
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1.2, duration: 0.5 }}
@@ -278,7 +277,7 @@ export default function HowItWorksSection() {
           />
           
           <motion.div 
-            className="absolute right-[30%] top-1/2 w-12 h-12 text-ap-green/30 text-3xl font-bold"
+            className="absolute right-[30%] top-1/2 w-12 h-12 text-ev-green/30 text-3xl font-bold"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.4, duration: 0.5 }}
@@ -289,7 +288,7 @@ export default function HowItWorksSection() {
           </motion.div>
           
           <motion.div 
-            className="absolute right-[15%] top-0 w-10 h-10 rounded-full border-2 border-ap-yellow/30"
+            className="absolute right-[15%] top-0 w-10 h-10 rounded-full border-2 border-ev-yellow/30"
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1.6, duration: 0.5 }}

@@ -1,4 +1,3 @@
-
 import React from "react";
 import { FileText, PieChart } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -14,7 +13,7 @@ const QuizAndTips = ({ quizzes }: QuizAndTipsProps) => {
     <div>
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold text-gray-900">Upcoming Quizzes</h2>
-        <Button variant="ghost" size="sm" className="text-ap-blue">
+        <Button variant="ghost" size="sm" className="text-ev-blue">
           View All
         </Button>
       </div>
@@ -34,12 +33,12 @@ const QuizAndTips = ({ quizzes }: QuizAndTipsProps) => {
       
       <div className="mt-8">
         <h2 className="text-xl font-semibold text-gray-900 mb-4">Study Tips</h2>
-        <div className="bg-gradient-to-br from-ap-blue/10 to-ap-green/10 rounded-xl p-5 border border-blue-100">
+        <div className="bg-gradient-to-br from-ev-blue/10 to-ev-green/10 rounded-xl p-5 border border-blue-100">
           <div className="flex justify-between">
-            <div className="p-2 bg-white/80 rounded-lg text-ap-blue">
+            <div className="p-2 bg-white/80 rounded-lg text-ev-blue">
               <FileText className="h-5 w-5" />
             </div>
-            <div className="p-2 bg-white/80 rounded-lg text-ap-blue">
+            <div className="p-2 bg-white/80 rounded-lg text-ev-blue">
               <PieChart className="h-5 w-5" />
             </div>
           </div>
@@ -47,7 +46,7 @@ const QuizAndTips = ({ quizzes }: QuizAndTipsProps) => {
           <p className="text-sm text-gray-600 mt-2">
             Create a study schedule to balance all subjects. Focus on weaker areas.
           </p>
-          <Button variant="outline" size="sm" className="mt-4 w-full border-ap-blue text-ap-blue">
+          <Button variant="outline" size="sm" className="mt-4 w-full border-ev-blue text-ev-blue">
             Create Study Plan
           </Button>
         </div>

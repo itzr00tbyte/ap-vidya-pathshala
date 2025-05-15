@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
@@ -97,7 +96,7 @@
   }
   
   .gradient-text {
-    @apply bg-gradient-to-r from-ap-yellow to-ap-red bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-ev-yellow to-ev-red bg-clip-text text-transparent;
   }
   
   /* Background patterns for educational elements */
@@ -115,15 +114,15 @@
   
   /* Enhanced section backgrounds */
   .section-bg-gradient {
-    @apply bg-gradient-to-br from-white via-blue-50 to-ap-yellow/5 relative;
+    @apply bg-gradient-to-br from-white via-blue-50 to-ev-yellow/5 relative;
   }
   
   .section-bg-light {
-    @apply bg-gradient-to-br from-white to-ap-blue/5 relative;
+    @apply bg-gradient-to-br from-white to-ev-blue/5 relative;
   }
   
   .section-bg-accent {
-    @apply bg-gradient-to-br from-ap-red/10 to-ap-yellow/10 relative;
+    @apply bg-gradient-to-br from-ev-red/10 to-ev-yellow/10 relative;
   }
   
   /* Math symbols pattern overlay for sections */

@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -16,12 +15,12 @@ const SubjectCard = ({ id, name, icon, progress, color, chaptersCount }: Subject
   return (
     <div className={cn(
       "relative overflow-hidden rounded-xl p-5 card-hover bg-white border",
-      color === "blue" && "border-ap-blue/30",
-      color === "green" && "border-ap-green/30",
-      color === "yellow" && "border-ap-yellow/30",
-      color === "orange" && "border-ap-orange/30",
-      color === "purple" && "border-ap-purple/30",
-      color === "red" && "border-ap-red/30",
+      color === "blue" && "border-ev-blue/30",
+      color === "green" && "border-ev-green/30",
+      color === "yellow" && "border-ev-yellow/30",
+      color === "orange" && "border-ev-orange/30",
+      color === "purple" && "border-ev-purple/30",
+      color === "red" && "border-ev-red/30",
     )}>
       <div className="flex justify-between">
         <div className={cn(

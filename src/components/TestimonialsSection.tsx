@@ -19,9 +19,9 @@ const Testimonial = ({ content, name, role, color = "blue" }: TestimonialProps) 
   return (
     <div className={cn(
       "p-6 rounded-xl h-full flex flex-col",
-      color === "blue" && "bg-ap-blue/5 border-l-4 border-ap-blue",
-      color === "green" && "bg-ap-green/5 border-l-4 border-ap-green",
-      color === "yellow" && "bg-ap-yellow/5 border-l-4 border-ap-yellow",
+      color === "blue" && "bg-ev-blue/5 border-l-4 border-ev-blue",
+      color === "green" && "bg-ev-green/5 border-l-4 border-ev-green",
+      color === "yellow" && "bg-ev-yellow/5 border-l-4 border-ev-yellow",
     )}>
       <blockquote className="flex-1 text-gray-600 italic text-sm md:text-base">
         "{content}"
@@ -29,9 +29,9 @@ const Testimonial = ({ content, name, role, color = "blue" }: TestimonialProps) 
       <div className="mt-4 flex items-center space-x-3">
         <div className={cn(
           "h-10 w-10 rounded-full flex items-center justify-center",
-          color === "blue" && "bg-ap-blue/10 text-ap-blue",
-          color === "green" && "bg-ap-green/10 text-ap-green",
-          color === "yellow" && "bg-ap-yellow/10 text-ap-yellow",
+          color === "blue" && "bg-ev-blue/10 text-ev-blue",
+          color === "green" && "bg-ev-green/10 text-ev-green",
+          color === "yellow" && "bg-ev-yellow/10 text-ev-yellow",
         )}>
           <User className="h-5 w-5" />
         </div>

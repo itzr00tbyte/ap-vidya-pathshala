@@ -610,7 +610,7 @@ const SubjectPage = () => {
                     <div 
                       key={idx} 
                       className={`h-2 flex-1 rounded-full ${
-                        idx + 1 === currentQuizIndex ? 'bg-ap-blue' : 'bg-gray-200'
+                        idx + 1 === currentQuizIndex ? 'bg-ev-blue' : 'bg-gray-200'
                       }`}
                     />
                   ))}
@@ -632,8 +632,8 @@ const SubjectPage = () => {
                           onClick={() => handleSelectAnswer(question.id, option)}
                           className={`p-4 border rounded-lg cursor-pointer transition-colors ${
                             selectedAnswers[question.id] === option 
-                              ? 'border-ap-blue bg-ap-blue/10'
-                              : 'border-gray-200 hover:border-ap-blue/50'
+                              ? 'border-ev-blue bg-ev-blue/10'
+                              : 'border-gray-200 hover:border-ev-blue/50'
                           }`}
                         >
                           {option}
@@ -675,10 +675,10 @@ const SubjectPage = () => {
         ) : (
           <>
             {/* Subject Header */}
-            <div className={`bg-ap-${subject?.color}/10 rounded-xl p-6 mb-8`}>
+            <div className={`bg-ev-${subject?.color}/10 rounded-xl p-6 mb-8`}>
               <div className="flex flex-col md:flex-row justify-between">
                 <div className="flex items-start space-x-4">
-                  <div className={`p-3 bg-ap-${subject?.color}/20 rounded-lg text-ap-${subject?.color}`}>
+                  <div className={`p-3 bg-ev-${subject?.color}/20 rounded-lg text-ev-${subject?.color}`}>
                     {subject?.icon}
                   </div>
                   <div>
@@ -778,7 +778,7 @@ const SubjectPage = () => {
                             />
                             {chapter.quiz && chapter.status === "in-progress" && (
                               <div className="mt-3 ml-0">
-                                <div className={`rounded-lg border border-${subject.color === 'blue' ? 'ap-blue' : `ap-${subject.color}`}/20 bg-white p-4 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5 flex items-center justify-between`}>
+                                <div className={`rounded-lg border border-ev-${subject.color === 'blue' ? 'blue' : `ev-${subject.color}`}/20 bg-white p-4 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5 flex items-center justify-between`}>
                                   <div>
                                     <h4 className="font-medium">
                                       {language === "english" ? `${chapter.title} Quiz` : `${chapter.title} క్విజ్`}
@@ -794,7 +794,7 @@ const SubjectPage = () => {
                                     size="sm"
                                     isQuizStyle={true}
                                     subjectColor={subject.color as "blue" | "green" | "orange" | "purple" | "yellow" | "red"}
-                                    className={`bg-ap-${subject.color}`}
+                                    className={`bg-ev-${subject.color}`}
                                     onClick={() => handleStartQuiz(chapter.title)}
                                   >
                                     <PlayCircle className="h-4 w-4 mr-1" />
@@ -814,9 +814,9 @@ const SubjectPage = () => {
                       {language === "english" ? "Learning Resources" : "అభ్యాస వనరులు"}
                     </h2>
                     <div className="space-y-4">
-                      <div className={`bg-gradient-to-br from-ap-${subject?.color}/10 to-white rounded-xl p-5 border border-ap-${subject?.color}/20`}>
+                      <div className={`bg-gradient-to-br from-ev-${subject?.color}/10 to-white rounded-xl p-5 border border-ev-${subject?.color}/20`}>
                         <div className="flex justify-between">
-                          <div className={`p-2 bg-white/80 rounded-lg text-ap-${subject?.color}`}>
+                          <div className={`p-2 bg-white/80 rounded-lg text-ev-${subject?.color}`}>
                             <FileText className="h-5 w-5" />
                           </div>
                           <span className="text-xs text-gray-500">PDF</span>
@@ -839,9 +839,9 @@ const SubjectPage = () => {
                         </SubjectButton>
                       </div>
                       
-                      <div className={`bg-gradient-to-br from-ap-${subject?.color}/10 to-white rounded-xl p-5 border border-ap-${subject?.color}/20`}>
+                      <div className={`bg-gradient-to-br from-ev-${subject?.color}/10 to-white rounded-xl p-5 border border-ev-${subject?.color}/20`}>
                         <div className="flex justify-between">
-                          <div className={`p-2 bg-white/80 rounded-lg text-ap-${subject?.color}`}>
+                          <div className={`p-2 bg-white/80 rounded-lg text-ev-${subject?.color}`}>
                             <PlayCircle className="h-5 w-5" />
                           </div>
                           <span className="text-xs text-gray-500">VIDEO</span>
