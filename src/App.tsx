@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -27,6 +26,8 @@ import TeacherManagement from "./pages/admin/TeacherManagement";
 import SchoolManagement from "./pages/admin/SchoolManagement";
 import ClassProgression from "./pages/admin/ClassProgression";
 import TeacherPortal from "./pages/admin/TeacherPortal";
+import MathsPAL from './components/pal/MathsPAL';
+import FractionsLearningPage from './components/pal/FractionsLearningPage';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -78,6 +79,8 @@ const App = () => {
               
               {/* 404 route */}
               <Route path="*" element={<NotFound />} />
+              {/* Fractions Learning Page route */}
+              <Route path="/fractions" element={<FractionsLearningPage />} />
             </Routes>
           </BrowserRouter>
         </TooltipProvider>
